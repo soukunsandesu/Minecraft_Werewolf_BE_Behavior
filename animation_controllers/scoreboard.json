@@ -1,0 +1,284 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.deathcount": {
+      "states": {
+        "default": {
+          "transitions": [
+            { 
+              "deathcount": "!query.is_alive" 
+            }
+          ]
+        },
+        "deathcount": {
+          "on_entry": [
+            "/scoreboard players add @s deathcount 1"
+          ],
+          "transitions": [
+            { 
+              "default": "query.is_alive" 
+            }
+          ]
+        }
+      }
+    },
+    "controller.animation.sneaking": {
+      "states": {
+        "default": {
+          "transitions": [
+            { 
+              "sneaking": "query.is_sneaking" 
+            }
+          ],
+          "on_entry": [
+            "/scoreboard players reset @s sneaking",
+            "/tag @s remove sneaking"
+          ]
+        },
+        "sneaking": {
+          "on_entry": [
+            "/scoreboard players add @s sneaking 1",
+            "/tag @s add sneaking"
+          ],
+          "transitions": [
+            { 
+              "default": "!query.is_sneaking" 
+            },
+            { 
+              "sneaking1": "query.is_sneaking" 
+            }
+          ]
+        },
+        "sneaking1": {
+          "on_entry": [
+            "/scoreboard players add @s sneaking 1",
+            "/tag @s add sneaking"
+          ],
+          "transitions": [
+            { 
+              "default": "!query.is_sneaking" 
+            },
+            { 
+              "sneaking": "query.is_sneaking" 
+            }
+          ]
+        }
+      }
+    },
+    "controller.animation.moving": {
+      "states": {
+        "default": {
+          "transitions": [
+            { 
+              "moving": "query.is_moving" 
+            }
+          ],
+          "on_entry": [
+            "/scoreboard players reset @s moving",
+            "/tag @s remove moving"
+          ]
+        },
+        "moving": {
+          "on_entry": [
+            "/scoreboard players add @s moving 1",
+            "/tag @s add moving"
+          ],
+          "transitions": [
+            { 
+              "default": "!query.is_moving" 
+            },
+            { 
+              "moving1": "query.is_moving" 
+            }
+          ]
+        },
+        "moving1": {
+          "on_entry": [
+            "/scoreboard players add @s moving 1",
+            "/tag @s add moving"
+          ],
+          "transitions": [
+            { 
+              "default": "!query.is_moving" 
+            },
+            { 
+              "moving": "query.is_moving" 
+            }
+          ]
+        }
+      }
+    },
+    "controller.animation.sprinting": {
+      "states": {
+        "default": {
+          "transitions": [
+            { 
+              "sprinting": "query.is_sprinting" 
+            }
+          ],
+          "on_entry": [
+            "/scoreboard players reset @s sprinting",
+            "/tag @s remove sprinting"
+          ]
+        },
+        "sprinting": {
+          "on_entry": [
+            "/scoreboard players add @s sprinting 1",
+            "/tag @s add sprinting"
+          ],
+          "transitions": [
+            { 
+              "default": "!query.is_sprinting" 
+            },
+            { 
+              "sprinting1": "query.is_sprinting" 
+            }
+          ]
+        },
+        "sprinting1": {
+          "on_entry": [
+            "/scoreboard players add @s sprinting 1",
+            "/tag @s add sprinting"
+          ],
+          "transitions": [
+            { 
+              "default": "!query.is_sprinting" 
+            },
+            { 
+              "sprinting": "query.is_sprinting" 
+            }
+          ]
+        }
+      }
+    },
+    "controller.animation.jumping": {
+      "states": {
+        "default": {
+          "transitions": [
+            { 
+              "jumping": "query.is_jumping" 
+            }
+          ],
+          "on_entry": [
+            "/scoreboard players reset @s jumping",
+            "/tag @s remove jumping"
+          ]
+        },
+        "jumping": {
+          "on_entry": [
+            "/scoreboard players add @s jumping 1",
+            "/tag @s add jumping"
+          ],
+          "transitions": [
+            { 
+              "default": "!query.is_jumping" 
+            },
+            { 
+              "jumping1": "query.is_jumping" 
+            }
+          ]
+        },
+        "jumping1": {
+          "on_entry": [
+            "/scoreboard players add @s jumping 1",
+            "/tag @s add jumping"
+          ],
+          "transitions": [
+            { 
+              "default": "!query.is_jumping" 
+            },
+            { 
+              "jumping": "query.is_jumping" 
+            }
+          ]
+        }
+      }
+    },
+    "controller.animation.invisible": {
+      "states": {
+        "default": {
+          "transitions": [
+            { 
+              "invisible": "query.is_invisible" 
+            }
+          ],
+          "on_entry": [
+            "/scoreboard players reset @s invisible",
+            "/tag @s remove invisible"
+          ]
+        },
+        "invisible": {
+          "on_entry": [
+            "/scoreboard players add @s invisible 1",
+            "/tag @s add invisible"
+          ],
+          "transitions": [
+            { 
+              "default": "!query.is_invisible" 
+            },
+            { 
+              "invisible1": "query.is_invisible" 
+            }
+          ]
+        },
+        "invisible1": {
+          "on_entry": [
+            "/scoreboard players add @s invisible 1",
+            "/tag @s add invisible"
+          ],
+          "transitions": [
+            { 
+              "default": "!query.is_invisible" 
+            },
+            { 
+              "invisible": "query.is_invisible" 
+            }
+          ]
+        }
+      }
+    },
+    "controller.animation.swimming": {
+      "states": {
+        "default": {
+          "transitions": [
+            { 
+              "swimming": "query.is_swimming" 
+            }
+          ],
+          "on_entry": [
+            "/scoreboard players reset @s swimming",
+            "/tag @s remove swimming"
+          ]
+        },
+        "swimming": {
+          "on_entry": [
+            "/scoreboard players add @s swimming 1",
+            "/tag @s add swimming"
+          ],
+          "transitions": [
+            { 
+              "default": "!query.is_swimming" 
+            },
+            { 
+              "swimming1": "query.is_swimming" 
+            }
+          ]
+        },
+        "swimming1": {
+          "on_entry": [
+            "/scoreboard players add @s swimming 1",
+            "/tag @s add swimming"
+          ],
+          "transitions": [
+            { 
+              "default": "!query.is_swimming" 
+            },
+            { 
+              "swimming": "query.is_swimming" 
+            }
+          ]
+        }
+      }
+    }
+  }
+}

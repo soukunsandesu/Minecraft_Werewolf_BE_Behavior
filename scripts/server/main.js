@@ -1,19 +1,21 @@
 import { world } from "@minecraft/server";
-world.getDimension("overworld").runCommandAsync("scoreboard objectives add tick dummy")
-function CD(CD){world.getDimension("overworld").runCommandAsync(CD)}
+
+function RunCommand(cmd) { world.getDimension("overworld").runCommandAsync(cmd) }
+
+RunCommand("scoreboard objectives add tick dummy")
 world.events.tick.subscribe(ev => {
     let tick = ev.currentTick
-    world.getDimension("overworld").runCommandAsync("function ST-main")
+    RunCommand("function ST-main")
     // if (tick % 5 == 0) { }
 })
 
 world.events.effectAdd.subscribe(ev => {
-   let entity = ev.entity
-   let effct = ev.effect.displayName
-    if (!entity.hasTag("PL")) {
-        CD("say test")
+    let entity = ev.entity
+    let effct = ev.effect
+    if (entity.hasTag("PL")) {
+        if (effct.displayName.match(/弱体化/)) {
+            entity.runCommandAsync("kill @s")
+        }
         return
     }
-    CD("say test2")
-
 })
