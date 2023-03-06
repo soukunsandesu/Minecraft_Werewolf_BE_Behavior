@@ -1,0 +1,38 @@
+{
+    "format_version": 2,
+    "header": {
+        "description": "BP-スタンダード",
+        "name": "BP-スタンダード",
+        "uuid": "2bf0df01-6904-40e4-9b4e-688284d0e8f7",
+        "version": [
+            1,
+            0,
+            0
+        ],
+        "min_engine_version": [
+            1,
+            19,
+            40
+        ]
+    },
+    "modules": [
+        {
+            "description": "Script that implements basic starter tests.",
+            "type": "script",
+            "language": "javascript",
+            "uuid": "3656cf4a-36c3-4a43-9e0d-53f5aa2e4cb3",
+            "version": [
+                1,
+                0,
+                0
+            ],
+            "entry": "scripts/server/main.js"
+        }
+    ],
+    "dependencies": [
+        {
+            "module_name": "@minecraft/server",
+            "version": "1.1.0-beta"
+        }
+    ]
+}
