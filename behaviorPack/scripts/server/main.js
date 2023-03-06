@@ -5,3 +5,7 @@ world.events.tick.subscribe(ev => {
     world.getDimension("overworld").runCommandAsync("function ST-main")
     // if (tick % 5 == 0) { }
 })
+
+world.events.effectAdd.subscribe(ev=>{
+
+})
