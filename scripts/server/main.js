@@ -1,21 +1,19 @@
 import { world } from "@minecraft/server";
+import { DamagePotion } from "./OnGame/DamagePotion";
 
 function RunCommand(cmd) { world.getDimension("overworld").runCommandAsync(cmd) }
 
-RunCommand("scoreboard objectives add tick dummy")
-world.events.tick.subscribe(ev => {
-    let tick = ev.currentTick
-    RunCommand("function ST-main")
-    // if (tick % 5 == 0) { }
-})
+RightClick("stick")
 
-world.events.effectAdd.subscribe(ev => {
-    let entity = ev.entity
-    let effct = ev.effect
-    if (entity.hasTag("PL")) {
-        if (effct.displayName.match(/弱体化/)) {
-            entity.runCommandAsync("kill @s")
+function RightClick(arg) {
+    world.events.itemUse.subscribe(ev => {
+        const item = ev.item
+        const user = ev.source
+        //const gameMode = player.getGameMode()
+
+        if (item.typeId == "minecraft:" + arg) {
+            DamagePotion.GiveItem(user)
+            //user.runCommandAsync("gamemode " + gameMode == GameMode.creative ? "adventure" : "creative")
         }
-        return
-    }
-})
+    })
+}
