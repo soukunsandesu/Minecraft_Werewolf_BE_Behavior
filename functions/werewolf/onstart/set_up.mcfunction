@@ -1,4 +1,4 @@
-function werewolf/reset
+function werewolf/onfinish/reset
 
 scoreboard objectives add elevator dummy
 scoreboard objectives add poison dummy
