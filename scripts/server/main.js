@@ -12,6 +12,11 @@ world.events.effectAdd.subscribe(ev => {
     let entity = ev.entity
     let effect = ev.effect
     DamagePotion.Core(entity, effect)
+
+    if (effect.displayName.match(/スピード/)) {
+        entity.runCommandAsync("effect @s speed 60 8");
+    }
+    world.say(effect.displayName + "\n" + effect.amplifier + "\n" + effect.duration)
 })
 
 function RightClick(arg) {
@@ -34,11 +39,6 @@ world.events.effectAdd.subscribe(ev => {
     let entity = ev.entity
     let effect = ev.effect
     DamagePotion.Core(ev)
-
-    if (effect.displayName.match(/スピード/)) {
-        entity.runCommandAsync("effect @s speed 60 8");
-    }
-    world.say(effect.displayName + "\n" + effect.amplifier + "\n" + effect.duration)
 })
 
 // test

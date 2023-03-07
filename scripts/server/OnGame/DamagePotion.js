@@ -13,6 +13,7 @@ export class DamagePotion {
                 entity.runCommandAsync("effect @s instant_damage 1 10 true");
                 entity.runCommandAsync("effect @s clear");
             }
-            
-        }
+
+        })
     }
+}
