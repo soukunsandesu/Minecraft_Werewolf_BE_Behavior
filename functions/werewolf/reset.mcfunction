@@ -1,0 +1,4 @@
+scoreboard objectives remove NumOfPlayers
+scoreboard objectives remove elevator
+scoreboard objectives remove poison
+scoreboard objectives remove skull

@@ -19,3 +19,18 @@ tag @e[type=player] remove dead
 tag @a[tag=dead] add spc
 gamemode spectator @e[type=player,m=a,tag=spc]
 tag @e[type=player] remove spc
+
+tag @a[m=spectator] add spectator
+tag @a[m=!spectator] remove spectator
+
+function werewolf/skull
+scoreboard players remove @a[scores={poison=1..}] poison 1
+effect @a[scores={poison=..0}] wither 120 0
+scoreboard players reset @a[scores={poison=..0}] poison
+
+tag @a remove PoisonInjection
+tag @a[hasitem={item=wither_rose,location=slot.weapon.mainhand}] add PoisonInjection
+effect @a[tag=PoisonInjection] weakness 1 10 true
+
+execute as @a at @s[hasitem={item=beacon},m=a] run function werewolf/mine
+
