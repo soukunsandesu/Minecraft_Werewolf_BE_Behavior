@@ -3,10 +3,10 @@ import { DamagePotion } from "./OnGame/DamagePotion";
 import * as UI from '@minecraft/server-ui';
 import { FORM } from "./form/text";
 
-
 function RunCommand(cmd) { world.getDimension("overworld").runCommandAsync(cmd) }
 function Say(ms) { world.say(String(ms)) }
 RightClick("stick")
+
 
 function RightClick(arg) {
     world.events.itemUse.subscribe(ev => {
@@ -24,6 +24,17 @@ function RightClick(arg) {
         }
     })
 }
+
+world.events.effectAdd.subscribe(ev => {
+    let entity = ev.entity
+    let effect = ev.effect
+    DamagePotion.Core(ev)
+
+    if (effect.displayName.match(/スピード/)) {
+        entity.runCommandAsync("effect @s speed 60 8");
+    }
+    world.say(effect.displayName + "\n" + effect.amplifier + "\n" + effect.duration)
+})
 
 // test
 world.events.beforeChat.subscribe(ev => {
