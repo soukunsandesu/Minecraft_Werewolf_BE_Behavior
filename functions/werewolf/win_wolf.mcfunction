@@ -1,1 +1,0 @@
-title @a title 人狼の勝利

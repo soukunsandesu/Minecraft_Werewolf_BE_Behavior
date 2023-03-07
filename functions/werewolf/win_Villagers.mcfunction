@@ -1,1 +1,0 @@
-title @a title 村人の勝利
