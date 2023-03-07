@@ -45,7 +45,7 @@ world.events.beforeChat.subscribe(ev => {
 
 world.events.tick.subscribe(ev => {
     let tick = ev.currentTick
-    RunCommand("function zn/1tick")
+    RunCommand("function werewolf/1tick")
     if (tick % 20 == 0) {
 // Say(tick)
     }
