@@ -5,10 +5,11 @@ export class DamagePotion {
         player.addItem("minecraft:diamond", 1); //addItemなんてなかった←m9(^Д^)ﾌﾟｷﾞｬｰ
     }
 
-    static Core(ev) {
-        let entity = ev.entity
-        let effect = ev.effect
-            if (effect.displayName.match(/弱体化/)) {
+    static Core() {
+        world.events.effectAdd.subscribe(ev => {
+            let entity = ev.entity
+            let effct = ev.effect
+            if (effct.displayName.match(/弱体化/)) {
                 entity.runCommandAsync("effect @s instant_damage 1 10 true");
                 entity.runCommandAsync("effect @s clear");
             }
