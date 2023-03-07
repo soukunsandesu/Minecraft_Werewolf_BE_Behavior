@@ -19,5 +19,10 @@ execute as @a[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 
 
 execute as @a run scoreboard players operation @s PreviewRole = @s CurrentRole
 
+##判定値追加
+execute as @a[scores={CurrentRole=1}] run scoreboard players add MWSystem NumOfWolf 1
+execute as @a[scores={CurrentRole=3..5}] run scoreboard players add MWSystem NumOfVillagers 1
+
+
 #Debuggerは役職配布直後にsummary表示
 execute as @a[tag=Debugger] run function werewolf/summary
