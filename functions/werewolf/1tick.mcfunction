@@ -19,9 +19,9 @@ execute as @a[m=a] at @s run spawnpoint @s ~~~
 tag @a add dead
 tag @e[type=player] remove dead
 tag @a[tag=dead] add dead_t
-execute as @e[type=player,tag=dead_t,scores={CurrentRole=1}] run scoreboard players random MWSystem NumOfWolf 1
-execute as @e[type=player,tag=dead_t,scores={CurrentRole=3..5}] run scoreboard players random MWSystem NumOfVillagers 1
-gamemode spectator @e[type=player,m=a,tag=dead_t]
+execute as @e[type=player,tag=dead_t,scores={CurrentRole=1}] run scoreboard players remove MWSystem NumOfWolf 1
+execute as @e[type=player,tag=dead_t,scores={CurrentRole=3..5}] run scoreboard players remove MWSystem NumOfVillagers 1
+gamemode spectator @a[m=a,tag=dead_t]
 tag @e[type=player] remove dead_t
 tag @a[m=spectator] add spectator
 tag @a[m=!spectator] remove spectator
@@ -40,5 +40,5 @@ execute as @a[hasitem={item=beacon},m=a] at @s run function werewolf/mine
 
 
 # 勝利判定
-execute if score MWSystem NumOfWolf = matches 0 run 
-execute if score MWSystem NumOfVillagers = matches 0 run 
+execute if score MWSystem NumOfWolf matches 0 if score MWSystem NumOfVillagers matches 1.. run function werewolf/onfinish/winner/villager
+execute if score MWSystem NumOfVillagers matches if score MWSystem NumOfWolf matches 1.. 0 run function werewolf/onfinish/winner/werewolf
