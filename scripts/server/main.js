@@ -34,20 +34,6 @@ function RightClick(arg) {
 
 // test
 world.events.beforeChat.subscribe(ev => {
-    let user = ev.sender
-    let ms = ev.message
-    if (ms == "test") {
-        // FORM.PLform(user)
-        const form = new UI.ActionFormData()
-            .title('妨害せよ')
-            .button('停電')
-            .button('転移');
-        const { selection, canceled } = form.show(user);
-        if (canceled) return;
-        if (selection === 0) { user.runCommandAsync('/effect @a[rm=1] blindness 15 0 true') }
-        if (selection === 1) { user.runCommandAsync('tp @s @r[rm=1]') }
-
-    }
 })
 
 world.events.tick.subscribe(ev => {
