@@ -2,11 +2,18 @@ import { world } from "@minecraft/server";
 import { DamagePotion } from "./OnGame/DamagePotion";
 import * as UI from '@minecraft/server-ui';
 import { FORM } from "./form/text";
+//import { werewolf } from "./typescript"
 
 
 function RunCommand(cmd) { world.getDimension("overworld").runCommandAsync(cmd) }
 function Say(ms) { world.say(String(ms)) }
 RightClick("stick")
+
+world.events.effectAdd.subscribe(ev => {
+    let entity = ev.entity
+    let effect = ev.effect
+    DamagePotion.Core(entity, effect)
+})
 
 function RightClick(arg) {
     world.events.itemUse.subscribe(ev => {
@@ -15,7 +22,6 @@ function RightClick(arg) {
         //const gameMode = player.getGameMode()
 
         if (item.typeId == "minecraft:" + arg) {
-            DamagePotion.GiveItem(user)
             //user.runCommandAsync("gamemode " + gameMode == GameMode.creative ? "adventure" : "creative")
         }
         // test
@@ -46,6 +52,7 @@ world.events.beforeChat.subscribe(ev => {
 world.events.tick.subscribe(ev => {
     let tick = ev.currentTick
     RunCommand("function werewolf/1tick")
+    //werewolf.getPlayersFromScoreboard();
     if (tick % 20 == 0) {
 // Say(tick)
     }
