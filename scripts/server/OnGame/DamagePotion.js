@@ -2,7 +2,7 @@ import { world } from "@minecraft/server";
 
 export class DamagePotion {
     static GiveItem(player) {
-        player.addItem("minecraft:diamond", 1); //addItemなんてなかった
+        player.addItem("minecraft:diamond", 1); //addItemなんてなかった←m9(^Д^)ﾌﾟｷﾞｬｰ
     }
 
     static Core() {
