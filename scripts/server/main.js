@@ -12,9 +12,8 @@ world.events.effectAdd.subscribe(ev => {
     let entity = ev.entity
     let effect = ev.effect
     items.DamagePotion(effect, entity)
-
     items.SpeedPotion(effect, entity)
-    world.say(effect.displayName + "\n" + effect.amplifier + "\n" + effect.duration)
+    // Say(effect.displayName + "\ntick:" + effect.amplifier + "\nlv:" + effect.duration)
 })
 
 function RightClick(arg) {
