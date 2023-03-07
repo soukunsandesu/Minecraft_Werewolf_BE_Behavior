@@ -1,5 +1,5 @@
 import { world } from "@minecraft/server";
-import { DamagePotion } from "./OnGame/DamagePotion";
+import { items } from "./OnGame/items";
 import * as UI from '@minecraft/server-ui';
 import { FORM } from "./form/text";
 //import { werewolf } from "./typescript"
@@ -11,11 +11,9 @@ RightClick("stick")
 world.events.effectAdd.subscribe(ev => {
     let entity = ev.entity
     let effect = ev.effect
-    DamagePotion.Core(entity, effect)
+    items.DamagePotion(effect, entity)
 
-    if (effect.displayName.match(/スピード/)) {
-        entity.runCommandAsync("effect @s speed 60 8");
-    }
+    items.SpeedPotion(effect, entity)
     world.say(effect.displayName + "\n" + effect.amplifier + "\n" + effect.duration)
 })
 
@@ -34,12 +32,6 @@ function RightClick(arg) {
         }
     })
 }
-
-world.events.effectAdd.subscribe(ev => {
-    let entity = ev.entity
-    let effect = ev.effect
-    DamagePotion.Core(ev)
-})
 
 // test
 world.events.beforeChat.subscribe(ev => {
