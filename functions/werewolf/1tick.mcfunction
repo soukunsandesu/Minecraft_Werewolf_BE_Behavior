@@ -13,7 +13,7 @@ scoreboard players set @a[tag=Edown] elevator 30
 tag @a remove Eup
 tag @a remove Edown
 scoreboard players remove @a[scores={elevator=1..}] elevator 1
-execute as @e[type=playerm=a] at @s run spawnpoint @s ~~~
+execute as @e[type=player,m=a] at @s run spawnpoint @s ~~~
 
 # 死亡判定
 tag @a add dead
