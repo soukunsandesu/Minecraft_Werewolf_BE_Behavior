@@ -28,17 +28,16 @@ world.events.itemUse.subscribe(ev => {
         //user.runCommandAsync("gamemode " + gameMode == GameMode.creative ? "adventure" : "creative")
     }
     // 占い石
-    if (item.typeId == "minecraft:gold_ingot") {
-        FORM.PLform(user)
-    }
+    // if (item.typeId == "minecraft:gold_ingot") {
+    //     FORM.PLform(user)
+    // }
 
-    let team = world.scoreboard.getObjective("CurrentRole")
-    let score = team.getParticipants()
-
+    // let team = world.scoreboard.getObjective("CurrentRole")
+    // let score = team.getParticipants()
     items.blackout(user, item)
     items.player_eye(user, item)
     items.divination(user, item)
-    let entity = { displayName: user.name, id: user.id, type: user.typeId }
+    // let entity = { displayName: PL.name, id: PL.id, type: PL.typeId }
     // if (item.typeId == "minecraft:diamond") {
     //     FORM.divination(user)
     //     return

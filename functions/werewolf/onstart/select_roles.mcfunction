@@ -24,6 +24,7 @@ execute as @a[scores={CurrentRole=1}] run scoreboard players add MWSystem NumOfW
 execute as @a[scores={CurrentRole=3..5}] run scoreboard players add MWSystem NumOfVillagers 1
 
 
+
 #Debuggerは役職配布直後にsummary表示
 execute as @a[tag=Debugger] run function werewolf/summary
 
