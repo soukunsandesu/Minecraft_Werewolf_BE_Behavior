@@ -1,6 +1,7 @@
 import { world } from "@minecraft/server";
 import * as UI from '@minecraft/server-ui';
 import { FORM } from "../form/text";
+function Say(ms) { world.say(String(ms)) }
 
 export class items {
     static GiveItem(player) {
@@ -34,10 +35,13 @@ export class items {
     static divination(user, item) {
         if (item.typeId == "minecraft:diamond") {
             let team = world.scoreboard.getObjective("CurrentRole")
-            let entity
-            let userroll = team.getParticipant(entity)
-
-            if (userroll==3){
+            let PL = world.getAllPlayers().find(e => e.id === user.id);
+            let userroll
+            for (let score of team.getScores()) {
+                if (score.participant.displayName === PL.name) { userroll = score }
+            }
+            if (userroll== null)return
+            if (userroll.score === 3) {
                 FORM.divination(user)
             }
             return

@@ -6,3 +6,4 @@ scoreboard objectives remove NumOfVillagers
 scoreboard objectives remove elevator
 scoreboard objectives remove poison
 scoreboard objectives remove skull
+scoreboard objectives remove time

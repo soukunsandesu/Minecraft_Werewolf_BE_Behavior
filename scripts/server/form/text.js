@@ -39,6 +39,7 @@ export class FORM {
     let answer
     if (reply > 1) { answer = textTeam[2] } else { answer = textTeam[reply] }
     user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}は${answer}です"}]}`)
+    user.runCommandAsync("clear @s diamond 0 1")
   }
 
 
