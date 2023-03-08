@@ -1,6 +1,6 @@
 scoreboard players add @a elevator 0
 
-execute as @p if score MWSystem time matches 1.. run titleraw @a actionbar {"rawtext":[{"score":{"name":"MWSystem","objective":"time"}}]}
+execute as @p if score MWSystem time matches 0.. run titleraw @a actionbar {"rawtext":[{"score":{"name":"MWSystem","objective":"time"}}]}
 
 execute as @a[scores={elevator=..0}] at @s if block ~~-2~ lodestone if block ~~4~ lodestone run tag @s add Eup
 execute as @a[tag=sneaking,scores={elevator=..0}] at @s if block ~~-1~ lodestone if block ~~-7~ lodestone run tag @s add Edown
@@ -18,12 +18,12 @@ execute as @a[m=a] at @s run spawnpoint @s ~~-50~
 # 死亡判定
 tag @a add dead
 tag @e[type=player] remove dead
-tag @a[tag=dead] add dead_t
 execute as @e[type=player,tag=dead_t,scores={CurrentRole=1}] run scoreboard players remove MWSystem NumOfWolf 1
 execute as @e[type=player,tag=dead_t,scores={CurrentRole=3..5}] run scoreboard players remove MWSystem NumOfVillagers 1
 gamemode spectator @e[type=player,m=a,tag=dead_t]
 execute as @e[type=player,tag=dead_t] at @s run tp @s ~~50~
 tag @e[type=player] remove dead_t
+tag @a[tag=dead] add dead_t
 tag @a[m=spectator] add spectator
 tag @a[m=!spectator] remove spectator
 
