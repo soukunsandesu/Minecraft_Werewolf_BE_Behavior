@@ -1,5 +1,9 @@
 function werewolf/onfinish/reset
 
+gamerule showdeathmessages false
+gamerule sendcommandfeedback false
+gamerule keepinventory false
+
 scoreboard objectives add elevator dummy
 scoreboard objectives add poison dummy
 scoreboard objectives add skull dummy
