@@ -32,19 +32,26 @@ world.events.itemUse.subscribe(ev => {
         FORM.PLform(user)
     }
 
-    items.blackout(user, item)
+    let team = world.scoreboard.getObjective("CurrentRole")
+    let score = team.getParticipants()
 
-    if (item.typeId == "minecraft:diamond") {
-        FORM.divination(user)
-        return
-    }
+    items.blackout(user, item)
+    items.player_eye(user, item)
+    items.divination(user, item)
+    let entity = { displayName: user.name, id: user.id, type: user.typeId }
+    // if (item.typeId == "minecraft:diamond") {
+    //     FORM.divination(user)
+    //     return
+    // }
     // items.divination(user, item)
 })
 
 world.events.entityHit.subscribe(ev => {
     let user = ev.entity
     let target = ev.hitEntity
+    if (target == null) { return }
     items.PoisonInjection(user, target)
+    items.ruin(user, target)
 })
 
 
@@ -66,6 +73,6 @@ world.events.tick.subscribe(ev => {
     RunCommand("function werewolf/1tick")
     //werewolf.getPlayersFromScoreboard();
     if (tick % 20 == 0) {
-        // Say(tick)
+        RunCommand("function werewolf/20tick")
     }
 })

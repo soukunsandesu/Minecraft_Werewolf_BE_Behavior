@@ -1,4 +1,6 @@
 import { world } from "@minecraft/server";
+import * as UI from '@minecraft/server-ui';
+import { FORM } from "../form/text";
 
 export class items {
     static GiveItem(player) {
@@ -31,6 +33,21 @@ export class items {
     }
     static divination(user, item) {
         if (item.typeId == "minecraft:diamond") {
+            let team = world.scoreboard.getObjective("CurrentRole")
+            let entity
+            let userroll = team.getParticipant(entity)
+
+            if (userroll==3){
+                FORM.divination(user)
+            }
+            return
+        }
+    }
+    static player_eye(user, item) {
+        if (item.typeId == "minecraft:ender_eye") {
+            user.runCommandAsync("clear @s ender_eye 0 1")
+            user.runCommandAsync("effect @s blindness 1 0 true")
+            user.runCommandAsync("tp @s ~~~ facing @p[rm=1,m=a,scores={CurrentRole=1..}]")
             return
         }
     }
@@ -38,6 +55,14 @@ export class items {
         if (user.hasTag("PoisonInjection")) {
             user.runCommandAsync("clear @s wither_rose 0 1")
             target.runCommandAsync("scoreboard players set @s poison 1800")
+            return
+        }
+    }
+    static ruin(user, target) {
+        if (user.hasTag("ruin")) {
+            user.runCommandAsync("summon lightning_bolt ~~~")
+            user.runCommandAsync("damage @s 10 anvil")
+            target.runCommandAsync("damage @s 30 anvil")
             return
         }
     }

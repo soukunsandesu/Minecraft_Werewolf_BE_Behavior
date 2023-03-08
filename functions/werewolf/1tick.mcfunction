@@ -12,7 +12,7 @@ scoreboard players set @a[tag=Edown] elevator 30
 tag @a remove Eup
 tag @a remove Edown
 scoreboard players remove @a[scores={elevator=1..}] elevator 1
-
+titleraw @a actionbar {"rawtext":[{"score":{"name":"MWSystem","objective":"time"}}]}
 execute as @a[m=a] at @s run spawnpoint @s ~~~
 
 # 死亡判定
@@ -35,6 +35,8 @@ scoreboard players reset @a[scores={poison=..0}] poison
 tag @a remove PoisonInjection
 tag @a[hasitem={item=wither_rose,location=slot.weapon.mainhand}] add PoisonInjection
 effect @a[tag=PoisonInjection] weakness 1 10 true
+tag @a remove ruin
+tag @a[hasitem={item=golden_sword,location=slot.weapon.mainhand}] add ruin
 
 execute as @a[hasitem={item=beacon},m=a] at @s run function werewolf/mine
 
