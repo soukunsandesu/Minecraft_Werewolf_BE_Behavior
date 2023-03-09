@@ -39,7 +39,7 @@ execute as @a[scores={CurrentRole=3..},hasitem={item=beacon},m=a] at @s run func
 
 execute as @a[hasitem={item=quartz_block},m=a] run function werewolf/quartz_give
 
-
+execute as @p[tag=Debugger] run function werewolf/tick_debug
 # 勝利判定
 execute if score MWSystem NumOfWolf matches 0 if score MWSystem NumOfVillagers matches 1.. as @p run function werewolf/onfinish/winner/villager
 execute if score MWSystem NumOfVillagers matches 0 if score MWSystem NumOfWolf matches 1.. as @p run function werewolf/onfinish/winner/werewolf

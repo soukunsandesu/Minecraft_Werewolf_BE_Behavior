@@ -1,6 +1,6 @@
 scoreboard players set debug NumOfWolf 0
 scoreboard players set debug NumOfVillagers 0
-execute as @e[scores={CurrentRole=1..}] run scoreboard players add debug NumOfWolf 1
+execute as @e[scores={CurrentRole=1}] run scoreboard players add debug NumOfWolf 1
 execute as @e[scores={CurrentRole=3..5}] run scoreboard players add debug NumOfVillagers 1
 
 
