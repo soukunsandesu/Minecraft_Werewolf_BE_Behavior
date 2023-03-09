@@ -9,7 +9,7 @@
                     "functions": [
                         {
                             "function": "set_name",
-                            "name": "チョンリマ"
+                            "name": "千里馬のポーション"
                         },
                         {
                             "function": "set_data",
@@ -17,7 +17,7 @@
                         },
                         {
                             "function": "set_lore",
-                            "lore": "+160%\n1:00"
+                            "lore": "§r§7スピード (1:00)\n\n§5効果:\n§1+160% スピード"
                         }
                     ]
                 }
