@@ -1,3 +1,6 @@
+# ロール付与
+scoreboard players set @a[tag=player] CurrentRole 0
+#scoreboard players set @r[scores={CurrentRole=0}] CurrentRole 1ではダメ？
 # 人狼 = 1
 execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 1
 # 狂人 = 2
@@ -17,7 +20,7 @@ execute if score MWSystem NumOfPlayers matches 10.. as @r[scores={CurrentRole=0}
 # 村人 = 5
 execute as @a[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 5
 
-execute as @a run scoreboard players operation @s PreviewRole = @s CurrentRole
+execute as @a[tag=player] run scoreboard players operation @s PreviewRole = @s CurrentRole
 
 ##判定値追加
 execute as @a[scores={CurrentRole=1}] run scoreboard players add MWSystem NumOfWolf 1

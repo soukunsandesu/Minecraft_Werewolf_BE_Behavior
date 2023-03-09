@@ -7,3 +7,4 @@ scoreboard objectives remove elevator
 scoreboard objectives remove poison
 scoreboard objectives remove skull
 scoreboard objectives remove time
+scoreboard objectives remove a_live

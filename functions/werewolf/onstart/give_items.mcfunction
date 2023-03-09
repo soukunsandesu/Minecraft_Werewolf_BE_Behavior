@@ -1,5 +1,5 @@
 scoreboard objectives add give_item dummy
-scoreboard players set @a give_item 0
+scoreboard players set @a[tag=player] give_item 0
 scoreboard players set @r[scores={give_item=0}] give_item 1
 scoreboard players set @r[scores={give_item=0}] give_item 2
 scoreboard players set @r[scores={give_item=0}] give_item 3

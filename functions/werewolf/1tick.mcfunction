@@ -18,13 +18,9 @@ execute as @e[type=player,m=a] at @s run spawnpoint @s ~~~
 # 死亡判定
 tag @a add dead
 tag @e[type=player] remove dead
-execute as @e[type=player,tag=dead_t,scores={CurrentRole=1}] run scoreboard players remove MWSystem NumOfWolf 1
-execute as @e[type=player,tag=dead_t,scores={CurrentRole=3..5}] run scoreboard players remove MWSystem NumOfVillagers 1
-gamemode spectator @e[type=player,m=a,tag=dead_t]
-tag @e[type=player] remove dead_t
 tag @a[tag=dead] add dead_t
-tag @a[m=spectator] add spectator
-tag @a[m=!spectator] remove spectator
+execute as @e[type=player,tag=dead_t,scores={CurrentRole=1..}] run function werewolf/dead
+
 
 
 function werewolf/skull

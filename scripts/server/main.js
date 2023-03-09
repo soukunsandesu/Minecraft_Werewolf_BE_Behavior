@@ -6,6 +6,7 @@ import { FORM } from "./form/text";
 
 function RunCommand(cmd) { world.getDimension("overworld").runCommandAsync(cmd) }
 function Say(ms) { world.say(String(ms)) }
+function Log(ms) { RunCommand(`tell @a[tag=Debugger] §7[log] ${ms}`)}
 function Nametag(user) {
     var name = user.name
     user.Nametag = name.replace(/(^§.\[(.*?)\]|§.$)/g, "");
@@ -14,7 +15,7 @@ function Nametag(user) {
 world.events.effectAdd.subscribe(ev => {
     let entity = ev.entity
     let effect = ev.effect
-    Say(effect.displayName + "\nlv:" + effect.amplifier + "\ntick:" + effect.duration)
+    Log(entity.typeId+"\n"+effect.displayName + "\nlv:" + effect.amplifier + "\ntick:" + effect.duration)
     items.DamagePotion(effect, entity)
     items.InvisibilityPotion(effect, entity)
     items.SpeedPotion(effect, entity)
