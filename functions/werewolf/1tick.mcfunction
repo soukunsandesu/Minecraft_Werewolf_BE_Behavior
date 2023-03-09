@@ -21,7 +21,10 @@ tag @e[type=player] remove dead
 tag @a[tag=dead] add dead_t
 execute as @e[type=player,tag=dead_t,scores={CurrentRole=1..}] run function werewolf/dead
 
-
+# スペクテイターチャット用
+tag @a[m=spectator] add spectator
+tag @a[m=!spectator] remove spectator
+kill @e[type=item,name=ダイヤモンド]
 
 function werewolf/skull
 scoreboard players remove @a[scores={poison=1..}] poison 1
@@ -41,6 +44,4 @@ execute as @a[hasitem={item=quartz_block},m=a] run function werewolf/quartz_give
 
 execute as @p[tag=Debugger] run function werewolf/tick_debug
 # 勝利判定
-execute if score MWSystem NumOfWolf matches 0 if score MWSystem NumOfVillagers matches 1.. as @p run function werewolf/onfinish/winner/villager
-execute if score MWSystem NumOfVillagers matches 0 if score MWSystem NumOfWolf matches 1.. as @p run function werewolf/onfinish/winner/werewolf
-execute if score MWSystem NumOfWolf matches 0 if score MWSystem NumOfVillagers matches 0 as @p run function werewolf/onfinish/winner/draw
+execute as @p[scores={CurrentRole=1..}] run function werewolf/onfinish/winner/check

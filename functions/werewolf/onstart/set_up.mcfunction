@@ -18,10 +18,7 @@ scoreboard objectives add CurrentRole dummy
 
 # プレイヤー数カウント
 scoreboard objectives add NumOfPlayers dummy
-execute as @a[tag=player] run scoreboard players add MWSystem NumOfPlayers 1
 # 役職生存数カウント
 scoreboard objectives add NumOfWolf dummy
 scoreboard objectives add NumOfVillagers dummy
-scoreboard players set MWSystem NumOfWolf 0
-scoreboard players set MWSystem NumOfVillagers 0
 

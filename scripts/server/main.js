@@ -15,7 +15,7 @@ function Nametag(user) {
 world.events.effectAdd.subscribe(ev => {
     let entity = ev.entity
     let effect = ev.effect
-    Log(entity.typeId+"\n"+effect.displayName + "\nlv:" + effect.amplifier + "\ntick:" + effect.duration)
+    // Log(entity.typeId+"\n"+effect.displayName + "\nlv:" + effect.amplifier + "\ntick:" + effect.duration)
     items.DamagePotion(effect, entity)
     items.InvisibilityPotion(effect, entity)
     items.SpeedPotion(effect, entity)

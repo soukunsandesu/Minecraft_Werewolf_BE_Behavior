@@ -11,3 +11,5 @@ execute as @p[tag=Debugger] run function werewolf/onstart/debug
 function werewolf/onstart/select_roles
 execute as @p[tag=Debugger] run tellraw @a {"rawtext":[{"text":"デバッガー:"},{"selector":"@a[tag=Debugger]"}]}
 tag @a remove player
+
+effect @a saturation 100 100 true

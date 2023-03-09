@@ -23,7 +23,7 @@ export class items {
     }
     static SpeedPotion(effect, entity) {
         if (effect.displayName.match(/スピード/) && effect.duration == 3600 && effect.amplifier == 0) {
-            entity.runCommandAsync("effect @s speed 180 8");
+            entity.runCommandAsync("effect @s speed 60 8");
             return
         }
     }
