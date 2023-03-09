@@ -15,6 +15,12 @@ export class items {
             return
         }
     }
+    static InvisibilityPotion(effect, entity) {
+        if (effect.displayName.match(/不可視/) && effect.duration == 3600 && effect.amplifier == 0) {
+            entity.runCommandAsync("effect @s invisibility 60 1");
+            return
+        }
+    }
     static SpeedPotion(effect, entity) {
         if (effect.displayName.match(/スピード/) && effect.duration == 3600 && effect.amplifier == 0) {
             entity.runCommandAsync("effect @s speed 180 8");

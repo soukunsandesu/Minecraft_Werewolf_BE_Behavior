@@ -1,0 +1,23 @@
+{
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:splash_potion",
+                    "functions": [
+                        {
+                            "function": "set_name",
+                            "name": "1擊必殺ポーション"
+                        },
+                        {
+                            "function": "set_data",
+                            "data": 34
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
