@@ -9,10 +9,6 @@
                     "quantity": 3,
                     "functions": [
                         {
-                            "function": "set_name",
-                            "name": "停電スイッチ"
-                        },
-                        {
                             "function": "set_lore",
                             "lore": "最も近いプレイヤーの方向を特定する"
                         }
