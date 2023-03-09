@@ -31,9 +31,9 @@ export class items {
         if (item.typeId == "minecraft:double_plant") {
             user.runCommandAsync(`effect @a[name=!${user.nameTag},m=a] blindness 10 0 false`)
             user.runCommandAsync("clear @s double_plant 0 1")
-            user.runCommandAsync("title @a[name=!${user.nameTag},m=a] times 5 20 10")
-            user.runCommandAsync("title @a[name=!${user.nameTag},m=a] title 停 電 発 生")
-            user.runCommandAsync("title @a[name=!${user.nameTag},m=a] subtitle 10秒後に復旧します")
+            user.runCommandAsync("title @a times 5 20 10")
+            user.runCommandAsync("title @a title 停 電 発 生")
+            user.runCommandAsync("title @a subtitle 10秒後に復旧します")
             user.runCommandAsync("playsound mob.wither.spawn @a ~ ~ ~ 100 1 100");
             return
         }
