@@ -11,6 +11,10 @@ execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 
 # 霊媒師 = 4
 execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 4
 
+execute as @a[tag=player] run scoreboard players add MWSystem NumOfPlayers 1
+scoreboard players set MWSystem NumOfWolf 0
+scoreboard players set MWSystem NumOfVillagers 0
+
 ## 追加の人狼
 # 5人から人狼を1人増やす
 execute if score MWSystem NumOfPlayers matches 5.. as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 1
@@ -23,9 +27,6 @@ execute as @a[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 
 execute as @a[tag=player] run scoreboard players operation @s PreviewRole = @s CurrentRole
 
 ##判定値追加
-execute as @a[tag=player] run scoreboard players add MWSystem NumOfPlayers 1
-scoreboard players set MWSystem NumOfWolf 0
-scoreboard players set MWSystem NumOfVillagers 0
 execute as @a[scores={CurrentRole=1}] run scoreboard players add MWSystem NumOfWolf 1
 execute as @a[scores={CurrentRole=3..5}] run scoreboard players add MWSystem NumOfVillagers 1
 
