@@ -1,6 +1,11 @@
 scoreboard players add @a elevator 0
 
-execute as @p if score MWSystem time matches 0.. run titleraw @a actionbar {"rawtext":[{"score":{"name":"MWSystem","objective":"time"}}]}
+execute as @a[scores={CurrentRole=1}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4人狼§r / "}{"text":"クォーツ全配布まで残り"}{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
+execute as @a[scores={CurrentRole=2}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §5狂人§r / "}{"text":"クォーツ全配布まで残り"}{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
+execute as @a[scores={CurrentRole=3}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §b預言者§r / "}{"text":"クォーツ全配布まで残り"}{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
+execute as @a[scores={CurrentRole=4}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §e霊媒師§r / "}{"text":"クォーツ全配布まで残り"}{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
+execute as @a[scores={CurrentRole=5}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §a村人§r / "}{"text":"クォーツ全配布まで残り"}{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
+
 
 execute as @a[scores={elevator=..0}] at @s if block ~~-2~ lodestone if block ~~4~ lodestone run tag @s add Eup
 execute as @a[tag=sneaking,scores={elevator=..0}] at @s if block ~~-1~ lodestone if block ~~-7~ lodestone run tag @s add Edown
