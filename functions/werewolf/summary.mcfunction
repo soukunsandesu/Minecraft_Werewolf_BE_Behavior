@@ -5,6 +5,7 @@ execute if score 狂人 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text"
 execute if score 預言者 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§b預言者§r:"},{"selector":"@e[scores={CurrentRole=3}]"}]}
 execute if score 霊媒師 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§e霊媒師§r:"},{"selector":"@e[scores={CurrentRole=4}]"}]}
 execute if score 怪盗 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§a怪盗§r:"},{"selector":"@e[scores={StartRoll=6}]"}]}
+execute if score 猫又 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§a猫又§r:"},{"selector":"@e[scores={StartRoll=7}]"}]}
 tellraw @s {"rawtext":[{"text":"§a村人§r:"},{"selector":"@e[scores={CurrentRole=5}]"}]}
 tellraw @s {"rawtext":[{"text":"§3##############################"}]}
 

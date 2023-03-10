@@ -21,5 +21,6 @@ scoreboard objectives add NumOfPlayers dummy
 # 役職生存数カウント
 scoreboard objectives add NumOfWolf dummy
 scoreboard objectives add NumOfVillagers dummy
+scoreboard objectives add NumOfFox dummy
 scoreboard objectives add StartRoll dummy
 

@@ -2,17 +2,41 @@ import { world } from "@minecraft/server";
 import * as UI from '@minecraft/server-ui';
 
 export class FORM {
-  static async PLform(user) {
+  static async werewolf(user) {
     const form = new UI.ActionFormData()
       .title('妨害せよ')
       .button('停電')
-      .button('転移');
+      .button('ランダムアイテム')
+      .button('最も遠いプレイヤーへ転移')
+      .button('人狼へ転移');
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
+    // userのrollを取得
+    let PL = world.getAllPlayers().find(e => e.id === user.id);
+
     if (selection === 0) {
-      user.runCommandAsync('effect @a blindness 15 0 true')
+      user.runCommandAsync(`effect @a[name=!${PL.name},m=a] blindness 10 0 false`)
+      user.runCommandAsync("title @a times 5 20 10")
+      user.runCommandAsync("title @a title 停 電 発 生")
+      user.runCommandAsync("title @a subtitle 10秒後に復旧します")
+      user.runCommandAsync("playsound mob.wither.spawn @a ~ ~ ~ 100 1 100");
     }
-    if (selection === 1) { user.runCommandAsync('tp @s @r[rm=1]') }
+    if (selection === 1) {
+      user.runCommandAsync("scoreboard players reset @a give_item")
+      user.runCommandAsync("scoreboard players random @s give_item 1 10")
+      user.runCommandAsync("function werewolf/onstart/give_items")
+    }
+    if (selection === 2) {
+      user.runCommandAsync("effect @s invisibility 10 0")
+      user.runCommandAsync(`tp @s @a[c=-1,name=!"${PL.name}",scores={CurrentRole=1..}]`)
+      user.runCommandAsync("playsound portal.travel @a ~~~ 30 1 100")
+    }
+    if (selection === 3) {
+      user.runCommandAsync("effect @s invisibility 10 0")
+      user.runCommandAsync(`tp @s @a[c=-1,name=!"${PL.name}",scores={CurrentRole=1}]`)
+      user.runCommandAsync("playsound portal.travel @a ~~~ 30 1 100")
+    }
+    user.runCommandAsync("clear @s diamond 0 1")
   }
 
   // 預言者
@@ -135,7 +159,6 @@ export class FORM {
       let score = a_live.getScore(PL)
       if (PL.displayName == PLs[selection].displayName) { live = score }
     }
-
 
     let reply = team.getScore(PLs[selection])
     let textTeam = ["観戦", "人狼", "狂人", "預言者", "霊媒師", "村人", "怪盗"]

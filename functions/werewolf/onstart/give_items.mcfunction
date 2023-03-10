@@ -1,4 +1,3 @@
-scoreboard objectives add give_item dummy
 scoreboard players set @a[tag=player] give_item 0
 scoreboard players set @r[scores={give_item=0}] give_item 1
 scoreboard players set @r[scores={give_item=0}] give_item 2
@@ -44,3 +43,4 @@ loot give @a[scores={give_item=18}] loot "give_items/beacon"
 
 
 scoreboard objectives remove give_item
+scoreboard objectives add give_item dummy

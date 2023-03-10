@@ -50,6 +50,9 @@ export class items {
 
             // 見かけ上のrollの役職の効果を発動する(PreviewRole)
             // 真偽の判定、それに伴う処理の分岐はFORM内で記述
+            if (userroll.score === 1) {
+                FORM.werewolf(user)
+            }
             if (userroll.score === 3) {
                 FORM.divination(user)
             }
