@@ -1,7 +1,5 @@
-scoreboard objectives remove INplayer
-
 function werewolf/onfinish/reset
-
+scoreboard objectives remove INplayer
 gamerule showdeathmessages false
 gamerule sendcommandfeedback false
 gamerule keepinventory false
@@ -23,4 +21,5 @@ scoreboard objectives add NumOfPlayers dummy
 # 役職生存数カウント
 scoreboard objectives add NumOfWolf dummy
 scoreboard objectives add NumOfVillagers dummy
+scoreboard objectives add StartRoll dummy
 

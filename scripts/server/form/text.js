@@ -158,9 +158,10 @@ export class FORM {
 
     if (live == 1) {
       if (reply == 1) { answer = '貴方の役職は人狼です 人狼は"},{"selector":"@e[scores={CurrentRole=1}]"},{"text":"' } else { answer = textTeam[reply] }
-      user.runCommandAsync(`scoreboard players operation @s CurrentRole = ${PLs[selection].displayName} CurrentRole`)
-      user.runCommandAsync(`execute as @a[name=${PLs[selection].displayName},hasitem={item=diamond}] run give ${PL.name} diamond`)
-      user.runCommandAsync(`scoreboard players set ${PLs[selection].displayName} CurrentRole 5`)
+      user.runCommandAsync(`scoreboard players operation @s CurrentRole = "${PLs[selection].displayName}" CurrentRole`)
+      user.runCommandAsync(`scoreboard players operation @s PreviewRole = @s CurrentRole`)
+      user.runCommandAsync(`execute as @a[name="${PLs[selection].displayName}",hasitem={item=diamond}] run give "${PL.name}" diamond`)
+      user.runCommandAsync(`scoreboard players set "${PLs[selection].displayName}" CurrentRole 5`)
       user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"貴方の役職は${answer}です"}]}`)
       user.runCommandAsync("clear @s diamond 0 1")
     } else {

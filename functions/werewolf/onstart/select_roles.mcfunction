@@ -28,6 +28,14 @@ execute if score MWSystem NumOfPlayers matches 10.. as @r[scores={CurrentRole=0}
 execute as @a[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 5
 
 execute as @a[tag=player] run scoreboard players operation @s PreviewRole = @s CurrentRole
+execute as @a[tag=player] run scoreboard players operation @s StartRoll = @s CurrentRole
+
+execute as @a[scores={CurrentRole=1}] run scoreboard players add 人狼 StartRoll 1
+execute as @a[scores={CurrentRole=2}] run scoreboard players add 狂人 StartRoll 1
+execute as @a[scores={CurrentRole=3}] run scoreboard players add 預言者 StartRoll 1
+execute as @a[scores={CurrentRole=4}] run scoreboard players add 霊媒師 StartRoll 1
+execute as @a[scores={CurrentRole=5}] run scoreboard players add 村人 StartRoll 1
+execute as @a[scores={CurrentRole=6}] run scoreboard players add 怪盗 StartRoll 1
 
 ##判定値追加
 # execute as @a[scores={CurrentRole=1}] run scoreboard players add MWSystem NumOfWolf 1
