@@ -8,3 +8,6 @@ scoreboard objectives remove poison
 scoreboard objectives remove skull
 scoreboard objectives remove time
 scoreboard objectives remove a_live
+
+scoreboard objectives add INplayer dummy
+scoreboard players add @a INplayer 0

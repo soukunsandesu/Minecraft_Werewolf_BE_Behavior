@@ -40,18 +40,24 @@ export class items {
     }
     static divination(user, item) {
         if (item.typeId == "minecraft:diamond") {
-            let team = world.scoreboard.getObjective("CurrentRole")
+            let team = world.scoreboard.getObjective("PreviewRole")
             let PL = world.getAllPlayers().find(e => e.id === user.id);
             let userroll
             for (let score of team.getScores()) {
                 if (score.participant.displayName === PL.name) { userroll = score }
             }
             if (userroll== null)return
+
+            // 見かけ上のrollの役職の効果を発動する(PreviewRole)
+            // 真偽の判定、それに伴う処理の分岐はFORM内で記述
             if (userroll.score === 3) {
                 FORM.divination(user)
             }
             if (userroll.score === 4) {
                 FORM.psychic(user)
+            }
+            if (userroll.score === 6) {
+                FORM.thief(user)
             }
             return
         }

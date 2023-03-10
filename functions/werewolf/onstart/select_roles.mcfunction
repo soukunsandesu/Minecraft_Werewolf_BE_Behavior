@@ -10,7 +10,10 @@ execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 
 execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 3
 # 霊媒師 = 4
 execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 4
+# 怪盗 = 6
+execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 6
 
+# 人数取得
 execute as @a[tag=player] run scoreboard players add MWSystem NumOfPlayers 1
 scoreboard players set MWSystem NumOfWolf 0
 scoreboard players set MWSystem NumOfVillagers 0
@@ -27,10 +30,10 @@ execute as @a[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 
 execute as @a[tag=player] run scoreboard players operation @s PreviewRole = @s CurrentRole
 
 ##判定値追加
-execute as @a[scores={CurrentRole=1}] run scoreboard players add MWSystem NumOfWolf 1
-execute as @a[scores={CurrentRole=3..5}] run scoreboard players add MWSystem NumOfVillagers 1
-
-
+# execute as @a[scores={CurrentRole=1}] run scoreboard players add MWSystem NumOfWolf 1
+# execute as @a[scores={CurrentRole=3..5}] run scoreboard players add MWSystem NumOfVillagers 1
+# winner/checkにてtick置きに取得、判定するようにしました　これは怪盗などのマッチ中に役職が変化する役職に対応するためです
+# 問題点として回線落ちなどのプレイヤーが一時死亡判定を喰らう事が上げられます
 
 #Debuggerは役職配布直後にsummary表示
 execute as @a[tag=Debugger] run function werewolf/summary

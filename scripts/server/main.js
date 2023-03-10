@@ -1,7 +1,7 @@
 import { Player, Scoreboard, world } from "@minecraft/server";
 import { items } from "./OnGame/items";
 import * as UI from '@minecraft/server-ui';
-import { FORM } from "./form/text";
+import { FORM} from "./form/text";
 //import { werewolf } from "./typescript"
 
 function RunCommand(cmd) { world.getDimension("overworld").runCommandAsync(cmd) }
@@ -15,7 +15,7 @@ function Nametag(user) {
 world.events.effectAdd.subscribe(ev => {
     let entity = ev.entity
     let effect = ev.effect
-    Log(entity.typeId+"\n"+effect.displayName + "\nlv:" + effect.amplifier + "\ntick:" + effect.duration)
+    // Log(entity.typeId+"\n"+effect.displayName + "\nlv:" + effect.amplifier + "\ntick:" + effect.duration)
     items.DamagePotion(effect, entity)
     items.InvisibilityPotion(effect, entity)
     items.SpeedPotion(effect, entity)

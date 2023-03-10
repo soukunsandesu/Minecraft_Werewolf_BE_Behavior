@@ -1,3 +1,5 @@
+scoreboard objectives remove INplayer
+
 function werewolf/onfinish/reset
 
 gamerule showdeathmessages false
