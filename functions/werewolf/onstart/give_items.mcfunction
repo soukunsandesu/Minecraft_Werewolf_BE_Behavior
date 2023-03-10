@@ -20,6 +20,8 @@ scoreboard players set @r[scores={give_item=0}] give_item 17
 scoreboard players set @r[scores={give_item=0}] give_item 18
 loot give @a[scores={give_item=1}] loot "give_items/double_plant"
 loot give @a[scores={give_item=2}] loot "give_items/ender_eye"
+loot give @a[scores={give_item=2}] loot "give_items/ender_eye"
+loot give @a[scores={give_item=2}] loot "give_items/ender_eye"
 loot give @a[scores={give_item=3}] loot "give_items/potion7"
 loot give @a[scores={give_item=4}] loot "give_items/potion14"
 loot give @a[scores={give_item=5}] loot "give_items/splash_potion34"

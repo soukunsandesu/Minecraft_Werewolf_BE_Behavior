@@ -9,7 +9,7 @@ export class items {
     }
 
     static DamagePotion(effect, entity) {
-        if (effect.displayName.match(/弱体化/) && effect.amplifier == 0) {
+        if (effect.displayName.match(/ウィザー/) && effect.amplifier == 1) {
             entity.runCommandAsync("effect @s clear");
             entity.runCommandAsync("damage @s 20 anvil entity @s");
             return
@@ -60,7 +60,7 @@ export class items {
         if (item.typeId == "minecraft:ender_eye") {
             user.runCommandAsync("clear @s ender_eye 0 1")
             user.runCommandAsync("effect @s blindness 1 0 true")
-            user.runCommandAsync("tp @s ~~~ facing @p[rm=1,m=a,scores={CurrentRole=1..}]")
+            user.runCommandAsync("tp @s ~~~ facing @a[c=-1,rm=1,m=a,scores={CurrentRole=1..}]")
             return
         }
     }

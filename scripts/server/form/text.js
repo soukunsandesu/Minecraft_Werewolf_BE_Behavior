@@ -47,7 +47,8 @@ export class FORM {
     let anPLs = []
     for (let PL of PLs) {
       let score = team.getScore(PL)
-      if (Number(score) > 0) {anPLs.push(PL)
+      if (Number(score) > 0) {
+        anPLs.push(PL)
       }
     }
     const form = new UI.ActionFormData()
@@ -57,14 +58,19 @@ export class FORM {
     });
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
-    let a_lives = world.scoreboard.getObjective("a_live")
-    let a_live = a_lives.getScore(PLs[selection])
+    let a_live = world.scoreboard.getObjective("a_live")
+    let live_PL = a_live.getParticipants()
+    let live
+    for (let PL of live_PL) {
+      let score = a_live.getScore(PL)
+      if (Number(score) == 0 && PL.displayName == PLs[selection].displayName) { live = score }
+    }
     let reply = team.getScore(PLs[selection])
     let textTeam = ["は観戦です", "は黒です", "は白です"]
     let answer
-    if(a_live>0){
+    if (live == 0) {
       if (reply > 1) { answer = textTeam[2] } else { answer = textTeam[reply] }
-    } else { answer ="の魂は見つかりませんでした…"}
+    } else { answer = "の魂は見つかりませんでした…" }
     user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}${answer}"}]}`)
     user.runCommandAsync("clear @s diamond 0 1")
   }
