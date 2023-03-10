@@ -1,7 +1,7 @@
 import { Player, Scoreboard, world } from "@minecraft/server";
 import { items } from "./OnGame/items";
 import * as UI from '@minecraft/server-ui';
-import { FORM} from "./form/text";
+import { FORM } from "./form/text";
 //import { werewolf } from "./typescript"
 
 function RunCommand(cmd) { world.getDimension("overworld").runCommandAsync(cmd) }
@@ -39,6 +39,7 @@ world.events.itemUse.subscribe(ev => {
     items.blackout(user, item)
     items.player_eye(user, item)
     items.divination(user, item)
+    items.GameFoam(user, item)
     // let entity = { displayName: PL.name, id: PL.id, type: PL.typeId }
     // if (item.typeId == "minecraft:diamond") {
     //     FORM.divination(user)

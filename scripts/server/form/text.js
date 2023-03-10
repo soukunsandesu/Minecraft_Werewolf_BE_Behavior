@@ -1,7 +1,84 @@
 import { world } from "@minecraft/server";
 import * as UI from '@minecraft/server-ui';
+import config from '../data';
 
 export class FORM {
+  static async gameinfo(user) {
+    const form = new UI.ActionFormData()
+      .title('指令は？')
+      .button('ゲーム開始')
+      .button('参加プレイヤー一覧')
+      .button('ゲーム中断')
+      .button('役職編成');
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    // userのrollを取得
+
+    if (selection === 0) {
+    }
+    if (selection === 1) {
+
+    }
+    if (selection === 2) {
+
+    }
+    if (selection === 3) return await this.rollinfo(user)
+  }
+  static async rollinfo(user) {
+    const form = new UI.ActionFormData()
+      .title('ロールを編成(選択で削除)');
+    let i = 0
+    let datas = config.Rolls
+    datas = [{ name: "人狼", score: 1 }]
+    if (datas.length > 0) {
+      for (let data of datas) {
+        form.button(data.name)
+        i = i + 1
+      }
+    }
+    form.button('役職追加');
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection === i) {
+      world.say("eee")
+      return await this.add_rollinfo(user)
+    }
+    insert(datas.splice(selection, 1))
+    return await this.rollinfo(user)
+  }
+
+  static async add_rollinfo(user) {
+    const form = new UI.ActionFormData()
+      .title('役職追加');
+    let inrolls = config.Inrolls
+    inrolls =[{ name: "人狼", score: 1 },
+      { name: "狂人", score: 2 },
+      { name: "預言者", score: 3 },
+      { name: "霊媒師", score: 4 },
+      { name: "村人", score: 5 },
+      { name: "怪盗", score: 6 },
+      { name: "猫又", score: 7 },
+      { name: "狐", score: 8 }]
+    let i = 0
+    for (let inroll of inrolls) {
+      form.button(inroll.name)
+      i = i + 1
+    }
+    form.button("戻る")
+    const { selection, canceled } = await form.show(user);
+
+    if (canceled) return;
+    if (selection == i) {
+      return await this.rollinfo(user)
+    }
+    insert(inrolls.push(inrolls[selection]))
+    return await this.rollinfo(user)
+  }
+  static insert(inconfig){
+    let indeat=[inconfig,config.Initial]
+}
+
+
   static async werewolf(user) {
     const form = new UI.ActionFormData()
       .title('妨害せよ')

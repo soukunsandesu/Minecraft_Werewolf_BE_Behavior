@@ -27,6 +27,12 @@ export class items {
             return
         }
     }
+    static GameFoam(user, item) {
+        if (item.typeId == "minecraft:stick" && (user.hasTag("OP") || user.hasTag("admin"))) {
+            FORM.gameinfo(user)
+            return
+        }
+    }
     static blackout(user, item) {
         if (item.typeId == "minecraft:double_plant") {
             user.runCommandAsync(`effect @a[name=!${user.nameTag},m=a] blindness 10 0 false`)
@@ -83,8 +89,9 @@ export class items {
     static ruin(user, target) {
         if (user.hasTag("ruin")) {
             user.runCommandAsync("summon lightning_bolt ~~~")
-            user.runCommandAsync("damage @s 10 anvil")
+            user.runCommandAsync("damage @s 13 anvil")
             target.runCommandAsync("damage @s 30 anvil")
+            user.runCommandAsync("clear golden_sword")
             return
         }
     }
