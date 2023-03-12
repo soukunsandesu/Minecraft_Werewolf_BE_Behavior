@@ -4,5 +4,5 @@ execute as @s[scores={CurrentRole=3..7}] run scoreboard players remove MWSystem 
 execute as @s[scores={CurrentRole=8}] run scoreboard players remove MWSystem NumOfFox 1
 scoreboard players set @s a_live 0
 gamemode spectator @s
-execute if entity @s[scores={PreviewRole=7}] as @r[scores={a_live=1}] run function werewolf/ongame/nekomata
+execute if entity @s[scores={PreviewRole=7}] run function werewolf/ongame/nekomata
 tag @e[type=player] remove dead_t
