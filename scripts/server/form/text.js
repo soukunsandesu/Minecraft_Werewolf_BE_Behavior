@@ -6,31 +6,26 @@ let datas = config.Rolls
 
 export class FORM {
   static async gameinfo(user) {
+    let PLs = world.getAllPlayers()
+    let PLc = PLs.filter(n => n.hasTag("player"));
     const form = new UI.ActionFormData()
       .title('指令は？')
       .button('ゲーム開始')
-      .button('プレイヤー一覧')
+      .button(`プレイヤー ${PLc.length}/${PLs.length}`)
       .button('ゲーム中断')
-      .button('役職編成');
+      .button(`役職編成\n${datas.length}枠設定済み`);
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
     // userのrollを取得
 
-    if (selection === 0) {
-      this.gamestart(user)
-    }
-    if (selection === 1) {
-
-    }
-    if (selection === 2) {
-
-    }
-    if (selection === 3) return await this.rollinfo(user)
+    if (selection === 0) this.gamestart(user);
+    if (selection === 1) return await this.GetPlayers(user);
+    if (selection === 2) user.runCommandAsync("function werewolf/onfinish/reset");
+    if (selection === 3) return await this.rollinfo(user);
   }
-  
-  
-  
-  static async gamestart  (user) {
+
+
+  static async gamestart(user) {
     if (datas.length > 2) {
       let PLs = world.getPlayers()
       user.runCommandAsync("function werewolf/start_First")
@@ -43,6 +38,28 @@ export class FORM {
     }
   }
 
+  static async GetPlayers(user) {
+    let PLs = world.getAllPlayers()
+    let PLc = PLs.filter(n => n.hasTag("player"));
+    const form = new UI.ActionFormData()
+      .title(`参加状態の変更 ${PLc.length}/${PLs.length}人`);
+    let i = 0
+    for (let PL of PLs) {
+      let status = "c待機中"
+      i = i + 1
+      if (PL.hasTag("player")) status = "a参加中"
+      form.button(`${i}:${PL.name}\n§${status}`)
+    }
+    form.button('戻る');
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == i) return await this.gameinfo(user)
+    if (PLs[selection].hasTag("player")) {
+      PLs[selection].removeTag("player")
+    } else { PLs[selection].addTag("player") }
+    return await this.GetPlayers(user)
+  }
+
   static async rollinfo(user) {
     const form = new UI.ActionFormData()
       .title('ロールを編成(選択で削除)');
@@ -53,11 +70,25 @@ export class FORM {
         form.button(`${i}:${data.name}`)
       }
     }
-    form.button('役職追加');
+    form.button('役職追加')
+      .button("戻る")
+      .button("ヘルプ");
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
     if (selection === i) {
       return await this.add_rollinfo(user)
+    }
+    if (selection === i + 1) {
+      return await this.gameinfo(user)
+    }
+    if (selection === i + 2) {
+      const form = new UI.ActionFormData()
+        .title('ヘルプ(ロール)')
+        .body("上から順にプレイヤーに割り当てられる\n例:プレイヤー3人 「1:人狼,2:村人,3:預言者,4:霊媒師」の場合\n「人狼,村人,預言者」が割り当てられる\n\n設定した枠を超えた場合は村人が割り当てられる\n例:プレイヤー3人 「1:人狼,2:預言者」の場合\n「人狼,預言者,村人」が割り当てられる")
+        .button("戻る");
+      const { selection, canceled } = await form.show(user);
+      if (canceled) return;
+      return await this.rollinfo(user)
     }
     datas.splice(selection, 1)
     return await this.rollinfo(user)
@@ -82,7 +113,6 @@ export class FORM {
     datas.push(Initials[selection])
     return await this.rollinfo(user)
   }
-
 
   static async werewolf(user) {
     const form = new UI.ActionFormData()
@@ -156,6 +186,7 @@ export class FORM {
       return
     }
     if (reply > 1) { answer = textTeam[2] } else { answer = textTeam[reply] }
+    if (reply == 8) { answer = "狐" }
     user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}は${answer}です"}]}`)
     user.runCommandAsync("clear @s diamond 0 1")
   }

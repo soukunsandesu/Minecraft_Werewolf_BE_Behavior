@@ -28,7 +28,7 @@ export class items {
         }
     }
     static GameFoam(user, item) {
-        if (item.typeId == "minecraft:stick" && (user.hasTag("OP") || user.hasTag("admin"))) {
+        if (item.typeId == "minecraft:blaze_rod" && (user.hasTag("OP") || user.hasTag("Debugger") || user.hasTag("admin"))) {
             FORM.gameinfo(user)
             return
         }
@@ -52,7 +52,7 @@ export class items {
             for (let score of team.getScores()) {
                 if (score.participant.displayName === PL.name) { userroll = score }
             }
-            if (userroll== null)return
+            if (userroll == null) return
 
             // 見かけ上のrollの役職の効果を発動する(PreviewRole)
             // 真偽の判定、それに伴う処理の分岐はFORM内で記述
