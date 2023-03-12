@@ -1,13 +1,15 @@
 import { world } from "@minecraft/server";
 import * as UI from '@minecraft/server-ui';
-import config from '../data';
+import { config } from '../data.js';
+
+let datas = config.Rolls
 
 export class FORM {
   static async gameinfo(user) {
     const form = new UI.ActionFormData()
       .title('指令は？')
       .button('ゲーム開始')
-      .button('参加プレイヤー一覧')
+      .button('プレイヤー一覧')
       .button('ゲーム中断')
       .button('役職編成');
     const { selection, canceled } = await form.show(user);
@@ -15,6 +17,7 @@ export class FORM {
     // userのrollを取得
 
     if (selection === 0) {
+      this.gamestart(user)
     }
     if (selection === 1) {
 
@@ -24,44 +27,49 @@ export class FORM {
     }
     if (selection === 3) return await this.rollinfo(user)
   }
+  
+  
+  
+  static async gamestart  (user) {
+    if (datas.length > 2) {
+      let PLs = world.getPlayers()
+      user.runCommandAsync("function werewolf/start_First")
+      for (let data of datas) {
+        user.runCommandAsync("execute as @r[tag=player,scores={CurrentRole=0}] run scoreboard players set @s CurrentRole " + data.score)
+      }
+      user.runCommandAsync("function werewolf/start_Latter")
+    } else {
+      world.say("ロールが少なすぎます！\n" + datas.length + ">2")
+    }
+  }
+
   static async rollinfo(user) {
     const form = new UI.ActionFormData()
       .title('ロールを編成(選択で削除)');
     let i = 0
-    let datas = config.Rolls
-    datas = [{ name: "人狼", score: 1 }]
     if (datas.length > 0) {
       for (let data of datas) {
-        form.button(data.name)
         i = i + 1
+        form.button(`${i}:${data.name}`)
       }
     }
     form.button('役職追加');
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
     if (selection === i) {
-      world.say("eee")
       return await this.add_rollinfo(user)
     }
-    insert(datas.splice(selection, 1))
+    datas.splice(selection, 1)
     return await this.rollinfo(user)
   }
 
   static async add_rollinfo(user) {
     const form = new UI.ActionFormData()
       .title('役職追加');
-    let inrolls = config.Inrolls
-    inrolls =[{ name: "人狼", score: 1 },
-      { name: "狂人", score: 2 },
-      { name: "預言者", score: 3 },
-      { name: "霊媒師", score: 4 },
-      { name: "村人", score: 5 },
-      { name: "怪盗", score: 6 },
-      { name: "猫又", score: 7 },
-      { name: "狐", score: 8 }]
+    let Initials = config.Initial
     let i = 0
-    for (let inroll of inrolls) {
-      form.button(inroll.name)
+    for (let Initial of Initials) {
+      form.button(Initial.name)
       i = i + 1
     }
     form.button("戻る")
@@ -71,12 +79,9 @@ export class FORM {
     if (selection == i) {
       return await this.rollinfo(user)
     }
-    insert(inrolls.push(inrolls[selection]))
+    datas.push(Initials[selection])
     return await this.rollinfo(user)
   }
-  static insert(inconfig){
-    let indeat=[inconfig,config.Initial]
-}
 
 
   static async werewolf(user) {
