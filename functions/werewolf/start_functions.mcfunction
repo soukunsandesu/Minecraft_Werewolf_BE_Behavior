@@ -1,5 +1,6 @@
 function werewolf/onstart/set_up
 gamemode adventure @a[tag=player]
+tag @a[tag=player] remove dead_t
 clear @a[tag=player,tag=!Debugger]
 effect @a[tag=player,tag=!Debugger] clear
 kill @e[type=item]
