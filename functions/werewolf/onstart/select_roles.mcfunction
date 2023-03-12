@@ -46,6 +46,9 @@ execute as @e[scores={CurrentRole=7}] run scoreboard players add 猫又 StartRol
 execute as @e[scores={CurrentRole=8}] run scoreboard players add 狐 StartRoll 1
 
 ##判定値追加
+scoreboard players set MWSystem NumOfWolf 0
+scoreboard players set MWSystem NumOfVillagers 0
+scoreboard players set MWSystem NumOfFox 0
 execute as @a[scores={CurrentRole=1}] run scoreboard players add MWSystem NumOfWolf 1
 execute as @a[scores={CurrentRole=3..7}] run scoreboard players add MWSystem NumOfVillagers 1
 execute as @a[scores={CurrentRole=8}] run scoreboard players add MWSystem NumOfFox 1

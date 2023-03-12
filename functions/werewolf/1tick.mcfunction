@@ -8,6 +8,7 @@ execute as @a[scores={PreviewRole=4}] if score MWSystem time matches 0.. run tit
 execute as @a[scores={PreviewRole=5}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §a村人§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
 execute as @a[scores={PreviewRole=6}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §b怪盗§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
 execute as @a[scores={PreviewRole=7}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §b猫又§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
+execute as @a[scores={PreviewRole=8}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §e狐§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
 
 execute as @a[scores={PreviewRole=1}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4人狼§r"}]}
 execute as @a[scores={PreviewRole=2}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §5狂人§r"}]}
@@ -16,6 +17,7 @@ execute as @a[scores={PreviewRole=4}] if score MWSystem time matches ..-1 run ti
 execute as @a[scores={PreviewRole=5}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §a村人§r"}]}
 execute as @a[scores={PreviewRole=6}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §b怪盗§r"}]}
 execute as @a[scores={PreviewRole=7}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §b猫又§r"}]}
+execute as @a[scores={PreviewRole=8}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §e狐§r"}]}
 
 execute as @p[scores={INplayer=-100..100}] run function werewolf/onstart/INplayer
 
@@ -34,7 +36,7 @@ scoreboard players remove @a[scores={elevator=1..}] elevator 1
 execute as @e[type=player,m=a] at @s run spawnpoint @s ~~~
 
 # 死亡判定
-tag @a add dead
+tag @a[m=a] add dead
 tag @e[type=player] remove dead
 tag @a[tag=dead] add dead_t
 execute as @e[type=player,tag=dead_t,scores={CurrentRole=1..}] run function werewolf/dead
