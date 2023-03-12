@@ -35,7 +35,8 @@ export class items {
     }
     static blackout(user, item) {
         if (item.typeId == "minecraft:double_plant") {
-            user.runCommandAsync(`effect @a[name=!${user.nameTag},m=a] blindness 10 0 false`)
+            let PL = world.getAllPlayers().find(e => e.id === user.id);
+            user.runCommandAsync(`effect @a[name=!${PL.name},m=a] blindness 10 0 false`)
             user.runCommandAsync("clear @s double_plant 0 1")
             user.runCommandAsync("title @a times 5 20 10")
             user.runCommandAsync("title @a title 停 電 発 生")
@@ -75,7 +76,8 @@ export class items {
         if (item.typeId == "minecraft:ender_eye") {
             user.runCommandAsync("clear @s ender_eye 0 1")
             user.runCommandAsync("effect @s blindness 1 0 true")
-            user.runCommandAsync("tp @s ~~~ facing @a[c=-1,rm=1,m=a,scores={CurrentRole=1..}]")
+            user.runCommandAsync("tp @s[tag=!sneaking] ~~~ facing @a[c=-1,rm=1,m=a,scores={CurrentRole=1..}]")
+            user.runCommandAsync("tp @s[tag=sneaking] ~~~ facing @a[c=1,rm=1,m=a,scores={CurrentRole=1..}]")
             return
         }
     }

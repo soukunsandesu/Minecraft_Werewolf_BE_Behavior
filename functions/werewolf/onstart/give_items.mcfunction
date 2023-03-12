@@ -10,14 +10,21 @@ scoreboard players set @r[scores={give_item=0}] give_item 7
 scoreboard players set @r[scores={give_item=0}] give_item 8
 scoreboard players set @r[scores={give_item=0}] give_item 9
 scoreboard players set @r[scores={give_item=0}] give_item 10
-scoreboard players set @r[scores={give_item=0}] give_item 11
-scoreboard players set @r[scores={give_item=0}] give_item 12
-scoreboard players set @r[scores={give_item=0}] give_item 13
-scoreboard players set @r[scores={give_item=0}] give_item 14
-scoreboard players set @r[scores={give_item=0}] give_item 15
-scoreboard players set @r[scores={give_item=0}] give_item 16
-scoreboard players set @r[scores={give_item=0}] give_item 17
-scoreboard players set @r[scores={give_item=0}] give_item 18
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @r[scores={give_item=0}] give_item 1 10
 loot give @a[scores={give_item=1}] loot "give_items/double_plant"
 loot give @a[scores={give_item=2}] loot "give_items/ender_eye"
 loot give @a[scores={give_item=2}] loot "give_items/ender_eye"

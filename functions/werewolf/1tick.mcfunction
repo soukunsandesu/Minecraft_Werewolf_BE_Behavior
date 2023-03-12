@@ -41,6 +41,8 @@ tag @e[type=player] remove dead
 tag @a[tag=dead] add dead_t
 execute as @e[type=player,tag=dead_t,scores={CurrentRole=1..}] run function werewolf/dead
 
+tag @e[type=player] remove dead_t
+
 # スペクテイターチャット用
 tag @a[m=spectator] add spectator
 tag @a[m=!spectator] remove spectator
