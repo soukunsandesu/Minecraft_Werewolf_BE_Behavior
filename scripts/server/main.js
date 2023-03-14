@@ -1,4 +1,4 @@
-import { Player, Scoreboard, system, SystemEvents, TickEvent, TickEventSignal, TicksPerSecond, world } from "@minecraft/server";
+import { system, world } from "@minecraft/server";
 import { items } from "./OnGame/items";
 import * as UI from '@minecraft/server-ui';
 import { FORM } from "./form/text";
@@ -79,6 +79,4 @@ system.runInterval(ev => {
 system.runInterval(ev => {
     RunCommand("function werewolf/20tick")
 }, 20)
-
-
 
