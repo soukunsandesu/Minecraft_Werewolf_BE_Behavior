@@ -5,8 +5,8 @@ import { FORM } from "./form/text";
 //import { werewolf } from "./typescript"
 
 function RunCommand(cmd) { world.getDimension("overworld").runCommandAsync(cmd) }
-function Say(ms) { world.getDimension("overworld").runCommandAsync("say "+ms) }
-function Log(ms) { RunCommand(`tell @a[tag=Debugger] §7[log] ${ms}`)}
+function Say(ms) { RunCommand("say " + ms) }
+function Log(ms) { RunCommand(`tell @a[tag=Debugger] §7[log] ${ms}`) }
 function Nametag(user) {
     var name = user.name
     user.Nametag = name.replace(/(^§.\[(.*?)\]|§.$)/g, "");
@@ -73,12 +73,12 @@ world.events.beforeChat.subscribe(ev => {
 //     Nametag(ev.player)
 // })
 
-system.run(ev => {
-   let tick= world.getTime()
+system.runInterval(ev => {
     RunCommand("function werewolf/1tick")
-    //werewolf.getPlayersFromScoreboard();
-    if (tick % 20 == 0) {
-        RunCommand("function werewolf/20tick")
-    }
-})
+}, 1)
+system.runInterval(ev => {
+    RunCommand("function werewolf/20tick")
+}, 20)
+
+
 
