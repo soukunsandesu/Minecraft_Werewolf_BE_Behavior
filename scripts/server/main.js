@@ -1,4 +1,4 @@
-import { Player, Scoreboard, world } from "@minecraft/server";
+import { Player, Scoreboard, TickEvent, TickEventSignal, TicksPerSecond, world } from "@minecraft/server";
 import { items } from "./OnGame/items";
 import * as UI from '@minecraft/server-ui';
 import { FORM } from "./form/text";
@@ -11,6 +11,8 @@ function Nametag(user) {
     var name = user.name
     user.Nametag = name.replace(/(^§.\[(.*?)\]|§.$)/g, "");
 }
+
+// world.events.worldInitialize.subscribe(RunCommand("function werewolf/onfinish/reset"))
 
 world.events.effectAdd.subscribe(ev => {
     let entity = ev.entity
@@ -70,7 +72,10 @@ world.events.beforeChat.subscribe(ev => {
 // world.events.playerJoin.subscribe(ev => {
 //     Nametag(ev.player)
 // })
-world.events.tick.subscribe(ev => {
+
+TickEvent.
+
+TickEventSignal.call(ev => {
     let tick = ev.currentTick
     RunCommand("function werewolf/1tick")
     //werewolf.getPlayersFromScoreboard();
