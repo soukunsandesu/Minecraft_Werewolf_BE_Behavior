@@ -9,7 +9,7 @@ export class items {
     }
 
     static DamagePotion(effect, entity) {
-        if (effect.displayName.match(/ウィザー/) && effect.amplifier == 1) {
+        if ((effect.displayName.match(/力/) && effect.amplifier == 0) || (effect.displayName.match(/ウィザー/) && effect.amplifier == 1)) {
             entity.runCommandAsync("effect @s clear");
             entity.runCommandAsync("damage @s 20 anvil entity @s");
             return

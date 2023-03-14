@@ -140,7 +140,7 @@ export class FORM {
     }
     if (selection === 2) {
       user.runCommandAsync("effect @s invisibility 10 0")
-      user.runCommandAsync(`tp @s @a[c=-1,name=!"${PL.name}",scores={CurrentRole=1..}]`)
+      user.runCommandAsync(`tp @s @a[c=-1,name=!"${PL.name}",scores={a_live=1..}]`)
       user.runCommandAsync("playsound portal.travel @a ~~~ 30 1 100")
     }
     if (selection === 3) {
@@ -296,7 +296,7 @@ export class FORM {
       if (reply == 1) { answer = '貴方の役職は人狼です 人狼は"},{"selector":"@e[scores={CurrentRole=1}]"},{"text":"' } else { answer = textTeam[reply] }
       user.runCommandAsync(`scoreboard players operation @s CurrentRole = "${PLs[selection].displayName}" CurrentRole`)
       user.runCommandAsync(`scoreboard players operation @s PreviewRole = @s CurrentRole`)
-      user.runCommandAsync(`execute as @a[name="${PLs[selection].displayName}",hasitem={item=diamond}] run give "${PL.name}" diamond`)
+      user.runCommandAsync(`execute as @a[name="${PLs[selection].displayName}",hasitem={item=diamond}] run give "${PL.name}" diamond 1 0 {"item_lock":{"mode":"lock_in_inventory"}}`)
       user.runCommandAsync(`scoreboard players set "${PLs[selection].displayName}" CurrentRole 5`)
       user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"貴方の役職は${answer}です"}]}`)
       user.runCommandAsync("clear @s diamond 0 1")

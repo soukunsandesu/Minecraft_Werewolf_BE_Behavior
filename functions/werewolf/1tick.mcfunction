@@ -33,14 +33,13 @@ scoreboard players set @a[tag=Edown] elevator 30
 tag @a remove Eup
 tag @a remove Edown
 scoreboard players remove @a[scores={elevator=1..}] elevator 1
-execute as @e[type=player,m=a] at @s run spawnpoint @s ~~~
 
 # 死亡判定
+execute as @e[type=player,m=a] at @s run spawnpoint @s ~~~
 tag @a[m=a] add dead
 tag @e[type=player] remove dead
 tag @a[tag=dead] add dead_t
-execute as @e[type=player,tag=dead_t,scores={CurrentRole=1..}] run function werewolf/dead
-
+execute as @e[type=player,tag=dead_t,scores={a_live=1..}] run function werewolf/dead
 tag @e[type=player] remove dead_t
 
 # スペクテイターチャット用
@@ -64,6 +63,6 @@ execute as @a[scores={CurrentRole=3..},hasitem={item=beacon},m=a] at @s run func
 
 execute as @a[hasitem={item=quartz_block},m=a] run function werewolf/quartz_give
 
-execute as @p[tag=Debugger] run function werewolf/tick_debug
+execute as @p[tag=Debugger] run function werewolf/onfinish/tick_debug
 # 勝利判定
 execute as @p[scores={CurrentRole=1..}] run function werewolf/onfinish/winner/check

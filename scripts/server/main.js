@@ -73,13 +73,12 @@ world.events.beforeChat.subscribe(ev => {
 //     Nametag(ev.player)
 // })
 
-TickEvent.
 
-TickEventSignal.call(ev => {
-    let tick = ev.currentTick
-    RunCommand("function werewolf/1tick")
-    //werewolf.getPlayersFromScoreboard();
-    if (tick % 20 == 0) {
-        RunCommand("function werewolf/20tick")
-    }
-})
+// TickEventSignal.call(ev => {
+//     let tick = ev.currentTick
+//     RunCommand("function werewolf/1tick")
+//     //werewolf.getPlayersFromScoreboard();
+//     if (tick % 20 == 0) {
+//         RunCommand("function werewolf/20tick")
+//     }
+// })
