@@ -1,4 +1,4 @@
-import { Player, Scoreboard, TickEvent, TickEventSignal, TicksPerSecond, world } from "@minecraft/server";
+import { Player, Scoreboard, system, SystemEvents, TickEvent, TickEventSignal, TicksPerSecond, world } from "@minecraft/server";
 import { items } from "./OnGame/items";
 import * as UI from '@minecraft/server-ui';
 import { FORM } from "./form/text";
@@ -73,12 +73,12 @@ world.events.beforeChat.subscribe(ev => {
 //     Nametag(ev.player)
 // })
 
+system.run(ev => {
+   let tick= world.getTime()
+    RunCommand("function werewolf/1tick")
+    //werewolf.getPlayersFromScoreboard();
+    if (tick % 20 == 0) {
+        RunCommand("function werewolf/20tick")
+    }
+})
 
-// TickEventSignal.call(ev => {
-//     let tick = ev.currentTick
-//     RunCommand("function werewolf/1tick")
-//     //werewolf.getPlayersFromScoreboard();
-//     if (tick % 20 == 0) {
-//         RunCommand("function werewolf/20tick")
-//     }
-// })
