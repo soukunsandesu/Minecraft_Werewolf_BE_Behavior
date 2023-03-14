@@ -5,7 +5,7 @@ import { FORM } from "./form/text";
 //import { werewolf } from "./typescript"
 
 function RunCommand(cmd) { world.getDimension("overworld").runCommandAsync(cmd) }
-function Say(ms) { world.say(String(ms)) }
+function Say(ms) { world.getDimension("overworld").runCommandAsync("say "+ms) }
 function Log(ms) { RunCommand(`tell @a[tag=Debugger] §7[log] ${ms}`)}
 function Nametag(user) {
     var name = user.name
