@@ -84,7 +84,7 @@ export class items {
     static PoisonInjection(user, target) {
         if (user.hasTag("PoisonInjection")) {
             user.runCommandAsync("clear @s wither_rose 0 1")
-            target.runCommandAsync("scoreboard players set @s poison 1800")
+            target.runCommandAsync("scoreboard players random @s poison 900 1800")
             return
         }
     }

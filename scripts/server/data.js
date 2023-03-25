@@ -14,6 +14,8 @@ export const config =
         { name: "村人", score: 5 },
         { name: "怪盗", score: 6 },
         { name: "猫又", score: 7 },
-        { name: "狐", score: 8 }
+        { name: "狐", score: 8 },
+        { name: "狂信者", score: 9 },
+        { name: "大狼", score: 10 }
     ]
 }

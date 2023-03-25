@@ -50,6 +50,7 @@ scoreboard players set MWSystem NumOfWolf 0
 scoreboard players set MWSystem NumOfVillagers 0
 scoreboard players set MWSystem NumOfFox 0
 execute as @a[scores={CurrentRole=1}] run scoreboard players add MWSystem NumOfWolf 1
+execute as @a[scores={CurrentRole=10}] run scoreboard players add MWSystem NumOfWolf 1
 execute as @a[scores={CurrentRole=3..7}] run scoreboard players add MWSystem NumOfVillagers 1
 execute as @a[scores={CurrentRole=8}] run scoreboard players add MWSystem NumOfFox 1
 
@@ -67,3 +68,8 @@ tellraw @a[scores={CurrentRole=2}] {"rawtext":[{"text":"あなたの役職は§5
 tellraw @a[scores={CurrentRole=3}] {"rawtext":[{"text":"あなたの役職は§b預言者§rです"}]}
 tellraw @a[scores={CurrentRole=4}] {"rawtext":[{"text":"あなたの役職は§e霊媒師§rです"}]}
 tellraw @a[scores={CurrentRole=5}] {"rawtext":[{"text":"あなたの役職は§a村人§rです"}]}
+tellraw @a[scores={CurrentRole=6}] {"rawtext":[{"text":"あなたの役職は§b怪盗§rです"}]}
+tellraw @a[scores={CurrentRole=7}] {"rawtext":[{"text":"あなたの役職は§g猫又§rです"}]}
+tellraw @a[scores={CurrentRole=8}] {"rawtext":[{"text":"あなたの役職は§e狐§rです"}]}
+tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"あなたの役職は§7狂信者§rです\n人狼一覧:"}, {"selector":"@a[scores={CurrentRole=1}]"}]}
+# tellraw @a[scores={CurrentRole=10}] {"rawtext":[]}

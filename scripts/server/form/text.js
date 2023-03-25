@@ -139,9 +139,9 @@ export class FORM {
       user.runCommandAsync("function werewolf/onstart/give_items")
     }
     if (selection === 2) {
-      user.runCommandAsync("effect @s invisibility 10 0")
+      user.runCommandAsync("effect @s[hasitem={item=bow,quantity=0}] invisibility 10 0")
       user.runCommandAsync(`tp @s @a[c=-1,name=!"${PL.name}",scores={a_live=1..}]`)
-      user.runCommandAsync("playsound portal.travel @a ~~~ 30 1 100")
+      user.runCommandAsync("playsound portal.travel @a ~~~ 100 1 100")
     }
     if (selection === 3) {
       user.runCommandAsync("effect @s invisibility 10 0")
@@ -274,7 +274,7 @@ export class FORM {
     }
 
     let reply = team.getScore(PLs[selection])
-    let textTeam = ["観戦", "人狼", "狂人", "預言者", "霊媒師", "村人", "怪盗"]
+    let textTeam = ["観戦", "人狼", "狂人", "預言者", "霊媒師", "村人", "怪盗", "猫又", "狐", "教信者"]
     let answer
 
     // userのrollを取得
@@ -293,7 +293,14 @@ export class FORM {
     }
 
     if (live == 1) {
-      if (reply == 1) { answer = '貴方の役職は人狼です 人狼は"},{"selector":"@e[scores={CurrentRole=1}]"},{"text":"' } else { answer = textTeam[reply] }
+      if (reply == 1) {
+        answer = '人狼です\n人狼は"},{"selector":"@e[scores={CurrentRole=1}]"},{"text":"'
+        user.runCommandAsync(`tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"${PLs[selection].displayName}から"},{"selector":"@s"}]},{"text":"が人狼を盗みました"`)
+      } else {
+        if (reply == 9) {
+          answer = '教信者です\n人狼は"},{"selector":"@e[scores={CurrentRole=1}]"},{"text":"'
+        } else { answer = textTeam[reply] }
+      }
       user.runCommandAsync(`scoreboard players operation @s CurrentRole = "${PLs[selection].displayName}" CurrentRole`)
       user.runCommandAsync(`scoreboard players operation @s PreviewRole = @s CurrentRole`)
       user.runCommandAsync(`execute as @a[name="${PLs[selection].displayName}",hasitem={item=diamond}] run give "${PL.name}" diamond 1 0 {"item_lock":{"mode":"lock_in_inventory"}}`)

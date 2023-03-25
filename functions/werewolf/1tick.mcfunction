@@ -9,6 +9,8 @@ execute as @a[scores={PreviewRole=5}] if score MWSystem time matches 0.. run tit
 execute as @a[scores={PreviewRole=6}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §b怪盗§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
 execute as @a[scores={PreviewRole=7}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §g猫又§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
 execute as @a[scores={PreviewRole=8}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §e狐§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
+execute as @a[scores={PreviewRole=9}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §7狂信者§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
+execute as @a[scores={PreviewRole=10}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4大狼§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
 
 execute as @a[scores={PreviewRole=1}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4人狼§r"}]}
 execute as @a[scores={PreviewRole=2}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §5狂人§r"}]}
@@ -18,6 +20,8 @@ execute as @a[scores={PreviewRole=5}] if score MWSystem time matches ..-1 run ti
 execute as @a[scores={PreviewRole=6}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §b怪盗§r"}]}
 execute as @a[scores={PreviewRole=7}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §g猫又§r"}]}
 execute as @a[scores={PreviewRole=8}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §e狐§r"}]}
+execute as @a[scores={PreviewRole=9}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §7狂信者§r"}]}
+execute as @a[scores={PreviewRole=10}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4大狼§r"}]}
 
 execute as @p[scores={INplayer=-100..100}] run function werewolf/onstart/INplayer
 
