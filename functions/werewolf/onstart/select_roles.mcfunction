@@ -44,6 +44,8 @@ execute as @e[scores={CurrentRole=5}] run scoreboard players add 村人 StartRol
 execute as @e[scores={CurrentRole=6}] run scoreboard players add 怪盗 StartRoll 1
 execute as @e[scores={CurrentRole=7}] run scoreboard players add 猫又 StartRoll 1
 execute as @e[scores={CurrentRole=8}] run scoreboard players add 狐 StartRoll 1
+execute as @e[scores={CurrentRole=9}] run scoreboard players add 狂信者 StartRoll 1
+execute as @e[scores={CurrentRole=10}] run scoreboard players add 大狼 StartRoll 1
 
 ##判定値追加
 scoreboard players set MWSystem NumOfWolf 0
