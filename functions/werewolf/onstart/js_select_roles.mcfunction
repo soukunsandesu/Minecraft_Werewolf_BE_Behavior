@@ -19,12 +19,18 @@ execute as @e[scores={CurrentRole=5}] run scoreboard players add 村人 StartRol
 execute as @e[scores={CurrentRole=6}] run scoreboard players add 怪盗 StartRoll 1
 execute as @e[scores={CurrentRole=7}] run scoreboard players add 猫又 StartRoll 1
 execute as @e[scores={CurrentRole=8}] run scoreboard players add 狐 StartRoll 1
+execute as @e[scores={CurrentRole=9}] run scoreboard players add 狂信者 StartRoll 1
+execute as @e[scores={CurrentRole=10}] run scoreboard players add 大狼 StartRoll 1
+execute as @e[scores={CurrentRole=11}] run scoreboard players add 賢狼 StartRoll 1
+
+tellraw @a { "rawtext": [  { "score": {"name": "人狼", "objective": "StartRoll" }}] }
 
 ##判定値追加
 scoreboard players set MWSystem NumOfWolf 0
 scoreboard players set MWSystem NumOfVillagers 0
 scoreboard players set MWSystem NumOfFox 0
 execute as @a[scores={CurrentRole=1}] run scoreboard players add MWSystem NumOfWolf 1
+execute as @a[scores={CurrentRole=10}] run scoreboard players add MWSystem NumOfWolf 1
 execute as @a[scores={CurrentRole=3..7}] run scoreboard players add MWSystem NumOfVillagers 1
 execute as @a[scores={CurrentRole=8}] run scoreboard players add MWSystem NumOfFox 1
 
@@ -42,3 +48,12 @@ tellraw @a[scores={CurrentRole=2}] {"rawtext":[{"text":"あなたの役職は§5
 tellraw @a[scores={CurrentRole=3}] {"rawtext":[{"text":"あなたの役職は§b預言者§rです"}]}
 tellraw @a[scores={CurrentRole=4}] {"rawtext":[{"text":"あなたの役職は§e霊媒師§rです"}]}
 tellraw @a[scores={CurrentRole=5}] {"rawtext":[{"text":"あなたの役職は§a村人§rです"}]}
+tellraw @a[scores={CurrentRole=6}] {"rawtext":[{"text":"あなたの役職は§b怪盗§rです"}]}
+tellraw @a[scores={CurrentRole=7}] {"rawtext":[{"text":"あなたの役職は§g猫又§rです"}]}
+tellraw @a[scores={CurrentRole=8}] {"rawtext":[{"text":"あなたの役職は§e狐§rです"}]}
+tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"あなたの役職は§7狂信者§rです"}]}
+execute if score 人狼 StartRoll matches 1.. run tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"人狼一覧: "}, {"selector":"@a[scores={CurrentRole=1}]"}]}
+execute if score 大狼 StartRoll matches 1.. run tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"大狼一覧: "}, {"selector":"@a[scores={CurrentRole=10}]"}]}
+
+tellraw @a[scores={CurrentRole=10}] {"rawtext":[{"text":"あなたの役職は§4大狼§rです"}]}
+tellraw @a[scores={CurrentRole=11}] {"rawtext":[{"text":"あなたの役職は§4賢狼§rです"}]}

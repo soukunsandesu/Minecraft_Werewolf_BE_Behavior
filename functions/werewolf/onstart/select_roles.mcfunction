@@ -1,15 +1,15 @@
 # ロール付与
-scoreboard players set @a[tag=player] CurrentRole 0
+# scoreboard players set @a[tag=player] CurrentRole 0
 #scoreboard players set @r[scores={CurrentRole=0}] CurrentRole 1ではダメ？
 # 人狼 = 1
-execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 1
+# execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 1
 # 狂人 = 2
-execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 2
+# execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 2
 
 # 預言者 = 3
-execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 3
+# execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 3
 # 霊媒師 = 4
-execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 4
+# execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 4
 # # 怪盗 = 6
 # execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 6
 # # 猫又 = 7
@@ -18,15 +18,8 @@ execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 
 # execute as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 8
 
 # 人数取得
+scoreboard players set MWSystem NumOfPlayers 0
 execute as @a[tag=player] run scoreboard players add MWSystem NumOfPlayers 1
-scoreboard players set MWSystem NumOfWolf 0
-scoreboard players set MWSystem NumOfVillagers 0
-
-## 追加の人狼
-# 5人から人狼を1人増やす
-execute if score MWSystem NumOfPlayers matches 5.. as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 1
-# 10人から人狼を1人増やす
-execute if score MWSystem NumOfPlayers matches 10.. as @r[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 1
 
 # 村人 = 5
 execute as @a[scores={CurrentRole=0}] run scoreboard players set @s CurrentRole 5
@@ -74,4 +67,6 @@ tellraw @a[scores={CurrentRole=6}] {"rawtext":[{"text":"あなたの役職は§b
 tellraw @a[scores={CurrentRole=7}] {"rawtext":[{"text":"あなたの役職は§g猫又§rです"}]}
 tellraw @a[scores={CurrentRole=8}] {"rawtext":[{"text":"あなたの役職は§e狐§rです"}]}
 tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"あなたの役職は§7狂信者§rです\n人狼一覧:"}, {"selector":"@a[scores={CurrentRole=1}]"}]}
+
+
 # tellraw @a[scores={CurrentRole=10}] {"rawtext":[]}
