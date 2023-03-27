@@ -36,12 +36,20 @@ export class items {
     static blackout(user, item) {
         if (item.typeId == "minecraft:double_plant") {
             let PL = world.getAllPlayers().find(e => e.id === user.id);
-            user.runCommandAsync(`effect @a[name=!${PL.name},m=a] blindness 10 0 false`)
+            user.runCommandAsync(`effect @a[name=!"${PL.name}",m=a] blindness 10 0 false`)
             user.runCommandAsync("clear @s double_plant 0 1")
             user.runCommandAsync("title @a times 5 20 10")
             user.runCommandAsync("title @a title 停 電 発 生")
             user.runCommandAsync("title @a subtitle 10秒後に復旧します")
             user.runCommandAsync("playsound mob.wither.spawn @a ~ ~ ~ 100 1 100");
+            return
+        }
+    }
+    static aspirator(user, item) {
+        if (item.typeId == "minecraft:hopper") {
+            let PL = world.getAllPlayers().find(e => e.id === user.id);
+            user.runCommandAsync(`tp @e[type=item,name=!"地雷"] @s`)
+            user.runCommandAsync("clear @s hopper 0 1")
             return
         }
     }

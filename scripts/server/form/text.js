@@ -127,16 +127,30 @@ export class FORM {
     let PL = world.getAllPlayers().find(e => e.id === user.id);
 
     if (selection === 0) {
-      user.runCommandAsync(`effect @a[name=!${PL.name},m=a] blindness 10 0 false`)
+      user.runCommandAsync(`effect @a[name=!"${PL.name}",m=a] blindness 10 0 false`)
       user.runCommandAsync("title @a times 5 20 10")
       user.runCommandAsync("title @a title 停 電 発 生")
       user.runCommandAsync("title @a subtitle 10秒後に復旧します")
       user.runCommandAsync("playsound mob.wither.spawn @a ~ ~ ~ 100 1 100");
     }
     if (selection === 1) {
-      user.runCommandAsync("scoreboard players reset @a give_item")
-      user.runCommandAsync("scoreboard players random @s give_item 1 10")
-      user.runCommandAsync("function werewolf/onstart/give_items")
+      const form = new UI.ActionFormData()
+        .title('妨害せよ')
+        .button('完全ランダム')
+        .button('殺傷ランダム\nローズ/即死ポーション/地雷');
+      const { selection, canceled } = await form.show(user);
+      if (canceled) return;
+      if (selection === 0) {
+        user.runCommandAsync("scoreboard players reset @a give_item")
+        user.runCommandAsync("scoreboard players random @s give_item 1 10")
+        user.runCommandAsync("function werewolf/onstart/give_items")
+      }
+      if (selection == 1) {
+        let random = [6, 5, -1]
+        user.runCommandAsync("scoreboard players reset @a give_item")
+        user.runCommandAsync("scoreboard players set @s give_item " + random[Math.floor(Math.random() * 3)])
+        user.runCommandAsync("function werewolf/onstart/give_items")
+      }
     }
     if (selection === 2) {
       user.runCommandAsync("effect @s[hasitem={item=bow,quantity=0}] invisibility 10 0")
@@ -168,8 +182,7 @@ export class FORM {
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
     let reply = team.getScore(PLs[selection])
-    let textTeam = ["観戦", "黒", "白"]
-    let answer
+    let answer = "白"
 
     // userのrollを取得
     let PL = world.getAllPlayers().find(e => e.id === user.id);
@@ -185,8 +198,8 @@ export class FORM {
       user.runCommandAsync("clear @s diamond 0 1")
       return
     }
-    if (reply > 1) { answer = textTeam[2] } else { answer = textTeam[reply] }
-    if (reply == 8) { answer = "狐" }
+    if (reply == 1 || reply == 11) { answer = "黒" }
+    if (reply == 8) { user.runCommandAsync(`kill "${PLs[selection].displayName}"`) }
     user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}は${answer}です"}]}`)
     user.runCommandAsync("clear @s diamond 0 1")
   }
@@ -220,8 +233,7 @@ export class FORM {
     }
 
     let reply = team.getScore(PLs[selection])
-    let textTeam = ["は観戦です", "は黒です", "は白です"]
-    let answer
+    let answer = "は白です"
 
     // userのrollを取得
     let PL = world.getAllPlayers().find(e => e.id === user.id);
@@ -233,15 +245,12 @@ export class FORM {
     // rollが見かけ上は霊媒だが、本当は違った場合用
     // 例：怪盗に進まれた霊媒
     if (userroll != 4) {
-      if (live == 0) {
-        answer = "は白"
-      } else { answer = "の魂は見つかりませんでした…" }
-      user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}${answer}"}]}`)
+      user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}の魂は見つかりませんでした…"}]}`)
       user.runCommandAsync("clear @s diamond 0 1")
       return
     }
     if (live == 0) {
-      if (reply > 1) { answer = textTeam[2] } else { answer = textTeam[reply] }
+      if (reply == 1 || reply == 10 || reply == 11) { answer = "は黒です" }
     } else { answer = "の魂は見つかりませんでした…" }
     user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}${answer}"}]}`)
     user.runCommandAsync("clear @s diamond 0 1")
@@ -302,9 +311,11 @@ export class FORM {
         } else { answer = textTeam[reply] }
       }
       user.runCommandAsync(`scoreboard players operation @s CurrentRole = "${PLs[selection].displayName}" CurrentRole`)
+      user.runCommandAsync(`scoreboard players operation @s team = "${PLs[selection].displayName}" team`)
       user.runCommandAsync(`scoreboard players operation @s PreviewRole = @s CurrentRole`)
       user.runCommandAsync(`execute as @a[name="${PLs[selection].displayName}",hasitem={item=diamond}] run give "${PL.name}" diamond 1 0 {"item_lock":{"mode":"lock_in_inventory"}}`)
       user.runCommandAsync(`scoreboard players set "${PLs[selection].displayName}" CurrentRole 5`)
+      user.runCommandAsync(`scoreboard players set "${PLs[selection].displayName}" team 2`)
       user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"貴方の役職は${answer}です"}]}`)
       user.runCommandAsync("clear @s diamond 0 1")
     } else {

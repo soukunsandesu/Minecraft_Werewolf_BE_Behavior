@@ -1,3 +1,6 @@
+gamemode spectator @a[scores={CurrentRole=0}]
+
+scoreboard players add @a CurrentRole 0
 scoreboard players add @a elevator 0
 
 execute as @a[scores={CurrentRole=0}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"観戦 / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
@@ -24,6 +27,7 @@ execute as @a[scores={PreviewRole=8}] if score MWSystem time matches ..-1 run ti
 execute as @a[scores={PreviewRole=9}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §7狂信者§r"}]}
 execute as @a[scores={PreviewRole=10}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4大狼§r"}]}
 execute as @a[scores={PreviewRole=11}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4賢狼§r"}]}
+
 
 execute as @p[scores={INplayer=-100..100}] run function werewolf/onstart/INplayer
 
@@ -64,7 +68,7 @@ effect @a[tag=PoisonInjection] weakness 1 10 true
 tag @a remove ruin
 tag @a[hasitem={item=golden_sword,location=slot.weapon.mainhand}] add ruin
 
-execute as @a[scores={CurrentRole=3..},hasitem={item=beacon},m=a] at @s run function werewolf/mine
+execute as @a[scores={team=2..3},hasitem={item=beacon},m=a] at @s run function werewolf/mine
 
 
 execute as @a[hasitem={item=quartz_block},m=a] run function werewolf/quartz_give

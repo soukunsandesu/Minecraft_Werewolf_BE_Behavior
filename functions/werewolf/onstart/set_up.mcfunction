@@ -24,3 +24,4 @@ scoreboard objectives add NumOfVillagers dummy
 scoreboard objectives add NumOfFox dummy
 scoreboard objectives add StartRoll dummy
 
+scoreboard objectives add team dummy
