@@ -42,6 +42,7 @@ world.events.itemUse.subscribe(ev => {
     items.player_eye(user, item)
     items.divination(user, item)
     items.GameFoam(user, item)
+    items.aspirator(user, item)
     // let entity = { displayName: PL.name, id: PL.id, type: PL.typeId }
     // if (item.typeId == "minecraft:diamond") {
     //     FORM.divination(user)

@@ -1,0 +1,23 @@
+{
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:hopper",
+                    "functions": [
+                        {
+                            "function": "set_name",
+                            "name": "掃除機"
+                        },
+                        {
+                            "function": "set_lore",
+                            "lore": "§r使用する事でドロップしているアイテムを取得する\n変わらない吸引力、ダインソの掃除機"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

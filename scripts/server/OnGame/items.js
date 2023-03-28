@@ -47,7 +47,6 @@ export class items {
     }
     static aspirator(user, item) {
         if (item.typeId == "minecraft:hopper") {
-            let PL = world.getAllPlayers().find(e => e.id === user.id);
             user.runCommandAsync(`tp @e[type=item,name=!"地雷"] @s`)
             user.runCommandAsync("clear @s hopper 0 1")
             return

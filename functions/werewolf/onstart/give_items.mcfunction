@@ -37,12 +37,14 @@ loot give @a[scores={give_item=7}] loot "give_items/shield"
 loot give @a[scores={give_item=8}] loot "give_items/skull"
 loot give @a[scores={give_item=9}] loot "give_items/totem_of_undying"
 loot give @a[scores={give_item=10}] loot "give_items/golden_sword"
-# アイテム未定
+loot give @a[scores={give_item=11}] loot "give_items/hopper"
+# 人狼専用
 loot give @a[scores={give_item=-1}] loot "give_items/beacon"
 loot give @a[scores={give_item=-1}] loot "give_items/beacon"
 loot give @a[scores={give_item=-1}] loot "give_items/beacon"
 loot give @a[scores={give_item=-1}] loot "give_items/beacon"
 loot give @a[scores={give_item=-1}] loot "give_items/beacon"
+
 
 
 scoreboard objectives remove give_item

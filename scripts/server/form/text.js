@@ -42,7 +42,7 @@ export class FORM {
     let PLs = world.getAllPlayers()
     let PLc = PLs.filter(n => n.hasTag("player"));
     const form = new UI.ActionFormData()
-      .title(`参加状態の変更 ${PLc.length}/${PLs.length}人`);
+      .title(`参加状態の変更 ${PLc.length}/${PLs.length}人`).button(`全員を参加状態にする`);
     let i = 0
     for (let PL of PLs) {
       let status = "c待機中"
@@ -53,6 +53,8 @@ export class FORM {
     form.button('戻る');
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
+    if (selection == 0) user.runCommandAsync("tag @a add player")
+    selection - 1
     if (selection == i) return await this.gameinfo(user)
     if (PLs[selection].hasTag("player")) {
       PLs[selection].removeTag("player")
@@ -98,6 +100,7 @@ export class FORM {
     const form = new UI.ActionFormData()
       .title('役職追加');
     let Initials = config.Initial
+    Initials = Initials.filter(role => role.name !== "観戦");
     let i = 0
     for (let Initial of Initials) {
       form.button(Initial.name)
@@ -283,7 +286,6 @@ export class FORM {
     }
 
     let reply = team.getScore(PLs[selection])
-    let textTeam = ["観戦", "人狼", "狂人", "預言者", "霊媒師", "村人", "怪盗", "猫又", "狐", "教信者"]
     let answer
 
     // userのrollを取得
@@ -308,7 +310,7 @@ export class FORM {
       } else {
         if (reply == 9) {
           answer = '教信者です\n人狼は"},{"selector":"@e[scores={CurrentRole=1}]"},{"text":"'
-        } else { answer = textTeam[reply] }
+        } else { answer = config.Initial[reply].name }
       }
       user.runCommandAsync(`scoreboard players operation @s CurrentRole = "${PLs[selection].displayName}" CurrentRole`)
       user.runCommandAsync(`scoreboard players operation @s team = "${PLs[selection].displayName}" team`)
