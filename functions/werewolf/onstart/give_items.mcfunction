@@ -1,6 +1,6 @@
 scoreboard objectives add give_item dummy
 scoreboard players set @a[tag=player] give_item 0
-scoreboard players random @a[scores={give_item=0}] give_item 1 11
+execute as @a[scores={give_item=0}] run scoreboard players random @s give_item 1 11
 loot give @a[scores={give_item=1}] loot "give_items/double_plant"
 loot give @a[scores={give_item=2}] loot "give_items/ender_eye"
 loot give @a[scores={give_item=2}] loot "give_items/ender_eye"
