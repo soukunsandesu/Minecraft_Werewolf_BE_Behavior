@@ -3,20 +3,19 @@ import * as UI from '@minecraft/server-ui';
 import { config } from '../data.js';
 
 let datas = config.Rolls
+let setting = config.setting
 
 export class FORM {
   static async gameinfo(user) {
     let PLs = world.getAllPlayers()
     let PLc = PLs.filter(n => n.hasTag("player"))
-    var Dm
-    if (user.hasTag("Debugger")) { Dm = "§aon" } else { Dm = "§coff" }
     const form = new UI.ActionFormData()
       .title('指令は？')
       .button('ゲーム開始')
       .button(`プレイヤー ${PLc.length}/${PLs.length}`)
       .button('ゲーム中断')
       .button(`役職編成\n${datas.length}枠設定済み`)
-      .button(`デバッグ\n${Dm}`);
+      .button(`設定`);
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
     // userのrollを取得
@@ -25,9 +24,7 @@ export class FORM {
     if (selection === 1) return await this.GetPlayers(user);
     if (selection === 2) user.runCommandAsync("function werewolf/onfinish/clean_up");
     if (selection === 3) return await this.rollinfo(user);
-    if (selection === 4) {
-      if (user.hasTag("Debugger")) { user.removeTag("Debugger") } else { user.addTag("Debugger"); }
-    }
+    if (selection === 4) return await this.setting(user);
   }
 
 
@@ -38,6 +35,7 @@ export class FORM {
       for (let data of datas) {
         user.runCommandAsync("execute as @r[tag=player,scores={CurrentRole=0}] run scoreboard players set @s CurrentRole " + data.score)
       }
+      if (setting.item) user.runCommandAsync("function werewolf/onstart/give_items")
       user.runCommandAsync("function werewolf/start_Latter")
     } else {
       world.say("ロールが少なすぎます！\n" + datas.length + ">2")
@@ -124,6 +122,23 @@ export class FORM {
     }
     datas.push(Initials[selection])
     return await this.rollinfo(user)
+  }
+
+  static async setting(user) {
+    function Cif(ev) { if (ev) { return "§atrue" } else { return "§cfalse" } }
+    var Dm
+    if (user.hasTag("Debugger")) { Dm = "§aon" } else { Dm = "§coff" }
+    const form = new UI.ActionFormData()
+      .title('設定')
+      .button(`初期アイテム\n${Cif(setting.item)}`)
+      .button(`デバッグ\n${Dm}`)
+      .button(`戻る`);
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == 0) if (setting.item) { setting.item = false } else { setting.item = true }
+    if (selection == 1) { if (user.hasTag("Debugger")) { user.removeTag("Debugger") } else { user.addTag("Debugger") } }
+    if (selection == 2) return await this.gameinfo(user)
+    return await this.setting(user)
   }
 
   static async werewolf(user) {
@@ -335,5 +350,19 @@ export class FORM {
   }
 
   static test() {
+  }
+  static async dokodemo_door(user) {
+    let team = world.scoreboard.getObjective("a_live")
+    let PLs = team.getParticipants()
+    let anPLs = []
+    for (let PL of PLs) {
+      let score = team.getScore(PL)
+      if (Number(score) > 0) anPLs.push(PL)
+    }
+    const form = new UI.ActionFormData()
+      .title('どこへ行く？');
+    anPLs.forEach(PL => {
+      form.button(PL.displayName)
+    });
   }
 }

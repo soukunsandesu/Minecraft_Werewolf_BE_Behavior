@@ -1,30 +1,6 @@
 scoreboard objectives add give_item dummy
 scoreboard players set @a[tag=player] give_item 0
-scoreboard players set @r[scores={give_item=0}] give_item 1
-scoreboard players set @r[scores={give_item=0}] give_item 2
-scoreboard players set @r[scores={give_item=0}] give_item 3
-scoreboard players set @r[scores={give_item=0}] give_item 4
-scoreboard players set @r[scores={give_item=0}] give_item 5
-scoreboard players set @r[scores={give_item=0}] give_item 6
-scoreboard players set @r[scores={give_item=0}] give_item 7
-scoreboard players set @r[scores={give_item=0}] give_item 8
-scoreboard players set @r[scores={give_item=0}] give_item 9
-scoreboard players set @r[scores={give_item=0}] give_item 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
-scoreboard players random @r[scores={give_item=0}] give_item 1 10
+scoreboard players random @a[scores={give_item=0}] give_item 1 11
 loot give @a[scores={give_item=1}] loot "give_items/double_plant"
 loot give @a[scores={give_item=2}] loot "give_items/ender_eye"
 loot give @a[scores={give_item=2}] loot "give_items/ender_eye"
@@ -46,6 +22,6 @@ loot give @a[scores={give_item=-1}] loot "give_items/beacon"
 loot give @a[scores={give_item=-1}] loot "give_items/beacon"
 
 
-
+tag @a remove give_item
 scoreboard objectives remove give_item
 scoreboard objectives add give_item dummy

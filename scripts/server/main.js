@@ -9,7 +9,7 @@ function Say(ms) { RunCommand("say " + ms) }
 function Log(ms) { RunCommand(`tell @a[tag=Debugger] §7[log] ${ms}`) }
 function Nametag(user) {
     var name = user.name
-    user.Nametag = name.replace(/(^§.\[(.*?)\]|§.$)/g, "");
+    user.nameTag = name.replace(/(^§.\[(.*?)\]|§.$)/g, "");
 }
 // idを入力することでプレイヤーを取得する
 function getPL(id) { return world.getAllPlayers().find(e => e.id === id); }
@@ -31,7 +31,7 @@ world.events.entityDie.subscribe(ev => {
 })
 
 // killするアイテム
-const itemIds = ["minecraft:diamond","minecraft:barrier"]
+const itemIds = ["minecraft:diamond", "minecraft:barrier"]
 // entityのスポーンを検知 アイテムのドロップもこれに含む
 world.events.entitySpawn.subscribe(ev => {
     if (ev.entity.typeId != 'minecraft:item') return
@@ -52,7 +52,8 @@ world.events.effectAdd.subscribe(ev => {
 world.events.itemUse.subscribe(ev => {
     const item = ev.item
     const user = ev.source
-    
+
+    items.jukebox(user, item)
     items.blackout(user, item)
     items.player_eye(user, item)
     items.divination(user, item)
@@ -84,8 +85,9 @@ world.events.beforeChat.subscribe(ev => {
         var name = ms.replace(".name", "");
         name = name.replace(/(^§.\[(.*?)\]|§.$)/g, "");
         if (name.length > 0) {
-            user.Nametag = name
-            user.runCommandAsync(`tellraw @a {"rawtext":[{"text":"§7<system> ${user.name}§rの名前を${user.Nametag}に設定しました"}]}`)
+            user.nameTag = name
+            user.runCommandAsync(`tellraw @a {"rawtext":[{"text":"<system> ${user.name}§rの名前を${user.nameTag}§rに設定しました"}]}`)
+            Say(user.nameTag)
         } else {
             user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"§7名前が入力されていません"}]}`)
         }

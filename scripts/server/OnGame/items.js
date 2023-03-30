@@ -95,6 +95,23 @@ export class items {
             return
         }
     }
+
+    static jukebox(user, item) {
+        if (item.typeId == "minecraft:jukebox") {
+            user.runCommandAsync("clear @s jukebox 0 1")
+            user.runCommandAsync('give @s diamond 1 0 {"item_lock":{"mode":"lock_in_inventory"}}')
+            return
+        }
+    }
+
+    static dark_oak_door(user, item) {
+        if (item.typeId == "minecraft:jukebox") {
+            user.runCommandAsync("clear @s jukebox 0 1")
+            user.runCommandAsync('give @s diamond 1 0 {"item_lock":{"mode":"lock_in_inventory"}}')
+            return
+        }
+    }
+
     static PoisonInjection(user, target) {
         if (user.hasTag("PoisonInjection")) {
             user.runCommandAsync("clear @s wither_rose 0 1")
