@@ -33,12 +33,17 @@ execute as @a[scores={CurrentRole=3..7}] run scoreboard players add MWSystem Num
 execute as @a[scores={CurrentRole=8}] run scoreboard players add MWSystem NumOfFox 1
 
 # 人狼陣営=1
-scoreboard players set @a[scores={CurrentRole=1..2}] team 1
-scoreboard players set @a[scores={CurrentRole=9..11}] team 1
-# 市民陣営=2
-scoreboard players set @a[scores={CurrentRole=3..7}] team 2
-# 狐陣営=3
-scoreboard players set @a[scores={CurrentRole=8}] team 3
+scoreboard players set @a[scores={CurrentRole=1}] team 1
+scoreboard players set @a[scores={CurrentRole=10..11}] team 1
+# 半人狼陣営=2
+# 狂人など
+scoreboard players set @a[scores={CurrentRole=2}] team 2
+scoreboard players set @a[scores={CurrentRole=9}] team 2
+
+# 市民陣営=3
+scoreboard players set @a[scores={CurrentRole=3..7}] team 3
+# 狐陣営=4
+scoreboard players set @a[scores={CurrentRole=8}] team 4
 
 #Debuggerは役職配布直後にsummary表示
 execute as @a[tag=Debugger] run function werewolf/summary

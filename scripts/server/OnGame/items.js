@@ -28,10 +28,15 @@ export class items {
         }
     }
     static GameFoam(user, item) {
-        if (item.typeId == "minecraft:blaze_rod" && (user.hasTag("OP") || user.hasTag("Debugger") || user.hasTag("admin"))) {
-            FORM.gameinfo(user)
-            return
+        let PL = world.getAllPlayers().find(e => e.id === user.id);
+        if (item.typeId == "minecraft:blaze_rod") {
+            if (PL.isOp) {
+                FORM.gameinfo(user)
+            } else {
+                if (PL.hasTag("player")) { PL.removeTag("player") } else { PL.addTag("player") }
+            }
         }
+        return
     }
     static blackout(user, item) {
         if (item.typeId == "minecraft:double_plant") {
@@ -57,26 +62,28 @@ export class items {
             let team = world.scoreboard.getObjective("PreviewRole")
             let PL = world.getAllPlayers().find(e => e.id === user.id);
             let userroll
-            for (let score of team.getScores()) {
-                if (score.participant.displayName === PL.name) { userroll = score }
-            }
-            if (userroll == null) return
+            if (team == undefined) { return } else {
+                for (let score of team.getScores()) {
+                    if (score.participant.displayName === PL.name) { userroll = score }
+                }
+                if (userroll == null) return
 
-            // 見かけ上のrollの役職の効果を発動する(PreviewRole)
-            // 真偽の判定、それに伴う処理の分岐はFORM内で記述
-            if (userroll.score === 1) {
-                FORM.werewolf(user)
+                // 見かけ上のrollの役職の効果を発動する(PreviewRole)
+                // 真偽の判定、それに伴う処理の分岐はFORM内で記述
+                if (userroll.score === 1) {
+                    FORM.werewolf(user)
+                }
+                if (userroll.score === 3) {
+                    FORM.divination(user)
+                }
+                if (userroll.score === 4) {
+                    FORM.psychic(user)
+                }
+                if (userroll.score === 6) {
+                    FORM.thief(user)
+                }
+                return
             }
-            if (userroll.score === 3) {
-                FORM.divination(user)
-            }
-            if (userroll.score === 4) {
-                FORM.psychic(user)
-            }
-            if (userroll.score === 6) {
-                FORM.thief(user)
-            }
-            return
         }
     }
     static player_eye(user, item) {

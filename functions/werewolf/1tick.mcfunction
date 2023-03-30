@@ -1,6 +1,3 @@
-gamemode spectator @a[scores={CurrentRole=0}]
-
-scoreboard players add @a CurrentRole 0
 scoreboard players add @a elevator 0
 
 execute as @a[scores={CurrentRole=0}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"観戦 / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
@@ -55,7 +52,6 @@ tag @e[type=player] remove dead_t
 # スペクテイターチャット用
 tag @a[m=spectator] add spectator
 tag @a[m=!spectator] remove spectator
-kill @e[type=item,name=ダイヤモンド]
 
 function werewolf/skull
 scoreboard players remove @a[scores={poison=1..}] poison 1
@@ -68,11 +64,11 @@ effect @a[tag=PoisonInjection] weakness 1 10 true
 tag @a remove ruin
 tag @a[hasitem={item=golden_sword,location=slot.weapon.mainhand}] add ruin
 
-execute as @a[scores={team=2..3},hasitem={item=beacon},m=a] at @s run function werewolf/mine
+execute as @a[scores={team=3..4},hasitem={item=beacon},m=a] at @s run function werewolf/mine
 
 
 execute as @a[hasitem={item=quartz_block},m=a] run function werewolf/quartz_give
 
 execute as @p[tag=Debugger] run function werewolf/onfinish/tick_debug
 # 勝利判定
-execute as @p[scores={CurrentRole=1..}] run function werewolf/onfinish/winner/check
+execute as @p[tag=!Debugger,scores={CurrentRole=1..}] run function werewolf/onfinish/winner/check

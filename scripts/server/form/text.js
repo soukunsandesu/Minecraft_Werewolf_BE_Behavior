@@ -7,21 +7,27 @@ let datas = config.Rolls
 export class FORM {
   static async gameinfo(user) {
     let PLs = world.getAllPlayers()
-    let PLc = PLs.filter(n => n.hasTag("player"));
+    let PLc = PLs.filter(n => n.hasTag("player"))
+    var Dm
+    if (user.hasTag("Debugger")) { Dm = "§aon" } else { Dm = "§coff" }
     const form = new UI.ActionFormData()
       .title('指令は？')
       .button('ゲーム開始')
       .button(`プレイヤー ${PLc.length}/${PLs.length}`)
       .button('ゲーム中断')
-      .button(`役職編成\n${datas.length}枠設定済み`);
+      .button(`役職編成\n${datas.length}枠設定済み`)
+      .button(`デバッグ\n${Dm}`);
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
     // userのrollを取得
 
     if (selection === 0) this.gamestart(user);
     if (selection === 1) return await this.GetPlayers(user);
-    if (selection === 2) user.runCommandAsync("function werewolf/onfinish/reset");
+    if (selection === 2) user.runCommandAsync("function werewolf/onfinish/clean_up");
     if (selection === 3) return await this.rollinfo(user);
+    if (selection === 4) {
+      if (user.hasTag("Debugger")) { user.removeTag("Debugger") } else { user.addTag("Debugger"); }
+    }
   }
 
 
@@ -53,12 +59,15 @@ export class FORM {
     form.button('戻る');
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
-    if (selection == 0) user.runCommandAsync("tag @a add player")
-    selection - 1
-    if (selection == i) return await this.gameinfo(user)
-    if (PLs[selection].hasTag("player")) {
-      PLs[selection].removeTag("player")
-    } else { PLs[selection].addTag("player") }
+    var ans = selection - 1
+    if (ans == -1) {
+      for (let PL of PLs) { PL.addTag("player") }
+      return await this.GetPlayers(user)
+    }
+    if (ans == i) return await this.gameinfo(user)
+    if (PLs[ans].hasTag("player")) {
+      PLs[ans].removeTag("player")
+    } else { PLs[ans].addTag("player") }
     return await this.GetPlayers(user)
   }
 
@@ -103,7 +112,7 @@ export class FORM {
     Initials = Initials.filter(role => role.name !== "観戦");
     let i = 0
     for (let Initial of Initials) {
-      form.button(Initial.name)
+      form.button(`${Initial.name}\n${Initial.text}`)
       i = i + 1
     }
     form.button("戻る")

@@ -5,8 +5,8 @@ effect @a[tag=player] saturation 100 100
 give @a[tag=player,tag=!Debugger] diamond 1 0 {"item_lock":{"mode":"lock_in_inventory"}}
 
 
-replaceitem entity @a[tag=player] slot.inventory 18 quartz 1 0 {"minecraft:item_lock":{"mode":"lock_in_slot"}}
-replaceitem entity @a[tag=player] slot.inventory 19 quartz 1 0 {"minecraft:item_lock":{"mode":"lock_in_slot"}}
-replaceitem entity @a[tag=player] slot.inventory 20 quartz 1 0 {"minecraft:item_lock":{"mode":"lock_in_slot"}}
+replaceitem entity @a[scores={team=1}] slot.inventory 18 barrier 1 0 {"minecraft:item_lock":{"mode":"lock_in_slot"}}
+replaceitem entity @a[scores={team=1}] slot.inventory 19 barrier 1 0 {"minecraft:item_lock":{"mode":"lock_in_slot"}}
+replaceitem entity @a[scores={team=1}] slot.inventory 20 barrier 1 0 {"minecraft:item_lock":{"mode":"lock_in_slot"}}
 
 tag @a remove player

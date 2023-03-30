@@ -10,5 +10,8 @@ gamemode spectator @s
 execute if entity @s[scores={CurrentRole=7}] as @r[scores={a_live=1}] run function werewolf/ongame/nekomata
 execute if entity @s[scores={CurrentRole=7}] run tellraw @a[tag=dead_cat] {"rawtext":[{"text":"猫又(§g"},{"selector":"@s"},{"text": "§r)による道連れに巻き込まれた。"}]}
 
+# 賢狼
+execute if entity @a[scores={CurrentRole=11}] run function werewolf/ongame/kenrou
+
 tag @a remove dead_cat
 function werewolf/summary
