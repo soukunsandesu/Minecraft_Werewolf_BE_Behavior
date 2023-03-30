@@ -30,7 +30,7 @@ export class items {
     static GameFoam(user, item) {
         let PL = world.getAllPlayers().find(e => e.id === user.id);
         if (item.typeId == "minecraft:blaze_rod") {
-            if (PL.isOp) {
+            if (PL.isOp()) {
                 FORM.gameinfo(user)
             } else {
                 if (PL.hasTag("player")) { PL.removeTag("player") } else { PL.addTag("player") }
@@ -105,9 +105,10 @@ export class items {
     }
 
     static dark_oak_door(user, item) {
-        if (item.typeId == "minecraft:jukebox") {
-            user.runCommandAsync("clear @s jukebox 0 1")
-            user.runCommandAsync('give @s diamond 1 0 {"item_lock":{"mode":"lock_in_inventory"}}')
+        if (item.typeId == "minecraft:dark_oak_door") {
+            user.runCommandAsync("effect @s[hasitem={item=bow,quantity=0}] invisibility 10 0")
+            user.runCommandAsync(`tp @s @a[c=-1,name=!"${PL.name}",scores={a_live=1..}]`)
+            user.runCommandAsync("playsound portal.travel @a ~~~ 100 1 100")
             return
         }
     }

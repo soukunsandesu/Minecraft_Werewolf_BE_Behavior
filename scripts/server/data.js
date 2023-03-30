@@ -18,7 +18,8 @@ export const config =
         { name: "狐", score: 8, text: "村、もしくは人狼陣営が勝利した時\n生存していると勝利となる" },
         { name: "狂信者", score: 9, text: "あまりに人狼を崇拝した結果誰が人狼かわかる" },
         { name: "大狼", score: 10, text: "占われても黒とでない" },
-        { name: "賢狼", score: 11, text: "死亡したプレイヤーの役職を知る事ができる" }
+        { name: "賢狼", score: 11, text: "死亡したプレイヤーの役職を知る事ができる" },
+        { name: "パン屋", score: 12, text: "150秒置きにみんなにパンを配る" }
     ],
     setting: { item: true }
 }

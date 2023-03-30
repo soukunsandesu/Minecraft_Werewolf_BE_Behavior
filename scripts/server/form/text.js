@@ -52,7 +52,7 @@ export class FORM {
       let status = "c待機中"
       i = i + 1
       if (PL.hasTag("player")) status = "a参加中"
-      form.button(`${i}:${PL.name}\n§${status}`)
+      form.button(`${i}:${PL.nameTag}\n§${status}`)
     }
     form.button('戻る');
     const { selection, canceled } = await form.show(user);
@@ -201,10 +201,11 @@ export class FORM {
       let score = team.getScore(PL)
       if (Number(score) > 0) anPLs.push(PL)
     }
+
     const form = new UI.ActionFormData()
       .title('誰を占う？');
     anPLs.forEach(PL => {
-      form.button(PL.displayName)
+      form.button(world.getAllPlayers().find(e => e.name === PL.displayName).nameTag)
     });
     const { selection, canceled } = await form.show(user);
     if (canceled) return;

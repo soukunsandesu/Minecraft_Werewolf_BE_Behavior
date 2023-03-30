@@ -8,6 +8,11 @@ execute if score 怪盗 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text"
 execute if score 猫又 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§g猫又§r:"},{"selector":"@e[scores={StartRoll=7}]"}]}
 execute if score 狐 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§e狐§r:"},{"selector":"@e[scores={StartRoll=8}]"}]}
 execute if score 狂信者 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§7狂信者§r:"},{"selector":"@e[scores={StartRoll=9}]"}]}
+execute if score 大狼 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§4大狼§r:"},{"selector":"@e[scores={StartRoll=10}]"}]}
+execute if score 賢狼 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§4賢狼§r:"},{"selector":"@e[scores={StartRoll=11}]"}]}
+execute if score パン屋 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§6パン屋§r:"},{"selector":"@e[scores={StartRoll=12}]"}]}
+
+
 tellraw @s {"rawtext":[{"text":"§a村人§r:"},{"selector":"@e[scores={CurrentRole=5}]"}]}
 tellraw @s {"rawtext":[{"text":"§3##############################"}]}
 

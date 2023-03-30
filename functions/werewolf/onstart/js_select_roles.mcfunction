@@ -22,14 +22,18 @@ execute as @e[scores={CurrentRole=8}] run scoreboard players add 狐 StartRoll 1
 execute as @e[scores={CurrentRole=9}] run scoreboard players add 狂信者 StartRoll 1
 execute as @e[scores={CurrentRole=10}] run scoreboard players add 大狼 StartRoll 1
 execute as @e[scores={CurrentRole=11}] run scoreboard players add 賢狼 StartRoll 1
+execute as @e[scores={CurrentRole=12}] run scoreboard players add パン屋 StartRoll 1
 
 ##判定値追加
 scoreboard players set MWSystem NumOfWolf 0
 scoreboard players set MWSystem NumOfVillagers 0
 scoreboard players set MWSystem NumOfFox 0
 execute as @a[scores={CurrentRole=1}] run scoreboard players add MWSystem NumOfWolf 1
-execute as @a[scores={CurrentRole=10}] run scoreboard players add MWSystem NumOfWolf 1
+execute as @a[scores={CurrentRole=10..11}] run scoreboard players add MWSystem NumOfWolf 1
+
 execute as @a[scores={CurrentRole=3..7}] run scoreboard players add MWSystem NumOfVillagers 1
+execute as @a[scores={CurrentRole=12}] run scoreboard players add MWSystem NumOfVillagers 1
+
 execute as @a[scores={CurrentRole=8}] run scoreboard players add MWSystem NumOfFox 1
 
 # 人狼陣営=1
@@ -42,6 +46,7 @@ scoreboard players set @a[scores={CurrentRole=9}] team 2
 
 # 市民陣営=3
 scoreboard players set @a[scores={CurrentRole=3..7}] team 3
+scoreboard players set @a[scores={CurrentRole=12}] team 3
 # 狐陣営=4
 scoreboard players set @a[scores={CurrentRole=8}] team 4
 

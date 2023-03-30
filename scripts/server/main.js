@@ -17,7 +17,8 @@ function getPL(id) { return world.getAllPlayers().find(e => e.id === id); }
 
 // プレイヤーの参加を検知
 world.events.playerJoin.subscribe(ev => {
-    let PL = getPL(ev.playerId)
+    let PL = world.getAllPlayers().find(e => e.name === ev.playerName);
+    Say(ev.playerName)
     Nametag(PL)
     PL.runCommandAsync("gamemode spectator")
     PL.runCommandAsync(`tellraw @s {"rawtext":[{"text":"人狼ビヘイビアパックが有効です\nこのビヘイビアパックは導入されたワールドで人狼ができるようにするものです\nop権限があるプレイヤーがブレイズロットを使用することでゲーム設定が開きます\nまた、「.name<名前>」で名前を変更できます"}]}`)
