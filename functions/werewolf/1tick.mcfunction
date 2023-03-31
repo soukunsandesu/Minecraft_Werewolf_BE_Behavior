@@ -77,4 +77,5 @@ execute as @a[hasitem={item=quartz_block},m=a] run function werewolf/quartz_give
 
 execute as @p[tag=Debugger] run function werewolf/onfinish/tick_debug
 # 勝利判定
-execute as @p[tag=!Debugger,scores={CurrentRole=1..}] run function werewolf/onfinish/winner/check
+execute if score MWSystem NumOfWolf matches 0 as @p[tag=!Debugger,scores={CurrentRole=1..}] run function werewolf/onfinish/winner/check
+execute if score MWSystem NumOfVillagers matches 0 as @p[tag=!Debugger,scores={CurrentRole=1..}] run function werewolf/onfinish/winner/check

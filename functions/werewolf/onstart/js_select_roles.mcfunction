@@ -23,11 +23,14 @@ execute as @e[scores={CurrentRole=9}] run scoreboard players add 狂信者 Start
 execute as @e[scores={CurrentRole=10}] run scoreboard players add 大狼 StartRoll 1
 execute as @e[scores={CurrentRole=11}] run scoreboard players add 賢狼 StartRoll 1
 execute as @e[scores={CurrentRole=12}] run scoreboard players add パン屋 StartRoll 1
+execute as @e[scores={lover=1..}] run scoreboard players add 恋人 StartRoll 1
+scoreboard players operation 恋人 StartRoll /= score2 time
 
 ##判定値追加
 scoreboard players set MWSystem NumOfWolf 0
 scoreboard players set MWSystem NumOfVillagers 0
 scoreboard players set MWSystem NumOfFox 0
+scoreboard players set MWSystem NumOfLover 0
 
 # 人狼陣営=1
 scoreboard players set @a[scores={CurrentRole=1}] team 1
@@ -48,12 +51,16 @@ execute as @a[scores={team=3}] run scoreboard players add MWSystem NumOfVillager
 # 狐陣営=4
 scoreboard players set @a[scores={CurrentRole=8}] team 4
 execute as @a[scores={team=4}] run scoreboard players add MWSystem NumOfFox 1
+
+# 恋人
+execute as @a[scores={lover=1..}] run scoreboard players add MWSystem NumOfLover 1
+
 execute as @a[tag=player] run scoreboard players operation @s Previewteam = @s team
 
 #Debuggerは役職配布直後にsummary表示
 execute as @a[tag=Debugger] run function werewolf/summary
 
-
+function werewolf/onstart/roles_list
 tellraw @a[scores={CurrentRole=1}] {"rawtext":[{"text":"あなたの役職は§4人狼§rです"}]}
 tellraw @a[scores={CurrentRole=2}] {"rawtext":[{"text":"あなたの役職は§5狂人§rです"}]}
 tellraw @a[scores={CurrentRole=3}] {"rawtext":[{"text":"あなたの役職は§b預言者§rです"}]}
@@ -64,23 +71,9 @@ tellraw @a[scores={CurrentRole=7}] {"rawtext":[{"text":"あなたの役職は§g
 tellraw @a[scores={CurrentRole=8}] {"rawtext":[{"text":"あなたの役職は§e狐§rです"}]}
 tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"あなたの役職は§7狂信者§rです"}]}
 execute if score MWSystem NumOfWolf matches 1.. run tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"人狼一覧: "}, {"selector":"@a[scores={team=1}]"}]}
-
 tellraw @a[scores={CurrentRole=10}] {"rawtext":[{"text":"あなたの役職は§4大狼§rです"}]}
 tellraw @a[scores={CurrentRole=11}] {"rawtext":[{"text":"あなたの役職は§4賢狼§rです"}]}
 tellraw @a[scores={CurrentRole=12}] {"rawtext":[{"text":"あなたの役職は§6パン屋§rです"}]}
 
 
-tellraw @a {"rawtext":[{"text":"プレイヤー数: "},{"score":{"name": "MWSystem","objective":"NumOfPlayers"}}]}
-tellraw @a {"rawtext":[{"text":"今回の役職"}]}
-execute if score 人狼 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§4人狼§r"},{"score":{"name":"人狼","objective":"StartRoll"}}]}
-execute if score 狂人 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§5狂人§r"},{"score":{"name":"狂人","objective":"StartRoll"}}]}
-execute if score 預言者 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§b預言者§r"},{"score":{"name":"預言者","objective":"StartRoll"}}]}
-execute if score 霊媒師 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§e霊媒師§r"},{"score":{"name":"霊媒師","objective":"StartRoll"}}]}
-execute if score 村人 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§a村人§r"},{"score":{"name":"村人","objective":"StartRoll"}}]}
-execute if score 怪盗 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§b怪盗§r"},{"score":{"name":"怪盗","objective":"StartRoll"}}]}
-execute if score 猫又 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§g猫又§r"},{"score":{"name":"猫又","objective":"StartRoll"}}]}
-execute if score 狐 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§e狐§r"},{"score":{"name":"狐","objective":"StartRoll"}}]}
-execute if score 狂信者 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§7狂信者§r"},{"score":{"name":"狂信者","objective":"StartRoll"}}]}
-execute if score 大狼 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§4大狼§r"},{"score":{"name":"大狼","objective":"StartRoll"}}]}
-execute if score 賢狼 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§4賢狼§r"},{"score":{"name":"賢狼","objective":"StartRoll"}}]}
-execute if score パン屋 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§6パン屋§r"},{"score":{"name":"パン屋","objective":"StartRoll"}}]}
+

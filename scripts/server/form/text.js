@@ -36,6 +36,11 @@ export class FORM {
         user.runCommandAsync("execute as @r[tag=player,scores={CurrentRole=0}] run scoreboard players set @s CurrentRole " + data.score)
       }
       if (setting.item) user.runCommandAsync("function werewolf/onstart/give_items")
+      if (setting.tp) {
+        user.runCommandAsync("tp @a @s")
+        user.runCommandAsync("effect @a invisibility 10 0 true")
+        user.runCommandAsync("effect @a resistance 10 10 true")
+      }
       user.runCommandAsync("function werewolf/start_Latter")
     } else {
       world.say("ロールが少なすぎます！\n" + datas.length + ">2")

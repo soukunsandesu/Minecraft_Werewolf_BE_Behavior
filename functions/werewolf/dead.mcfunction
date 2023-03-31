@@ -6,11 +6,12 @@ scoreboard players set @s a_live 0
 gamemode spectator @s
 
 # 猫又
-execute if entity @s[scores={CurrentRole=7}] as @r[scores={a_live=1}] run function werewolf/ongame/nekomata
-execute if entity @s[scores={CurrentRole=7}] run tellraw @a[tag=dead_cat] {"rawtext":[{"text":"猫又(§g"},{"selector":"@s"},{"text": "§r)による道連れに巻き込まれた。"}]}
+execute if entity @s[scores={CurrentRole=7}] run function werewolf/ongame/nekomata
 
 # 賢狼
 execute if entity @a[scores={CurrentRole=11}] run function werewolf/ongame/kenrou
 
-tag @a remove dead_cat
+# 恋人
+execute if entity @s[scores={lover=1..}] run function werewolf/ongame/lover
+
 function werewolf/summary
