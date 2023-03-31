@@ -7,4 +7,4 @@ execute if score MWSystem time matches 300 as @a[scores={team=1}] run replaceite
 execute if score MWSystem time matches 450 as @a run give @s quartz
 execute if score MWSystem time matches 450 as @a[scores={team=1}] run replaceitem entity @s slot.inventory 18 quartz
 
-execute if entity @a[scores={CurrentRole=12}] run function werewolf/ongame/panya
+execute as @p[scores={CurrentRole=12,a_live=1}] run function werewolf/ongame/panya

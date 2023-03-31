@@ -13,13 +13,8 @@ function getPL(id) { return world.getAllPlayers().find(e => e.id === id); }
 
 
 // プレイヤーの参加を検知
-world.events.playerJoin.subscribe(ev => {
-    let PL = world.getAllPlayers().find(e => e.name === ev.playerName);
-    Say(ev.playerName + "\n" + ev.playerId+"\n"+PL+"\n"+PL.id)
-    PL.nameTag = Nametag(PL.name)
-    PL.addTag("joinPL")
-    
-})
+// world.events.playerJoin.subscribe(ev => {
+// })
 
 
 // 死んだことを検知
