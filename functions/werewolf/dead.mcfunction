@@ -1,8 +1,7 @@
 # 実行者:死亡したplayer
-execute as @s[scores={CurrentRole=1}] run scoreboard players remove MWSystem NumOfWolf 1
-execute as @s[scores={CurrentRole=10}] run scoreboard players remove MWSystem NumOfWolf 1
-execute as @s[scores={CurrentRole=3..7}] run scoreboard players remove MWSystem NumOfVillagers 1
-execute as @s[scores={CurrentRole=8}] run scoreboard players remove MWSystem NumOfFox 1
+execute as @s[scores={team=1}] run scoreboard players remove MWSystem NumOfWolf 1
+execute as @s[scores={team=3}] run scoreboard players remove MWSystem NumOfVillagers 1
+execute as @s[scores={team=4}] run scoreboard players remove MWSystem NumOfFox 1
 scoreboard players set @s a_live 0
 gamemode spectator @s
 

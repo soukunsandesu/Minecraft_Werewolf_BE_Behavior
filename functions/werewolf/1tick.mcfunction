@@ -1,3 +1,7 @@
+gamemode spectator @a[tag=joinPL]
+tellraw @a[tag=joinPL] {"rawtext":[{"text":"人狼ビヘイビアパックが有効です\nこのビヘイビアパックは導入されたワールドで人狼ができるようにするものです\nop権限があるプレイヤーがブレイズロットを使用することでゲーム設定が開きます\nまた、「.name<名前>」で名前を変更できます"}]}
+tag @a remove joinPL
+
 scoreboard players add @a elevator 0
 
 execute as @a[scores={CurrentRole=0}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"観戦 / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}

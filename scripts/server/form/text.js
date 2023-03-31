@@ -186,7 +186,7 @@ export class FORM {
     }
     if (selection === 3) {
       user.runCommandAsync("effect @s invisibility 10 0")
-      user.runCommandAsync(`tp @s @a[c=-1,name=!"${PL.name}",scores={CurrentRole=1}]`)
+      user.runCommandAsync(`tp @s @a[c=-1,name=!"${PL.name}",scores={team=1}]`)
       user.runCommandAsync("playsound portal.travel @a ~~~ 30 1 100")
     }
     user.runCommandAsync("clear @s diamond 0 1")

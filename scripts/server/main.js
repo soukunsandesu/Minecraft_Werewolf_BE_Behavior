@@ -7,10 +7,7 @@ import { FORM } from "./form/text";
 function RunCommand(cmd) { world.getDimension("overworld").runCommandAsync(cmd) }
 function Say(ms) { RunCommand("say " + ms) }
 function Log(ms) { RunCommand(`tell @a[tag=Debugger] §7[log] ${ms}`) }
-function Nametag(user) {
-    var name = user.name
-    user.nameTag = name.replace(/(^§.\[(.*?)\]|§.$)/g, "");
-}
+function Nametag(name) { return name.replace(/(^§.\[(.*?)\]|§.$)/g, ""); }
 // idを入力することでプレイヤーを取得する
 function getPL(id) { return world.getAllPlayers().find(e => e.id === id); }
 
@@ -18,11 +15,12 @@ function getPL(id) { return world.getAllPlayers().find(e => e.id === id); }
 // プレイヤーの参加を検知
 world.events.playerJoin.subscribe(ev => {
     let PL = world.getAllPlayers().find(e => e.name === ev.playerName);
-    Say(ev.playerName)
-    Nametag(PL)
-    PL.runCommandAsync("gamemode spectator")
-    PL.runCommandAsync(`tellraw @s {"rawtext":[{"text":"人狼ビヘイビアパックが有効です\nこのビヘイビアパックは導入されたワールドで人狼ができるようにするものです\nop権限があるプレイヤーがブレイズロットを使用することでゲーム設定が開きます\nまた、「.name<名前>」で名前を変更できます"}]}`)
+    Say(ev.playerName + "\n" + ev.playerId+"\n"+PL+"\n"+PL.id)
+    PL.nameTag = Nametag(PL.name)
+    PL.addTag("joinPL")
+    
 })
+
 
 // 死んだことを検知
 world.events.entityDie.subscribe(ev => {

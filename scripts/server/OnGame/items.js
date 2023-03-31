@@ -70,16 +70,17 @@ export class items {
 
                 // 見かけ上のrollの役職の効果を発動する(PreviewRole)
                 // 真偽の判定、それに伴う処理の分岐はFORM内で記述
-                if (userroll.score === 1) {
+                let score = userroll.score
+                if (score == 1 || score == 10 || score == 11) {
                     FORM.werewolf(user)
                 }
-                if (userroll.score === 3) {
+                if (score == 3) {
                     FORM.divination(user)
                 }
-                if (userroll.score === 4) {
+                if (score == 4) {
                     FORM.psychic(user)
                 }
-                if (userroll.score === 6) {
+                if (score == 6) {
                     FORM.thief(user)
                 }
                 return
