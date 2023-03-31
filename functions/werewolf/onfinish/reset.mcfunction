@@ -11,7 +11,7 @@ scoreboard objectives remove time
 scoreboard objectives remove a_live
 scoreboard objectives remove StartRoll
 scoreboard objectives remove team
-
+scoreboard objectives remove Previewteam
 scoreboard objectives add INplayer dummy
 scoreboard players add @a INplayer 0
 give @a blaze_rod

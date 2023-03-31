@@ -70,6 +70,7 @@ world.events.entityHit.subscribe(ev => {
 world.events.beforeChat.subscribe(ev => {
     let user = ev.sender
     let ms = ev.message
+    if (!user.nameTag) { user.nameTag = Nametag(user.name) }
     ev.cancel = true
     if (ms.match(/"/)) {
         user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"§7ダブルクォート(\")は入力できません"}]}`)
@@ -91,7 +92,7 @@ world.events.beforeChat.subscribe(ev => {
     if (user.hasTag("spectator")) {
         RunCommand(`tellraw @a[m=!a] {"rawtext":[{"text":"§7[スペクテイターチャット]<${user.nameTag}> ${ms}"}]}`)
     } else {
-        RunCommand(`tellraw @a[m=!a] {"rawtext":[{"text":"<${user.nameTag}> ${ms}"}]}`)
+        RunCommand(`tellraw @a {"rawtext":[{"text":"<${user.nameTag}> ${ms}"}]}`)
     }
 })
 

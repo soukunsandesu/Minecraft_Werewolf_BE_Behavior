@@ -131,6 +131,7 @@ export class FORM {
     const form = new UI.ActionFormData()
       .title('設定')
       .button(`初期アイテム\n${Cif(setting.item)}`)
+      .button(`スタート時に自分へ全員をTPする\n${Cif(setting.tp)}`)
       .button(`デバッグ\n${Dm}`)
       .button(`戻る`);
     const { selection, canceled } = await form.show(user);
@@ -330,19 +331,20 @@ export class FORM {
 
     if (live == 1) {
       if (reply == 1) {
-        answer = '人狼です\n人狼は"},{"selector":"@e[scores={CurrentRole=1}]"},{"text":"'
+        answer = '人狼です\n人狼は"},{"selector":"@e[scores={team=1}]"},{"text":"'
         user.runCommandAsync(`tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"${PLs[selection].displayName}から"},{"selector":"@s"}]},{"text":"が人狼を盗みました"`)
       } else {
         if (reply == 9) {
-          answer = '教信者です\n人狼は"},{"selector":"@e[scores={CurrentRole=1}]"},{"text":"'
+          answer = '教信者です\n人狼は"},{"selector":"@e[scores={team=1}]"},{"text":"'
         } else { answer = config.Initial[reply].name }
       }
       user.runCommandAsync(`scoreboard players operation @s CurrentRole = "${PLs[selection].displayName}" CurrentRole`)
       user.runCommandAsync(`scoreboard players operation @s team = "${PLs[selection].displayName}" team`)
+      user.runCommandAsync(`scoreboard players operation @s Previewteam = "${PLs[selection].displayName}" team`)
       user.runCommandAsync(`scoreboard players operation @s PreviewRole = @s CurrentRole`)
       user.runCommandAsync(`execute as @a[name="${PLs[selection].displayName}",hasitem={item=diamond}] run give "${PL.name}" diamond 1 0 {"item_lock":{"mode":"lock_in_inventory"}}`)
       user.runCommandAsync(`scoreboard players set "${PLs[selection].displayName}" CurrentRole 5`)
-      user.runCommandAsync(`scoreboard players set "${PLs[selection].displayName}" team 2`)
+      user.runCommandAsync(`scoreboard players set "${PLs[selection].displayName}" team 3`)
       user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"貴方の役職は${answer}です"}]}`)
       user.runCommandAsync("clear @s diamond 0 1")
     } else {

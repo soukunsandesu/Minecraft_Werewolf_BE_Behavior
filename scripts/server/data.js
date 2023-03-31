@@ -21,5 +21,5 @@ export const config =
         { name: "賢狼", score: 11, text: "死亡したプレイヤーの役職を知る事ができる" },
         { name: "パン屋", score: 12, text: "150秒置きにみんなにパンを配る" }
     ],
-    setting: { item: true }
+    setting: { item: true, tp: false }
 }

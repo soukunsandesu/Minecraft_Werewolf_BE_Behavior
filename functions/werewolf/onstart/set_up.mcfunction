@@ -9,6 +9,8 @@ scoreboard objectives add poison dummy
 scoreboard objectives add skull dummy
 scoreboard objectives add time dummy
 scoreboard players set MWSystem time 600
+scoreboard players set score150 time 150
+
 # 生者 1 死者 0
 scoreboard objectives add a_live dummy
 scoreboard players set @a[tag=player] a_live 1
@@ -25,3 +27,5 @@ scoreboard objectives add NumOfFox dummy
 scoreboard objectives add StartRoll dummy
 
 scoreboard objectives add team dummy
+
+scoreboard objectives add Previewteam dummy

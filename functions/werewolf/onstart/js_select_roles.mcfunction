@@ -48,6 +48,7 @@ execute as @a[scores={team=3}] run scoreboard players add MWSystem NumOfVillager
 # 狐陣営=4
 scoreboard players set @a[scores={CurrentRole=8}] team 4
 execute as @a[scores={team=4}] run scoreboard players add MWSystem NumOfFox 1
+execute as @a[tag=player] run scoreboard players operation @s Previewteam = @s team
 
 #Debuggerは役職配布直後にsummary表示
 execute as @a[tag=Debugger] run function werewolf/summary
