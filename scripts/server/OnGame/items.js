@@ -4,9 +4,6 @@ import { FORM } from "../form/text";
 function Say(ms) { world.say(String(ms)) }
 
 export class items {
-    static GiveItem(player) {
-        player.addItem("minecraft:diamond", 1); //addItemなんてなかった←m9(^Д^)ﾌﾟｷﾞｬｰ
-    }
 
     static DamagePotion(effect, entity) {
         if ((effect.displayName.match(/力/) && effect.amplifier == 0) || (effect.displayName.match(/ウィザー/) && effect.amplifier == 1)) {
@@ -27,17 +24,7 @@ export class items {
             return
         }
     }
-    static GameFoam(user, item) {
-        let PL = world.getAllPlayers().find(e => e.id === user.id);
-        if (item.typeId == "minecraft:blaze_rod") {
-            if (PL.isOp()) {
-                FORM.gameinfo(user)
-            } else {
-                if (PL.hasTag("player")) { PL.removeTag("player") } else { PL.addTag("player") }
-            }
-        }
-        return
-    }
+
     static blackout(user, item) {
         if (item.typeId == "minecraft:double_plant") {
             let PL = world.getAllPlayers().find(e => e.id === user.id);
@@ -128,6 +115,35 @@ export class items {
             target.runCommandAsync("damage @s 30 anvil")
             user.runCommandAsync("clear golden_sword")
             return
+        }
+    }
+
+    static GameFoam(user, item) {
+        let PL = world.getAllPlayers().find(e => e.id === user.id);
+        if (item.typeId == "minecraft:blaze_rod") {
+            if (PL.isOp()) {
+                FORM.gameinfo(user)
+            } else {
+                if (PL.hasTag("player")) { PL.removeTag("player") } else { PL.addTag("player") }
+            }
+        }
+        return
+    }
+
+    static Qchat(user, item) {
+        if (item.typeId == "minecraft:stick") {
+            if (item?.nameTag == undefined) {
+                let PL = world.getAllPlayers().find(e => e.id === user.id);
+                if (PL.isOp()) {
+                    FORM.gameinfo(user)
+                } else {
+                    if (PL.hasTag("player")) { PL.removeTag("player") } else { PL.addTag("player") }
+                }
+            } else {
+                if (item?.nameTag == "§r§fチャット") FORM.QC(user)
+                if (item?.nameTag == "§r§f人狼チャット") FORM.WQ(user)
+                if (item?.nameTag == "§r§fヘルプ棒") FORM.Help(user)
+            }
         }
     }
 }

@@ -9,11 +9,11 @@
                     "functions": [
                         {
                             "function": "set_name",
-                            "name": "停電スイッチ"
+                            "name": "§r§f停電スイッチ"
                         },
                         {
                             "function": "set_lore",
-                            "lore": "§r自分以外の視野を奪う"
+                            "lore": "§r§f自分以外の視野を奪う"
                         }
                     ]
                 }

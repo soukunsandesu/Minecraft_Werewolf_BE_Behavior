@@ -1,6 +1,7 @@
-gamemode spectator @a[tag=joinPL]
-tellraw @a[tag=joinPL] {"rawtext":[{"text":"人狼ビヘイビアパックが有効です\nこのビヘイビアパックは導入されたワールドで人狼ができるようにするものです\nop権限があるプレイヤーがブレイズロットを使用することでゲーム設定が開きます\nまた、「.name<名前>」で名前を変更できます"}]}
-tag @a remove joinPL
+scoreboard players add @a Ongame 0
+gamemode spectator @a[Ongame=0]
+tellraw @a[Ongame=0] {"rawtext":[{"text":"人狼ビヘイビアパックが有効です\nこのビヘイビアパックは導入されたワールドで人狼ができるようにするものです\nop権限があるプレイヤーが棒を使用することでゲーム設定が開きます\nまた、「.name<名前>」で名前を変更できます"}]}
+scoreboard players set @a Ongame 1
 
 scoreboard players add @a elevator 0
 
@@ -58,6 +59,8 @@ tag @e[type=player] remove dead_t
 # スペクテイターチャット用
 tag @a[m=spectator] add spectator
 tag @a[m=!spectator] remove spectator
+tag @a remove a_live
+tag @a[scores={a_live=1..}] add a_live
 
 function werewolf/skull
 scoreboard players remove @a[scores={poison=1..}] poison 1
@@ -77,5 +80,5 @@ execute as @a[hasitem={item=quartz_block},m=a] run function werewolf/quartz_give
 
 execute as @p[tag=Debugger] run function werewolf/onfinish/tick_debug
 # 勝利判定
-execute if score MWSystem NumOfWolf matches 0 as @p[tag=!Debugger,scores={CurrentRole=1..}] run function werewolf/onfinish/winner/check
-execute if score MWSystem NumOfVillagers matches 0 as @p[tag=!Debugger,scores={CurrentRole=1..}] run function werewolf/onfinish/winner/check
+execute if score MWSystem NumOfWolf matches 0 as @p[scores={CurrentRole=1..}] run function werewolf/onfinish/winner/check
+execute if score MWSystem NumOfVillagers matches 0 as @p[scores={CurrentRole=1..}] run function werewolf/onfinish/winner/check

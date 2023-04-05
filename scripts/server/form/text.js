@@ -4,6 +4,7 @@ import { config } from '../data.js';
 
 let datas = config.Rolls
 let setting = config.setting
+let member
 
 export class FORM {
   static async gameinfo(user) {
@@ -30,10 +31,16 @@ export class FORM {
 
   static async gamestart(user) {
     if (datas.length > 2) {
-      let PLs = world.getPlayers()
+      let PLs = world.getAllPlayers()
       user.runCommandAsync("function werewolf/start_First")
       for (let data of datas) {
         user.runCommandAsync("execute as @r[tag=player,scores={CurrentRole=0}] run scoreboard players set @s CurrentRole " + data.score)
+      }
+      if (setting.lover > 0) {
+        for (let i = 1; i <= setting.lover; ++i) {
+          user.runCommandAsync("scoreboard players set @r[scores={lover=0}] lover " + i)
+          user.runCommandAsync("scoreboard players set @r[scores={lover=0}] lover " + i)
+        }
       }
       if (setting.item) user.runCommandAsync("function werewolf/onstart/give_items")
       if (setting.tp) {
@@ -42,9 +49,12 @@ export class FORM {
         user.runCommandAsync("effect @a resistance 10 10 true")
       }
       user.runCommandAsync("function werewolf/start_Latter")
-    } else {
-      world.say("ロールが少なすぎます！\n" + datas.length + ">2")
-    }
+
+      user.runCommandAsync('tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"人狼一覧:"},{"selector":"@a[scores={team=1}]"}]}')
+      if (setting.Fanatic) user.runCommandAsync('tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"白人外一覧:"},{"selector":"@a[scores={team=2}]"}]}')
+
+      for (let PL of PLs) { if (PL.hasTag("player")) member.push(PL) }
+    } else { world.say("ロールが少なすぎます！\n" + datas.length + ">2") }
   }
 
   static async GetPlayers(user) {
@@ -136,14 +146,19 @@ export class FORM {
     const form = new UI.ActionFormData()
       .title('設定')
       .button(`初期アイテム\n${Cif(setting.item)}`)
+      .button(`恋人\n${setting.lover}組`)
       .button(`スタート時に自分へ全員をTPする\n${Cif(setting.tp)}`)
+      .button(`教信者が人狼陣営を全て見える\n${Cif(setting.Fanatic)}`)
       .button(`デバッグ\n${Dm}`)
       .button(`戻る`);
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
     if (selection == 0) if (setting.item) { setting.item = false } else { setting.item = true }
-    if (selection == 1) { if (user.hasTag("Debugger")) { user.removeTag("Debugger") } else { user.addTag("Debugger") } }
-    if (selection == 2) return await this.gameinfo(user)
+    if (selection == 1) if (setting.lover < 5) { setting.lover = setting.lover + 1 } else { setting.lover = 0 }
+    if (selection == 2) if (setting.tp) { setting.tp = false } else { setting.tp = true }
+    if (selection == 3) if (setting.Fanatic) { setting.Fanatic = false } else { setting.Fanatic = true }
+    if (selection == 4) { if (user.hasTag("Debugger")) { user.removeTag("Debugger") } else { user.addTag("Debugger") } }
+    if (selection == 5) return await this.gameinfo(user)
     return await this.setting(user)
   }
 
@@ -372,5 +387,230 @@ export class FORM {
     anPLs.forEach(PL => {
       form.button(PL.displayName)
     });
+  }
+
+  static async QC(user) {
+    const form = new UI.ActionFormData()
+      .title('クイックチャット')
+      .button("告発")
+      .button("宣言")
+      .button("質問")
+      .button("回答")
+      .button("要求")
+      .button("プレイヤー");
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == 0) { this.QC_AC_1(user) }
+    if (selection == 1) { this.QC_CO(user) }
+    if (selection == 2) { this.QC_Q_1(user) }
+    if (selection == 3) { this.QC_A(user) }
+    if (selection == 4) { this.QC_R(user) }
+    if (selection == 5) { this.QC_P(user) }
+    return
+  }
+  static async QC_AC_1(user) {
+    const form = new UI.ActionFormData().title('告発');
+    let text = ["がBを殺した", "はBを騙した", "はBといた", "は嘘をついている", "が怪しい", "はCかもしれない", "はCだ", "は隠れている"]
+    text.forEach(tx => { form.button("A" + tx) });
+    form.button("戻る");
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == text.length) { this.QC(user) }
+    if (selection < text.length) { this.QC_AC_2(user, text[selection]) }
+    return
+  }
+  static async QC_AC_2(user, text) {
+    let A = this.getPL()
+    A.push({ nameTag: "誰か" })
+    const form = new UI.ActionFormData().title("A" + text);
+    A.forEach(PL => { form.button(PL.nameTag) });
+    form.button("戻る");
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == A.length) { this.QC_AC_1(user) }
+    if (selection < A.length) { if (text.match(/B|C/)) { this.QC_AC_3(user, text, A[selection], A) } else { user.runCommandAsync(`tellraw @a {"rawtext":[{"text":"<${user.nameTag}> ${A[selection].nameTag + text}"}]}`) } }
+    return
+  }
+  static async QC_AC_3(user, text, A, B) {
+    const form = new UI.ActionFormData().title(A.nameTag + text);
+    let sel
+    let At = text
+    if (text.match(/B/)) {
+      sel = B
+      sel.forEach(PL => { form.button(PL.nameTag) });
+      At = At.replace("B", "BorC")
+    } else {
+      sel = this.getRole()
+      sel.push("白")
+      sel.push("黒")
+      sel.forEach(R => { form.button(R) });
+      At = At.replace("C", "BorC")
+    }
+    form.button("戻る");
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == sel.length) { this.QC_AC_2(user, text) }
+    if (selection < sel.length) {
+      if (sel[selection]?.nameTag) { sel = sel[selection].nameTag } else { sel = sel[selection] }
+      user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"<${user.nameTag}> ${A.nameTag + At.replace("BorC", sel)}"}]}`)
+    }
+    return
+  }
+
+  static async QC_CO(user) {
+    let Role = this.getRole()
+    const form = new UI.ActionFormData().title('宣言');
+    Role.forEach(RL => { form.button(RL) });
+    form.button("戻る");
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == Role.length) { this.QC(user) }
+    if (selection < Role.length) { user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"<${user.nameTag}> ${Role[selection]}CO"}]}`) }
+    return
+  }
+
+  static async QC_Q_1(user) {
+    const form = new UI.ActionFormData().title('質問');
+    let text = ["Aは何をしていた？", "Aと一緒にいたのは誰？", "Aはどこにいる？", "Aは生きている？"]
+    text.forEach(tx => { form.button(tx) });
+    form.button("戻る");
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == text.length) { this.QC(user) }
+    if (selection < text.length) { this.QC_Q_2(user, text[selection]) }
+    return
+  }
+  static async QC_Q_2(user, text) {
+    let A = this.getPL()
+    A.push({ nameTag: "みんな" })
+    const form = new UI.ActionFormData().title(text);
+    A.forEach(PL => { form.button(PL.nameTag) });
+    form.button("戻る");
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == A.length) { this.QC_Q_1(user) }
+    if (selection < A.length) { user.runCommandAsync(`tellraw @a {"rawtext":[{"text":"<${user.nameTag}> ${A[selection].nameTag + text}"}]}`) }
+    return
+  }
+  static async QC_A(user) {
+    const form = new UI.ActionFormData().title('回答');
+    let text = ["はい", "いいえ", "わからない"]
+    text.forEach(tx => { form.button(tx) });
+    form.button("戻る");
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == text.length) { this.QC(user) }
+    if (selection < text.length) { user.runCommandAsync(`tellraw @a {"rawtext":[{"text":"<${user.nameTag}> ${text[selection]}"}]}`) }
+    return
+  }
+  static async QC_R(user) {
+    const form = new UI.ActionFormData().title('要求');
+    let text = ["来てください", "離れてください", "アイテムをください", "アイテムを見せてください", "クォーツをください", "ダイヤモンドを見せてください"]
+    text.forEach(tx => { form.button(tx) });
+    form.button("戻る");
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == text.length) { this.QC(user) }
+    if (selection < text.length) { user.runCommandAsync(`tellraw @a {"rawtext":[{"text":"<${user.nameTag}> ${text[selection]}"}]}`) }
+    return
+  }
+  static async QC_P(user) {
+    const form = new UI.ActionFormData().title('プレイヤー');
+    let PLs = this.getPL()
+    PLs.forEach(PL => { form.button(PL.nameTag) });
+    form.button("戻る");
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == PLs.length) { this.QC(user) }
+    if (selection < PLs.length) { user.runCommandAsync(`tellraw @a {"rawtext":[{"text":"<${user.nameTag}> ${PLs[selection].nameTag}"}]}`) }
+    return
+  }
+  static async WQ(user) {
+    var text = ["はい", "いいえ", "攻撃", "走れ", "中に溶け込め", "ここに来て", "助けて"]
+    const form = new UI.ActionFormData()
+      .title('人狼チャット');
+    text.forEach(tx => { form.button(tx) });
+
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    user.runCommandAsync(`tellraw @a[scores={WolfC=1}] {"rawtext":[{"text":"§7[人狼チャット] ${text[selection]}"}]}`)
+    user.runCommandAsync(`tellraw @a[m=!a] {"rawtext":[{"text":"§7[人狼チャット]<${user.nameTag}§7>\n${text[selection]}"}]}`)
+    return
+  }
+  static async Help(user) {
+    var text = ["役職について", "陣営について", "アイテムについて"]
+    const form = new UI.ActionFormData()
+      .title('ヘルプ');
+    text.forEach(tx => { form.button(tx) });
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == 0) this.Help_R(user)
+    if (selection == 1) this.Help_T(user)
+    if (selection == 2) this.Help_I(user)
+    return
+  }
+
+  static async Help_R(user) {
+    let Role = config.Initial
+    const form = new UI.ActionFormData()
+      .title('役職について');
+    Role.forEach(RL => { form.button(RL.name) });
+    form.button("戻る")
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == Role.length) this.Help(user)
+    if (selection < Role.length) this.Help_R_show(user, selection)
+    return
+  }
+  static async Help_R_show(user, S) {
+    let Role = config.Initial
+    const form = new UI.ActionFormData()
+      .title(`${Role[S].name}`)
+      .body(`${Role[S].Commentary}`)
+      .button("戻る");
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == 0) this.Help_R(user)
+    return
+  }
+
+  static async Help_T(user) {
+    const form = new UI.ActionFormData()
+      .title('陣営について')
+      .body("市民陣営\n人狼陣営の黒人外を全滅させると勝利\n\n人狼陣営\n市民陣営を全滅させると勝利\n\n狐陣営\n市民陣営、人狼陣営が勝利した時、生存していると横取り勝利\n\n恋人\n市民・人狼陣営が勝利した時生存していると横取り勝利\n(市民陣営のプレイヤーが恋人になった場合、市民陣営としてカウントされない)")
+      .button("戻る")
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == 0) this.Help(user)
+    return
+  }
+
+  static async Help_I(user) {
+    let items = config.Items
+    let text = ""
+    items.forEach(I => { text = `${text + I.name}\n${I.Commentary}\n\n` });
+    const form = new UI.ActionFormData()
+      .title('アイテムについて')
+      .body(text)
+      .button("戻る");
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == 0) this.Help(user)
+    return
+  }
+
+  static getPL() {
+    let team = world.scoreboard.getObjective("a_live")
+    let PLs = []
+    let wPLs = world.getAllPlayers()
+    for (let PL of team.getParticipants()) {
+      if (Number(team.getScore(PL)) >= 0) PLs.push(wPLs.find(e => e.name === PL.displayName))
+    }
+    return PLs
+  }
+  static getRole() {
+    let role = datas.slice()
+    role.push({ name: "村人", score: 5 })
+    return Array.from(new Set(role.map(R => R.name)));
   }
 }

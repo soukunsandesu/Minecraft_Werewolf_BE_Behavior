@@ -6,3 +6,4 @@ effect @a[tag=player,tag=!Debugger] clear
 kill @e[type=item]
 execute as @p[tag=Debugger] run function werewolf/onstart/debug
 scoreboard players set @a[tag=player] CurrentRole 0
+scoreboard players set @a[tag=player] lover 0

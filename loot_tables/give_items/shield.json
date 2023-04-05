@@ -9,7 +9,7 @@
                     "functions": [
                         {
                             "function": "set_lore",
-                            "lore": "§r左手に持つことで矢を4発耐える"
+                            "lore": "§r§f左手に持つことで矢を4発耐える"
                         }
                     ]
                 }

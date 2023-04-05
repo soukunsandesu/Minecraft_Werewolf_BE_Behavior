@@ -9,11 +9,11 @@
                     "functions": [
                         {
                             "function": "set_name",
-                            "name": "2代目ルイン"
+                            "name": "§r§f劣化ルイン"
                         },
                         {
                             "function": "set_lore",
-                            "lore": "§r1擊で倒せるが\n使用者に雷と自傷ダメージ"
+                            "lore": "§r§f1擊で倒せるが\n使用者に雷と自傷ダメージ"
                         }
                     ]
                 }

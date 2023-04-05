@@ -11,11 +11,11 @@ function Nametag(name) { return name.replace(/(^§.\[(.*?)\]|§.$)/g, ""); }
 // idを入力することでプレイヤーを取得する
 function getPL(id) { return world.getAllPlayers().find(e => e.id === id); }
 
-
+let InPLs=[]
 // プレイヤーの参加を検知
-// world.events.playerJoin.subscribe(ev => {
-// })
-
+world.events.playerJoin.subscribe(ev => {
+    InPLs.push(ev.playerName)
+})
 
 // 死んだことを検知
 world.events.entityDie.subscribe(ev => {
@@ -25,7 +25,7 @@ world.events.entityDie.subscribe(ev => {
 })
 
 // killするアイテム
-const itemIds = ["minecraft:diamond", "minecraft:barrier"]
+const itemIds = ["minecraft:diamond", "minecraft:barrier", "minecraft:stick"]
 // entityのスポーンを検知 アイテムのドロップもこれに含む
 world.events.entitySpawn.subscribe(ev => {
     if (ev.entity.typeId != 'minecraft:item') return
@@ -51,8 +51,10 @@ world.events.itemUse.subscribe(ev => {
     items.blackout(user, item)
     items.player_eye(user, item)
     items.divination(user, item)
-    items.GameFoam(user, item)
     items.aspirator(user, item)
+
+    items.GameFoam(user, item)
+    items.Qchat(user, item)
 })
 
 // 攻撃が当たった事を検知

@@ -5,15 +5,15 @@
             "entries": [
                 {
                     "type": "item",
-                    "name": "minecraft:beacon",
+                    "name": "minecraft:stick",
                     "functions": [
                         {
                             "function": "set_name",
-                            "name": "§r§f地雷"
+                            "name": "§r§fヘルプ棒"
                         },
                         {
                             "function": "set_lore",
-                            "lore": "§r§4人狼陣営§f以外が取得すると爆発する"
+                            "lore": "§r§f使用することで役職やアイテムの説明を閲覧する"
                         }
                     ]
                 }

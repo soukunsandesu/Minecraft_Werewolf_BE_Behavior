@@ -30,6 +30,11 @@ scoreboard objectives add NumOfLover dummy
 
 scoreboard objectives add StartRoll dummy
 
+# ゲーム中に参加してきたプレイヤー用
+scoreboard objectives remove Ongame
+scoreboard objectives add Ongame dummy
+
 scoreboard objectives add team dummy
+scoreboard objectives add WolfC dummy
 
 scoreboard objectives add lover dummy

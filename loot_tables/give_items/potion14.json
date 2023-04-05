@@ -9,7 +9,7 @@
                     "functions": [
                         {
                             "function": "set_name",
-                            "name": "千里馬のポーション"
+                            "name": "§r§f高速移動のポーション"
                         },
                         {
                             "function": "set_data",
@@ -17,7 +17,7 @@
                         },
                         {
                             "function": "set_lore",
-                            "lore": "§r§7スピード (1:00)\n\n§5効果:\n§9+160% スピード"
+                            "lore": "§r§f飲むことで1分間移動スピード+160%"
                         }
                     ]
                 }

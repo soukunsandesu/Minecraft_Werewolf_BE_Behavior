@@ -14,6 +14,10 @@ scoreboard objectives remove StartRoll
 scoreboard objectives remove team
 scoreboard objectives remove Previewteam
 scoreboard objectives remove lover
+scoreboard objectives remove WolfC
+
 scoreboard objectives add INplayer dummy
 scoreboard players add @a INplayer 0
-give @a blaze_rod
+
+give @a stick
+loot give @a loot "give_items/stick_help"
