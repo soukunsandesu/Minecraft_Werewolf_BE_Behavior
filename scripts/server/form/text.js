@@ -247,7 +247,7 @@ export class FORM {
       user.runCommandAsync("clear @s diamond 0 1")
       return
     }
-    if (reply == 1 || reply == 11) { answer = "黒" }
+    if (reply == 1 || reply == 11 || reply == 14) { answer = "黒" }
     if (reply == 8) { user.runCommandAsync(`kill "${PLs[selection].displayName}"`) }
     user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}は${answer}です"}]}`)
     user.runCommandAsync("clear @s diamond 0 1")

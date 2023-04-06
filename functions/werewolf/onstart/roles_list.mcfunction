@@ -11,6 +11,8 @@ execute if score 狂信者 StartRoll matches 1.. run tellraw @a {"rawtext":[{"te
 execute if score 大狼 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§4大狼§r"},{"score":{"name":"大狼","objective":"StartRoll"}}]}
 execute if score 賢狼 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§4賢狼§r"},{"score":{"name":"賢狼","objective":"StartRoll"}}]}
 execute if score パン屋 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§6パン屋§r"},{"score":{"name":"パン屋","objective":"StartRoll"}}]}
+execute if score 囁く狂人 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§7囁く狂人§r"},{"score":{"name":"囁く狂人","objective":"StartRoll"}}]}
+execute if score 狼付き StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§4狼付き§r"},{"score":{"name":"狼付き","objective":"StartRoll"}}]}
 
 
 execute if score 恋人 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§d恋人§r"},{"score":{"name":"恋人","objective":"StartRoll"}},{"text":"組"}]}

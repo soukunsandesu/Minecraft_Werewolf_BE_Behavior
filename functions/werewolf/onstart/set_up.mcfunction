@@ -33,6 +33,7 @@ scoreboard objectives add StartRoll dummy
 # ゲーム中に参加してきたプレイヤー用
 scoreboard objectives remove Ongame
 scoreboard objectives add Ongame dummy
+scoreboard players set @a Ongame 1
 
 scoreboard objectives add team dummy
 scoreboard objectives add WolfC dummy

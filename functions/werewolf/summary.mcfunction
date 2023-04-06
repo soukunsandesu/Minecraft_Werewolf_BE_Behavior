@@ -11,6 +11,8 @@ execute if score 狂信者 StartRoll matches 1.. run tellraw @s {"rawtext":[{"te
 execute if score 大狼 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§4大狼§r:"},{"selector":"@a[scores={CurrentRole=10}]"}]}
 execute if score 賢狼 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§4賢狼§r:"},{"selector":"@a[scores={CurrentRole=11}]"}]}
 execute if score パン屋 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§6パン屋§r:"},{"selector":"@a[scores={CurrentRole=12}]"}]}
+execute if score 囁く狂人 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§7囁く狂人§r:"},{"selector":"@a[scores={CurrentRole=13}]"}]}
+execute if score 狼付き StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§4狼付き§r:"},{"selector":"@a[scores={CurrentRole=14}]"}]}
 
 execute if entity @a[scores={lover=1}] run tellraw @s {"rawtext":[{"text":"§d恋人§r"},{"selector":"@a[scores={lover=1}]"},{"text":"ペア"}]}
 execute if entity @a[scores={lover=2}] run tellraw @s {"rawtext":[{"text":"§d恋人§r"},{"selector":"@a[scores={lover=2}]"},{"text":"ペア"}]}

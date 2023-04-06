@@ -1,7 +1,7 @@
 {
     "format_version": 2,
     "header": {
-        "description": "マイクラ人狼",
+        "description": "マイクラ人狼\n使用するにはベータAPIをonにしてください",
         "name": "minecraft-Werewolf",
         "uuid": "a469ff39-12be-419b-ac1a-eb77d0df808c",
         "version": [1,0,0],
