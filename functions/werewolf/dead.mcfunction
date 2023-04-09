@@ -5,6 +5,9 @@ execute as @s[scores={team=4}] run scoreboard players remove MWSystem NumOfFox 1
 scoreboard players set @s a_live 0
 gamemode spectator @s
 
+# 女王
+execute if entity @s[scores={CurrentRole=15}] run function werewolf/ongame/queen
+
 # 猫又
 execute if entity @s[scores={CurrentRole=7}] run function werewolf/ongame/nekomata
 

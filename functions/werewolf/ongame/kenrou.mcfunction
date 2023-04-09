@@ -10,3 +10,8 @@ execute as @s[scores={CurrentRole=8}] run tellraw @a[scores={CurrentRole=11,a_li
 execute as @s[scores={CurrentRole=9}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7狂信者が死亡しました"}]}
 execute as @s[scores={CurrentRole=10}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7大狼が死亡しました"}]}
 execute as @s[scores={CurrentRole=11}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7賢狼が死亡しました"}]}
+execute as @s[scores={CurrentRole=12}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7パン屋が死亡しました"}]}
+execute as @s[scores={CurrentRole=13}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7囁く狂人が死亡しました"}]}
+execute as @s[scores={CurrentRole=14}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7狼付きが死亡しました"}]}
+execute as @s[scores={CurrentRole=15}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7女王が死亡しました"}]}
+execute as @s[scores={CurrentRole=16}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7プリンセスが死亡しました"}]}

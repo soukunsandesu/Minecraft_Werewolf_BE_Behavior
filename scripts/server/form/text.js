@@ -167,7 +167,7 @@ export class FORM {
     if (selection == 3) if (setting.Fanatic) { setting.Fanatic = false } else { setting.Fanatic = true }
     if (selection == 4) if (setting.thief < 600) { setting.thief = setting.thief + 150 } else { setting.thief = 0 }
     if (selection == 5) return await this.setting_time(user)
-    if (selection == 6) if (setting.quartz < 400) { setting.thief = setting.quartz + 50 } else { setting.quartz = 50 }
+    if (selection == 6) if (setting.quartz < 400) { setting.quartz = setting.quartz + 50 } else { setting.quartz = 50 }
     if (selection == 7) { if (user.hasTag("Debugger")) { user.removeTag("Debugger") } else { user.addTag("Debugger") } }
     if (selection == 8) return await this.gameinfo(user)
     return await this.setting(user)
