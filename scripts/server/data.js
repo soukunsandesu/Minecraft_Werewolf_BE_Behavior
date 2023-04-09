@@ -40,5 +40,5 @@ export const config = {
         { name: "ヘルプ棒(棒)", Commentary: "使用することで役職やアイテムの説明を閲覧する" },
         { name: "棒", Commentary: "OPを持つ場合\nゲームの設定画面が開く\nOPを持たない場合\n§c待機中§rと§a参加中§rを切り替える" }
     ],
-    setting: { item: true, tp: false, lover: 0, Fanatic: true }
+    setting: { item: true, tp: false, lover: 0, Fanatic: true, thief: 450, time:600,quartz:150 }
 }

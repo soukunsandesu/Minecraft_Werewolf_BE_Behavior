@@ -11,11 +11,10 @@ function Nametag(name) { return name.replace(/(^§.\[(.*?)\]|§.$)/g, ""); }
 // idを入力することでプレイヤーを取得する
 function getPL(id) { return world.getAllPlayers().find(e => e.id === id); }
 
-let InPLs=[]
 // プレイヤーの参加を検知
-world.events.playerJoin.subscribe(ev => {
-    InPLs.push(ev.playerName)
-})
+// world.events.playerJoin.subscribe(ev => {
+//     InPLs.push(ev.playerName)
+// })
 
 // 死んだことを検知
 world.events.entityDie.subscribe(ev => {

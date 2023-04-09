@@ -33,6 +33,11 @@ export class FORM {
     if (datas.length > 2) {
       let PLs = world.getAllPlayers()
       user.runCommandAsync("function werewolf/start_First")
+      
+      user.runCommandAsync("scoreboard players set MWSystem time " + setting.time)
+      user.runCommandAsync("scoreboard players set クォーツ間隔 time " + setting.quartz)
+      user.runCommandAsync("scoreboard players set 怪盗リミット time " + setting.thief)
+
       for (let data of datas) {
         user.runCommandAsync("execute as @r[tag=player,scores={CurrentRole=0}] run scoreboard players set @s CurrentRole " + data.score)
       }
@@ -49,7 +54,7 @@ export class FORM {
         user.runCommandAsync("effect @a resistance 10 10 true")
       }
       user.runCommandAsync("function werewolf/start_Latter")
-
+      user.runCommandAsync(`tellraw @a[scores={CurrentRole=6}] {"rawtext":[{"text":"§7怪盗は${setting.thief}秒以降、役職を盗めなくなります注意してください"}]}`)
       user.runCommandAsync('tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"人狼一覧:"},{"selector":"@a[scores={team=1}]"}]}')
       if (setting.Fanatic) user.runCommandAsync('tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"白人外一覧:"},{"selector":"@a[scores={team=2}]"}]}')
 
@@ -149,6 +154,9 @@ export class FORM {
       .button(`恋人\n${setting.lover}組`)
       .button(`スタート時に自分へ全員をTPする\n${Cif(setting.tp)}`)
       .button(`教信者が人狼陣営を全て見える\n${Cif(setting.Fanatic)}`)
+      .button(`怪盗が役職を盗める時間\n${setting.thief}秒以前`)
+      .button(`クォーツ全配布までの時間\n${setting.time}秒`)
+      .button(`クォーツ配布の間隔\n${setting.quartz}秒おき`)
       .button(`デバッグ\n${Dm}`)
       .button(`戻る`);
     const { selection, canceled } = await form.show(user);
@@ -157,9 +165,32 @@ export class FORM {
     if (selection == 1) if (setting.lover < 5) { setting.lover = setting.lover + 1 } else { setting.lover = 0 }
     if (selection == 2) if (setting.tp) { setting.tp = false } else { setting.tp = true }
     if (selection == 3) if (setting.Fanatic) { setting.Fanatic = false } else { setting.Fanatic = true }
-    if (selection == 4) { if (user.hasTag("Debugger")) { user.removeTag("Debugger") } else { user.addTag("Debugger") } }
-    if (selection == 5) return await this.gameinfo(user)
+    if (selection == 4) if (setting.thief < 600) { setting.thief = setting.thief + 150 } else { setting.thief = 0 }
+    if (selection == 5) return await this.setting_time(user)
+    if (selection == 6) if (setting.quartz < 400) { setting.thief = setting.quartz + 50 } else { setting.quartz = 50 }
+    if (selection == 7) { if (user.hasTag("Debugger")) { user.removeTag("Debugger") } else { user.addTag("Debugger") } }
+    if (selection == 8) return await this.gameinfo(user)
     return await this.setting(user)
+  }
+
+  static async setting_time(user) {
+    const form = new UI.ActionFormData()
+      .title('設定_時間').body(setting.time + "秒")
+      .button(`+300`)
+      .button(`+50`)
+      .button(`-50`)
+      .button(`-300`)
+      .button(`戻る`);
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    if (selection == 0) setting.time = setting.time + 300
+    if (selection == 1) setting.time = setting.time + 50
+    if (selection == 2) setting.time = setting.time - 50
+    if (selection == 3) setting.time = setting.time - 300
+    if (selection == 4) return await this.setting(user)
+    if (setting.time <= 0) setting.time = 50
+    if (setting.time > 1800) setting.time = 1800
+    return await this.setting_time(user)
   }
 
   static async werewolf(user) {
@@ -242,13 +273,12 @@ export class FORM {
 
     // rollが見かけ上は予言だが、本当は違った場合用
     // 例：偽占い 怪盗に進まれた占い
-    if (userroll != 3) {
-      user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}は白です"}]}`)
-      user.runCommandAsync("clear @s diamond 0 1")
-      return
+    if (userroll == 3) {
+      if (reply == 1 || reply == 11 || reply == 14) { answer = "黒" }
+      if (reply == 8) { user.runCommandAsync(`kill "${PLs[selection].displayName}"`) }
+    } else {
+      answer = "白"
     }
-    if (reply == 1 || reply == 11 || reply == 14) { answer = "黒" }
-    if (reply == 8) { user.runCommandAsync(`kill "${PLs[selection].displayName}"`) }
     user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}は${answer}です"}]}`)
     user.runCommandAsync("clear @s diamond 0 1")
   }
@@ -274,11 +304,9 @@ export class FORM {
 
     // 対象の生死を取得
     let a_live = world.scoreboard.getObjective("a_live")
-    let live_PL = a_live.getParticipants()
     let live
-    for (let PL of live_PL) {
-      let score = a_live.getScore(PL)
-      if (PL.displayName == PLs[selection].displayName) { live = score }
+    for (let PL of a_live.getParticipants()) {
+      if (PL.displayName == PLs[selection].displayName) { live = a_live.getScore(PL) }
     }
 
     let reply = team.getScore(PLs[selection])
@@ -293,13 +321,10 @@ export class FORM {
 
     // rollが見かけ上は霊媒だが、本当は違った場合用
     // 例：怪盗に進まれた霊媒
-    if (userroll != 4) {
-      user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}の魂は見つかりませんでした…"}]}`)
-      user.runCommandAsync("clear @s diamond 0 1")
-      return
-    }
-    if (live == 0) {
-      if (reply == 1 || reply == 10 || reply == 11) { answer = "は黒です" }
+    if (userroll == 4) {
+      if (live == 0) {
+        if (reply == 1 || reply == 10 || reply == 11) { answer = "は黒です" }
+      } else { answer = "の魂は見つかりませんでした…" }
     } else { answer = "の魂は見つかりませんでした…" }
     user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}${answer}"}]}`)
     user.runCommandAsync("clear @s diamond 0 1")

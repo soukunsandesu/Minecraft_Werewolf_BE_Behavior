@@ -11,5 +11,6 @@ loot give @a loot "give_items/stick_help"
 replaceitem entity @a[tag=player] slot.inventory 18 barrier 1 0 {"minecraft:item_lock":{"mode":"lock_in_slot"}}
 replaceitem entity @a[tag=player] slot.inventory 19 barrier 1 0 {"minecraft:item_lock":{"mode":"lock_in_slot"}}
 replaceitem entity @a[tag=player] slot.inventory 20 barrier 1 0 {"minecraft:item_lock":{"mode":"lock_in_slot"}}
+replaceitem entity @a[tag=player] slot.inventory 21 barrier 1 0 {"minecraft:item_lock":{"mode":"lock_in_slot"}}
 
 tag @a remove player

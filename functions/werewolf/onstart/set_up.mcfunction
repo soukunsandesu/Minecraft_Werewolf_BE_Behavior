@@ -8,7 +8,6 @@ scoreboard objectives add elevator dummy
 scoreboard objectives add poison dummy
 scoreboard objectives add skull dummy
 scoreboard objectives add time dummy
-scoreboard players set MWSystem time 600
 scoreboard players set score150 time 150
 scoreboard players set score2 time 2
 scoreboard objectives add Previewteam dummy
@@ -37,5 +36,6 @@ scoreboard players set @a Ongame 1
 
 scoreboard objectives add team dummy
 scoreboard objectives add WolfC dummy
+scoreboard objectives add Wquartz dummy
 
 scoreboard objectives add lover dummy

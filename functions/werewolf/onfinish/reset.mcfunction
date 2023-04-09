@@ -15,6 +15,7 @@ scoreboard objectives remove team
 scoreboard objectives remove Previewteam
 scoreboard objectives remove lover
 scoreboard objectives remove WolfC
+scoreboard objectives remove Wquartz
 
 scoreboard objectives add INplayer dummy
 scoreboard players add @a INplayer 0
