@@ -33,7 +33,7 @@ export class FORM {
     if (datas.length > 2) {
       let PLs = world.getAllPlayers()
       user.runCommandAsync("function werewolf/start_First")
-      
+
       user.runCommandAsync("scoreboard players set MWSystem time " + setting.time)
       user.runCommandAsync("scoreboard players set クォーツ間隔 time " + setting.quartz)
       user.runCommandAsync("scoreboard players set 怪盗リミット time " + setting.thief)
@@ -375,12 +375,13 @@ export class FORM {
     }
 
     if (live == 1) {
-      if (reply == 1) {
-        answer = '人狼です\n人狼は"},{"selector":"@e[scores={team=1}]"},{"text":"'
-        user.runCommandAsync(`tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"${PLs[selection].displayName}から"},{"selector":"@s"}]},{"text":"が人狼を盗みました"`)
+      if (reply == 1 || reply == 10 || reply == 11) {
+        answer = config.Initial[reply].name + '\n人狼一覧:"},{"selector":"@a[scores={team=1}]"},{"text":"'
+        user.runCommandAsync(`tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"${PLs[selection].displayName}から"},{"selector":"@s"}]},{"text":"が${config.Initial[reply].name}を盗みました"`)
       } else {
         if (reply == 9) {
-          answer = '教信者です\n人狼は"},{"selector":"@e[scores={team=1}]"},{"text":"'
+          answer = '教信者\n人狼一覧:"},{"selector":"@a[scores={team=1}]"},{"text":"'
+          if (setting.Fanatic) answer = answer + '\n白人外一覧:"},{"selector":"@a[scores={team=2}]"},{"text":"'
         } else { answer = config.Initial[reply].name }
       }
       user.runCommandAsync(`scoreboard players operation @s CurrentRole = "${PLs[selection].displayName}" CurrentRole`)
@@ -390,7 +391,7 @@ export class FORM {
       user.runCommandAsync(`execute as @a[name="${PLs[selection].displayName}",hasitem={item=diamond}] run give "${PL.name}" diamond 1 0 {"item_lock":{"mode":"lock_in_inventory"}}`)
       user.runCommandAsync(`scoreboard players set "${PLs[selection].displayName}" CurrentRole 5`)
       user.runCommandAsync(`scoreboard players set "${PLs[selection].displayName}" team 3`)
-      user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"貴方の役職は${answer}です"}]}`)
+      user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"貴方が盗んだ役職は${answer}"}]}`)
       user.runCommandAsync("clear @s diamond 0 1")
     } else {
       user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"死者からは盗めません"}]}`)
