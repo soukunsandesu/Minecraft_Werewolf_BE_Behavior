@@ -79,11 +79,10 @@ world.events.beforeChat.subscribe(ev => {
     }
     if (ms.match(/^.name/)) {
         var name = ms.replace(".name", "");
-        name = name.replace(/(^§.\[(.*?)\]|§.$)/g, "");
+        name = name.replace(/(^§.\[(.*?)\]|\\|§.$)/g, "");
         if (name.length > 0) {
             user.nameTag = name
             user.runCommandAsync(`tellraw @a {"rawtext":[{"text":"<system> ${user.name}§rの名前を${user.nameTag}§rに設定しました"}]}`)
-            Say(user.nameTag)
         } else {
             user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"§7名前が入力されていません"}]}`)
         }

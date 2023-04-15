@@ -515,7 +515,7 @@ export class FORM {
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
     if (selection == A.length) { this.QC_Q_1(user) }
-    if (selection < A.length) { user.runCommandAsync(`tellraw @a {"rawtext":[{"text":"<${user.nameTag}> ${A[selection].nameTag + text}"}]}`) }
+    if (selection < A.length) { user.runCommandAsync(`tellraw @a {"rawtext":[{"text":"<${user.nameTag}> ${A[selection].nameTag + text.replace("A", "")}"}]}`) }
     return
   }
   static async QC_A(user) {
@@ -630,7 +630,9 @@ export class FORM {
     let PLs = []
     let wPLs = world.getAllPlayers()
     for (let PL of team.getParticipants()) {
-      if (Number(team.getScore(PL)) >= 0) PLs.push(wPLs.find(e => e.name === PL.displayName))
+      if (Number(team.getScore(PL)) >= 0 && PL.displayName != "commands.scoreboard.players.offlinePlayerName") {
+        PLs.push(wPLs.find(e => e.name === PL.displayName))
+      }
     }
     return PLs
   }
