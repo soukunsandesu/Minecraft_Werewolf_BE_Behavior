@@ -61,7 +61,7 @@ execute as @e[type=player,m=a] at @s run spawnpoint @s ~~~
 tag @a[m=a] add dead
 tag @e[type=player] remove dead
 tag @a[tag=dead] add dead_t
-execute as @e[type=player,tag=dead_t,scores={a_live=1..}] run function werewolf/dead
+execute as @e[type=player,tag=dead_t,scores={a_live=1..}] run function werewolf/ongame/dead
 tag @e[type=player] remove dead_t
 
 # スペクテイターチャット用

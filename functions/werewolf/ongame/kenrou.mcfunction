@@ -1,4 +1,4 @@
-# deadから起動
+# dead_runから起動
 execute as @s[scores={CurrentRole=1}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7人狼が死亡しました"}]}
 execute as @s[scores={CurrentRole=2}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7狂人が死亡しました"}]}
 execute as @s[scores={CurrentRole=3}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7預言者が死亡しました"}]}

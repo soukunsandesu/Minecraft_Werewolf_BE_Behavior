@@ -70,6 +70,9 @@ export class items {
                 if (score == 6) {
                     FORM.thief(user)
                 }
+                if (score == 17) {
+                    FORM.hunter(user)
+                }
                 return
             }
         }
@@ -94,9 +97,7 @@ export class items {
 
     static dark_oak_door(user, item) {
         if (item.typeId == "minecraft:dark_oak_door") {
-            user.runCommandAsync("effect @s[hasitem={item=bow,quantity=0}] invisibility 10 0")
-            user.runCommandAsync(`tp @s @a[c=-1,name=!"${PL.name}",scores={a_live=1..}]`)
-            user.runCommandAsync("playsound portal.travel @a ~~~ 100 1 100")
+            FORM.dokodemo_door(user)
             return
         }
     }

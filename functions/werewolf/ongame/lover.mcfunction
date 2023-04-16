@@ -1,4 +1,4 @@
-# deadから起動
+# dead_runから起動
 execute if entity @s[scores={lover=1}] run tag @a[scores={lover=1,a_live=1}] add dead_lover
 execute if entity @s[scores={lover=2}] run tag @a[scores={lover=2,a_live=1}] add dead_lover
 execute if entity @s[scores={lover=3}] run tag @a[scores={lover=3,a_live=1}] add dead_lover

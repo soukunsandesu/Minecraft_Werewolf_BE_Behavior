@@ -197,9 +197,8 @@ export class FORM {
     const form = new UI.ActionFormData()
       .title('妨害せよ')
       .button('停電')
-      .button('ランダムアイテム')
       .button('最も遠いプレイヤーへ転移')
-      .button('人狼へ転移');
+      .button('指定して転移');
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
     // userのrollを取得
@@ -237,9 +236,32 @@ export class FORM {
       user.runCommandAsync("playsound portal.travel @a ~~~ 100 1 100")
     }
     if (selection === 3) {
-      user.runCommandAsync("effect @s invisibility 10 0")
-      user.runCommandAsync(`tp @s @a[c=-1,name=!"${PL.name}",scores={team=1}]`)
-      user.runCommandAsync("playsound portal.travel @a ~~~ 30 1 100")
+      let team = world.scoreboard.getObjective("CurrentRole")
+      let PLs = team.getParticipants()
+      let anPLs = []
+      for (let PL of PLs) {
+        let score = team.getScore(PL)
+        if (Number(score) > 0) anPLs.push(PL)
+      }
+      const form = new UI.ActionFormData()
+        .title('どこへ行く？');
+      let WPL = world.getAllPlayers()
+      anPLs.forEach(PL => { form.button(WPL.find(e => e.name === PL.displayName).nameTag) });
+
+      const { selection, canceled } = await form.show(user);
+      if (canceled) return;
+      let a_live = world.scoreboard.getObjective("a_live")
+      let live
+      for (let PL of a_live.getParticipants()) {
+        if (PL.displayName == anPLs[selection].displayName) { live = a_live.getScore(PL) }
+      }
+      if (live > 0) {
+        user.runCommandAsync("effect @s[hasitem={item=bow,quantity=0}] invisibility 10 0")
+        user.runCommandAsync(`tp @s "${PLs[selection].displayName}"`)
+        user.runCommandAsync("playsound portal.travel @a ~~~ 100 1 100")
+      } else {
+        user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}は死亡しています"}]}`)
+      }
     }
     user.runCommandAsync("clear @s diamond 0 1")
   }
@@ -256,9 +278,9 @@ export class FORM {
 
     const form = new UI.ActionFormData()
       .title('誰を占う？');
-    anPLs.forEach(PL => {
-      form.button(world.getAllPlayers().find(e => e.name === PL.displayName).nameTag)
-    });
+    let WPL = world.getAllPlayers()
+    anPLs.forEach(PL => { form.button(WPL.find(e => e.name === PL.displayName).nameTag) });
+
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
     let reply = team.getScore(PLs[selection])
@@ -296,9 +318,11 @@ export class FORM {
     }
     const form = new UI.ActionFormData()
       .title('誰を霊界から呼ぶ？');
-    anPLs.forEach(PL => {
-      form.button(PL.displayName)
-    });
+    let WPL = world.getAllPlayers()
+    anPLs.forEach(PL => { form.button(WPL.find(e => e.name === PL.displayName).nameTag) });
+
+
+
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
 
@@ -341,9 +365,9 @@ export class FORM {
     }
     const form = new UI.ActionFormData()
       .title('誰から盗む？');
-    anPLs.forEach(PL => {
-      form.button(PL.displayName)
-    });
+    let WPL = world.getAllPlayers()
+    anPLs.forEach(PL => { form.button(WPL.find(e => e.name === PL.displayName).nameTag) });
+
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
 
@@ -398,10 +422,36 @@ export class FORM {
     }
   }
 
-  static test() {
-  }
-  static async dokodemo_door(user) {
+  static async hunter(user) {
     let team = world.scoreboard.getObjective("a_live")
+    let PLs = team.getParticipants()
+    let anPLs = []
+    for (let PL of PLs) {
+      let score = team.getScore(PL)
+      if (Number(score) > 0 && user.id != PL.id) anPLs.push(PL)
+    }
+    const form = new UI.ActionFormData()
+      .title('誰を守る？');
+    let WPL = world.getAllPlayers()
+    anPLs.forEach(PL => { form.button(WPL.find(e => e.name === PL.displayName).nameTag) });
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    let PL = world.getAllPlayers().find(e => e.id === user.id);
+    let userroll
+    for (let score of team.getScores()) {
+      if (score.participant.displayName === PL.name) { userroll = score.score }
+    }
+
+    // rollが見かけ上は怪盗だが、本当は違った場合用
+    // 例：怪盗に盗まれる
+    user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}を守りました"}]}`)
+    if (userroll == 17) user.runCommandAsync(`scoreboard players set "${PLs[selection].displayName}" hunter 1`)
+    user.runCommandAsync("clear @s diamond 0 1")
+    return
+  }
+
+  static async dokodemo_door(user) {
+    let team = world.scoreboard.getObjective("CurrentRole")
     let PLs = team.getParticipants()
     let anPLs = []
     for (let PL of PLs) {
@@ -410,9 +460,24 @@ export class FORM {
     }
     const form = new UI.ActionFormData()
       .title('どこへ行く？');
-    anPLs.forEach(PL => {
-      form.button(PL.displayName)
-    });
+    let WPL = world.getAllPlayers()
+    anPLs.forEach(PL => { form.button(WPL.find(e => e.name === PL.displayName).nameTag) });
+
+    const { selection, canceled } = await form.show(user);
+    if (canceled) return;
+    let a_live = world.scoreboard.getObjective("a_live")
+    let live
+    for (let PL of a_live.getParticipants()) {
+      if (PL.displayName == anPLs[selection].displayName) { live = a_live.getScore(PL) }
+    }
+    if (live > 0) {
+      user.runCommandAsync("effect @s[hasitem={item=bow,quantity=0}] invisibility 10 0")
+      user.runCommandAsync(`tp @s "${PLs[selection].displayName}"`)
+      user.runCommandAsync("playsound portal.travel @a ~~~ 100 1 100")
+    } else {
+      user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}は死亡しています"}]}`)
+    }
+    user.runCommandAsync("clear @s dark_oak_door 0 1")
   }
 
   static async QC(user) {

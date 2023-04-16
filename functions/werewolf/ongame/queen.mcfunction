@@ -1,4 +1,4 @@
-# deadから起動
+# dead_runから起動
 tag @a[scores={team=3,a_live=1}]  add dead_queen
 tellraw @a[tag=dead_queen] {"rawtext":[{"text":"§d女王§r("},{"selector":"@s"},{"text": "§r)が死亡した"}]}
 tellraw @a[m=!a] {"rawtext":[{"text":"§d女王§r("},{"selector":"@s"},{"text": "§r)が死亡した"}]}

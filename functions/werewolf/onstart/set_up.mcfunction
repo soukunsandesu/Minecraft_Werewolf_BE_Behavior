@@ -39,3 +39,4 @@ scoreboard objectives add WolfC dummy
 scoreboard objectives add Wquartz dummy
 
 scoreboard objectives add lover dummy
+scoreboard objectives add hunter dummy

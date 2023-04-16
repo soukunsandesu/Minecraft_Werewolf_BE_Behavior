@@ -57,7 +57,12 @@ world.events.itemUse.subscribe(ev => {
 
     items.GameFoam(user, item)
     items.Qchat(user, item)
+    // Say(item.typeId)
 })
+
+
+
+
 
 // 攻撃が当たった事を検知
 world.events.entityHit.subscribe(ev => {
@@ -106,4 +111,5 @@ system.runInterval(ev => {
 system.runInterval(ev => {
     RunCommand("function werewolf/20tick")
 }, 20)
+
 
