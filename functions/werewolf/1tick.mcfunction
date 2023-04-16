@@ -70,7 +70,7 @@ tag @a[m=!spectator] remove spectator
 tag @a remove a_live
 tag @a[scores={a_live=1..}] add a_live
 
-function werewolf/skull
+function werewolf/items/skull
 scoreboard players remove @a[scores={poison=1..}] poison 1
 effect @a[scores={poison=..0}] wither 120 0
 scoreboard players reset @a[scores={poison=..0}] poison
@@ -81,10 +81,10 @@ effect @a[tag=PoisonInjection] weakness 1 10 true
 tag @a remove ruin
 tag @a[hasitem={item=golden_sword,location=slot.weapon.mainhand}] add ruin
 
-execute as @a[scores={team=3..4},hasitem={item=beacon},m=a] at @s run function werewolf/mine
+execute as @a[scores={team=3..4},hasitem={item=beacon},m=a] at @s run function werewolf/items/mine
 
 
-execute as @a[hasitem={item=quartz_block},m=a] run function werewolf/quartz_give
+execute as @a[hasitem={item=quartz_block},m=a] run function werewolf/items/quartz_give
 
 execute as @p[tag=Debugger] run function werewolf/onfinish/tick_debug
 # 勝利判定

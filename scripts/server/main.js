@@ -16,6 +16,9 @@ function getPL(id) { return world.getAllPlayers().find(e => e.id === id); }
 //     InPLs.push(ev.playerName)
 // })
 
+// 最初に実行させる
+RunCommand("function werewolf/first_set")
+
 // 死んだことを検知
 world.events.entityDie.subscribe(ev => {
     // playerか否か
