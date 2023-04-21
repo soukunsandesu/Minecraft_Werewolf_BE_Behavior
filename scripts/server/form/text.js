@@ -30,36 +30,33 @@ export class FORM {
 
 
   static async gamestart(user) {
-    if (datas.length > 2) {
-      let PLs = world.getAllPlayers()
-      user.runCommandAsync("function werewolf/start_First")
+    let PLs = world.getAllPlayers()
+    user.runCommandAsync("function werewolf/start_First")
 
-      user.runCommandAsync("scoreboard players set MWSystem time " + setting.time)
-      user.runCommandAsync("scoreboard players set クォーツ間隔 time " + setting.quartz)
-      user.runCommandAsync("scoreboard players set 怪盗リミット time " + setting.thief)
+    user.runCommandAsync("scoreboard players set MWSystem time " + setting.time)
+    user.runCommandAsync("scoreboard players set クォーツ間隔 time " + setting.quartz)
+    user.runCommandAsync("scoreboard players set 怪盗リミット time " + setting.thief)
 
-      for (let data of datas) {
-        user.runCommandAsync("execute as @r[tag=player,scores={CurrentRole=0}] run scoreboard players set @s CurrentRole " + data.score)
+    for (let data of datas) {
+      user.runCommandAsync("execute as @r[tag=player,scores={CurrentRole=0}] run scoreboard players set @s CurrentRole " + data.score)
+    }
+    if (setting.lover > 0) {
+      for (let i = 1; i <= setting.lover; ++i) {
+        user.runCommandAsync("scoreboard players set @r[scores={lover=0}] lover " + i)
+        user.runCommandAsync("scoreboard players set @r[scores={lover=0}] lover " + i)
       }
-      if (setting.lover > 0) {
-        for (let i = 1; i <= setting.lover; ++i) {
-          user.runCommandAsync("scoreboard players set @r[scores={lover=0}] lover " + i)
-          user.runCommandAsync("scoreboard players set @r[scores={lover=0}] lover " + i)
-        }
-      }
-      if (setting.item) user.runCommandAsync("function werewolf/onstart/give_items")
-      if (setting.tp) {
-        user.runCommandAsync("tp @a @s")
-        user.runCommandAsync("effect @a invisibility 10 0 true")
-        user.runCommandAsync("effect @a resistance 10 10 true")
-      }
-      user.runCommandAsync("function werewolf/start_Latter")
-      user.runCommandAsync(`tellraw @a[scores={CurrentRole=6}] {"rawtext":[{"text":"§7怪盗は${setting.thief}秒以降、役職を盗めなくなります注意してください"}]}`)
-      user.runCommandAsync('tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"人狼一覧:"},{"selector":"@a[scores={team=1}]"}]}')
-      if (setting.Fanatic) user.runCommandAsync('tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"白人外一覧:"},{"selector":"@a[scores={team=2}]"}]}')
-
-      for (let PL of PLs) { if (PL.hasTag("player")) member.push(PL) }
-    } else { world.say("ロールが少なすぎます！\n" + datas.length + ">2") }
+    }
+    if (setting.item) user.runCommandAsync("function werewolf/onstart/give_items")
+    if (setting.tp) {
+      user.runCommandAsync("tp @a @s")
+      user.runCommandAsync("effect @a invisibility 10 0 true")
+      user.runCommandAsync("effect @a resistance 10 10 true")
+    }
+    user.runCommandAsync("function werewolf/start_Latter")
+    user.runCommandAsync(`tellraw @a[scores={CurrentRole=6}] {"rawtext":[{"text":"§7怪盗は${setting.thief}秒以降、役職を盗めなくなります注意してください"}]}`)
+    user.runCommandAsync('tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"人狼一覧:"},{"selector":"@a[scores={team=1}]"}]}')
+    if (setting.Fanatic) user.runCommandAsync('tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"白人外一覧:"},{"selector":"@a[scores={team=2}]"}]}')
+    for (let PL of PLs) { if (PL.hasTag("player")) member.push(PL) }
   }
 
   static async GetPlayers(user) {
@@ -197,6 +194,7 @@ export class FORM {
     const form = new UI.ActionFormData()
       .title('妨害せよ')
       .button('停電')
+      .button('ランダムアイテム')
       .button('最も遠いプレイヤーへ転移')
       .button('指定して転移');
     const { selection, canceled } = await form.show(user);
@@ -428,7 +426,9 @@ export class FORM {
     let anPLs = []
     for (let PL of PLs) {
       let score = team.getScore(PL)
-      if (Number(score) > 0 && user.id != PL.id) anPLs.push(PL)
+      if (Number(score) > 0 && user.name != PL.displayName) {
+        anPLs.push(PL)
+      }
     }
     const form = new UI.ActionFormData()
       .title('誰を守る？');
@@ -437,15 +437,15 @@ export class FORM {
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
     let PL = world.getAllPlayers().find(e => e.id === user.id);
-    let userroll
-    for (let score of team.getScores()) {
-      if (score.participant.displayName === PL.name) { userroll = score.score }
+    let roll
+    for (let score of world.scoreboard.getObjective("CurrentRole").getScores()) {
+      if (score.participant.displayName === PL.name) { roll = score.score }
     }
 
     // rollが見かけ上は怪盗だが、本当は違った場合用
     // 例：怪盗に盗まれる
     user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}を守りました"}]}`)
-    if (userroll == 17) user.runCommandAsync(`scoreboard players set "${PLs[selection].displayName}" hunter 1`)
+    if (roll == 17) user.runCommandAsync(`scoreboard players set "${PLs[selection].displayName}" hunter 1`)
     user.runCommandAsync("clear @s diamond 0 1")
     return
   }

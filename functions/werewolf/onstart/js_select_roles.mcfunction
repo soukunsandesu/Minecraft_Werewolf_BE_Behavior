@@ -27,6 +27,7 @@ execute as @e[scores={CurrentRole=13}] run scoreboard players add 囁く狂人 S
 execute as @e[scores={CurrentRole=14}] run scoreboard players add 狼付き StartRoll 1
 execute as @e[scores={CurrentRole=15}] run scoreboard players add 女王 StartRoll 1
 execute as @e[scores={CurrentRole=16}] run scoreboard players add プリンセス StartRoll 1
+execute as @e[scores={CurrentRole=17}] run scoreboard players add 狩人 StartRoll 1
 
 execute as @e[scores={lover=1..}] run scoreboard players add 恋人 StartRoll 1
 scoreboard players operation 恋人 StartRoll /= score2 time
@@ -54,7 +55,7 @@ scoreboard players set @a[scores={CurrentRole=13}] WolfC 1
 # 市民陣営=3
 scoreboard players set @a[scores={CurrentRole=3..7}] team 3
 scoreboard players set @a[scores={CurrentRole=12}] team 3
-scoreboard players set @a[scores={CurrentRole=14..16}] team 3
+scoreboard players set @a[scores={CurrentRole=14..17}] team 3
 execute as @a[scores={team=3,lover=0}] run scoreboard players add MWSystem NumOfVillagers 1
 
 # 狐陣営=4
@@ -88,6 +89,7 @@ tellraw @a[scores={CurrentRole=15}] {"rawtext":[{"text":"あなたの役職は§
 execute if entity @a[scores={CurrentRole=15}] as @p run tellraw @a[scores={team=3}] {"rawtext":[{"text":"§d女王§rは"},{"selector":"@a[scores={CurrentRole=15}]"},{"text":"です"}]}
 tellraw @a[scores={CurrentRole=16}] {"rawtext":[{"text":"あなたの役職は§dプリンセス§rです"}]}
 execute if entity @a[scores={CurrentRole=16}] as @p run tellraw @a[scores={CurrentRole=15}] {"rawtext":[{"text":"§dプリンセス§rは"},{"selector":"@a[scores={CurrentRole=16}]"},{"text":"です"}]}
+tellraw @a[scores={CurrentRole=17}] {"rawtext":[{"text":"あなたの役職は§a狩人§rです"}]}
 
 tellraw @a[scores={lover=1}] {"rawtext":[{"text":"あなたは§d恋人§rです\n"},{"selector":"@a[scores={lover=1}]"},{"text":"ペア"}]}
 tellraw @a[scores={lover=2}] {"rawtext":[{"text":"あなたは§d恋人§rです\n"},{"selector":"@a[scores={lover=2}]"},{"text":"ペア"}]}

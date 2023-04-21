@@ -15,6 +15,7 @@ execute if score 囁く狂人 StartRoll matches 1.. run tellraw @s {"rawtext":[{
 execute if score 狼付き StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§4狼付き§r:"},{"selector":"@a[scores={CurrentRole=14}]"}]}
 execute if score 女王 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§d女王§r:"},{"selector":"@a[scores={CurrentRole=15}]"}]}
 execute if score プリンセス StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§dプリンセス§r:"},{"selector":"@a[scores={CurrentRole=16}]"}]}
+execute if score 狩人 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§a狩人§r:"},{"selector":"@a[scores={CurrentRole=17}]"}]}
 
 execute if entity @a[scores={lover=1}] run tellraw @s {"rawtext":[{"text":"§d恋人§r"},{"selector":"@a[scores={lover=1}]"},{"text":"ペア"}]}
 execute if entity @a[scores={lover=2}] run tellraw @s {"rawtext":[{"text":"§d恋人§r"},{"selector":"@a[scores={lover=2}]"},{"text":"ペア"}]}

@@ -12,9 +12,10 @@ function Nametag(name) { return name.replace(/(^§.\[(.*?)\]|§.$)/g, ""); }
 function getPL(id) { return world.getAllPlayers().find(e => e.id === id); }
 
 // プレイヤーの参加を検知
-// world.events.playerJoin.subscribe(ev => {
-//     InPLs.push(ev.playerName)
-// })
+let newPLs = []
+world.events.playerJoin.subscribe(ev => {
+    newPLs.push(ev.playerId)
+})
 
 // 最初に実行させる
 RunCommand("function werewolf/first_set")
@@ -87,13 +88,7 @@ world.events.beforeChat.subscribe(ev => {
     }
     if (ms.match(/^.name/)) {
         var name = ms.replace(".name", "");
-        name = name.replace(/(^§.\[(.*?)\]|\\|§.$)/g, "");
-        if (name.length > 0) {
-            user.nameTag = name
-            user.runCommandAsync(`tellraw @a {"rawtext":[{"text":"<system> ${user.name}§rの名前を${user.nameTag}§rに設定しました"}]}`)
-        } else {
-            user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"§7名前が入力されていません"}]}`)
-        }
+        nameTag(user, name)
         return
     }
 
@@ -110,6 +105,17 @@ system.runInterval(ev => {
 }, 1)
 system.runInterval(ev => {
     RunCommand("function werewolf/20tick")
+    if (newPLs.length > 0) {
+    }
 }, 20)
 
+function nameTag(user, name) {
+    name = name.replace(/(^§.\[(.*?)\]|\\|§.$)/g, "");
+    if (name.length > 0) {
+        user.nameTag = name
+        user.runCommandAsync(`tellraw @a {"rawtext":[{"text":"<system> ${user.name}§rの名前を${user.nameTag}§rに設定しました\n同じ名前のプレイヤーが存在するとバグります注意してください"}]}`)
+    } else {
+        user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"§7名前が入力されていません"}]}`)
+    }
 
+}
