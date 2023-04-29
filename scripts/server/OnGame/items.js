@@ -39,7 +39,7 @@ export class items {
     }
     static aspirator(user, item) {
         if (item.typeId == "minecraft:hopper") {
-            user.runCommandAsync(`tp @e[type=item,name=!"地雷"] @s`)
+            user.runCommandAsync(`tp @e[type=item,name=!"§r§f地雷"] @s`)
             user.runCommandAsync("clear @s hopper 0 1")
             return
         }

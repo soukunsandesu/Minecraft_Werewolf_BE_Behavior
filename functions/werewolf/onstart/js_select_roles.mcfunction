@@ -42,7 +42,6 @@ scoreboard players set MWSystem NumOfLover 0
 scoreboard players set @a[scores={CurrentRole=1}] team 1
 scoreboard players set @a[scores={CurrentRole=10..11}] team 1
 execute as @a[scores={team=1}] run scoreboard players add MWSystem NumOfWolf 1
-execute if score MWSystem NumOfWolf matches 2.. run tellraw @a[scores={team=1}] {"rawtext":[{"text":"人狼一覧: "}, {"selector":"@a[scores={team=1}]"}]}
 scoreboard players set @a[scores={team=1}] WolfC 1
 
 # 判定外陣営=2
@@ -90,6 +89,7 @@ execute if entity @a[scores={CurrentRole=15}] as @p run tellraw @a[scores={team=
 tellraw @a[scores={CurrentRole=16}] {"rawtext":[{"text":"あなたの役職は§dプリンセス§rです"}]}
 execute if entity @a[scores={CurrentRole=16}] as @p run tellraw @a[scores={CurrentRole=15}] {"rawtext":[{"text":"§dプリンセス§rは"},{"selector":"@a[scores={CurrentRole=16}]"},{"text":"です"}]}
 tellraw @a[scores={CurrentRole=17}] {"rawtext":[{"text":"あなたの役職は§a狩人§rです"}]}
+execute if score MWSystem NumOfWolf matches 2.. run tellraw @a[scores={team=1}] {"rawtext":[{"text":"人狼一覧: "}, {"selector":"@a[scores={team=1}]"}]}
 
 tellraw @a[scores={lover=1}] {"rawtext":[{"text":"あなたは§d恋人§rです\n"},{"selector":"@a[scores={lover=1}]"},{"text":"ペア"}]}
 tellraw @a[scores={lover=2}] {"rawtext":[{"text":"あなたは§d恋人§rです\n"},{"selector":"@a[scores={lover=2}]"},{"text":"ペア"}]}

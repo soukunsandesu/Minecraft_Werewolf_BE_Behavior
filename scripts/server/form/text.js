@@ -556,7 +556,7 @@ export class FORM {
     const { selection, canceled } = await form.show(user);
     if (canceled) return;
     if (selection == Role.length) { this.QC(user) }
-    if (selection < Role.length) { user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"<${user.nameTag}> ${Role[selection]}CO"}]}`) }
+    if (selection < Role.length) { user.runCommandAsync(`tellraw @a {"rawtext":[{"text":"<${user.nameTag}> ${Role[selection]}CO"}]}`) }
     return
   }
 
