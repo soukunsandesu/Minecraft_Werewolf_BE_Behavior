@@ -28,7 +28,7 @@ world.events.entityDie.subscribe(ev => {
 })
 
 // killするアイテム
-const itemIds = ["minecraft:diamond", "minecraft:barrier", "minecraft:stick"]
+const itemIds = ["minecraft:diamond", "minecraft:barrier", "minecraft:stick", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots"]
 // entityのスポーンを検知 アイテムのドロップもこれに含む
 world.events.entitySpawn.subscribe(ev => {
     if (ev.entity.typeId != 'minecraft:item') return
