@@ -23,6 +23,7 @@ execute as @a[scores={PreviewRole=14}] if score MWSystem time matches 0.. run ti
 execute as @a[scores={PreviewRole=15}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §d女王§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
 execute as @a[scores={PreviewRole=16}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §dプリンセス§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
 execute as @a[scores={PreviewRole=17}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §a狩人§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
+execute as @a[scores={PreviewRole=18}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §7ボマー§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
 
 execute as @a[scores={PreviewRole=1}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4人狼§r"}]}
 execute as @a[scores={PreviewRole=2}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §5狂人§r"}]}
@@ -41,6 +42,7 @@ execute as @a[scores={PreviewRole=14}] if score MWSystem time matches ..-1 run t
 execute as @a[scores={PreviewRole=15}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §d女王§r"}]}
 execute as @a[scores={PreviewRole=16}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §dプリンセス§r"}]}
 execute as @a[scores={PreviewRole=17}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §a狩人§r"}]}
+execute as @a[scores={PreviewRole=18}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §7ボマー§r"}]}
 
 
 execute as @p[scores={INplayer=-100..100}] run function werewolf/onstart/INplayer
@@ -83,8 +85,12 @@ tag @a[hasitem={item=wither_rose,location=slot.weapon.mainhand}] add PoisonInjec
 effect @a[tag=PoisonInjection] weakness 1 10 true
 tag @a remove ruin
 tag @a[hasitem={item=golden_sword,location=slot.weapon.mainhand}] add ruin
+tag @a remove C4bomb
+tag @a[hasitem={item=respawn_anchor,location=slot.weapon.mainhand}] add C4bomb
+effect @a[tag=C4bomb] weakness 1 10 true
 
 execute as @a[scores={team=3..4},hasitem={item=beacon},m=a] at @s run function werewolf/items/mine
+execute as @a[scores={team=1..4},hasitem={item=respawn_anchor},m=a] at @s run function werewolf/items/C4bomb
 
 
 execute as @a[hasitem={item=quartz_block},m=a] run function werewolf/items/quartz_give

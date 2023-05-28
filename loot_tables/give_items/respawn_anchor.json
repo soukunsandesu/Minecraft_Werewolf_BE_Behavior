@@ -1,0 +1,23 @@
+{
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:respawn_anchor",
+                    "functions": [
+                        {
+                            "function": "set_name",
+                            "name": "§r§fC4爆弾"
+                        },
+                        {
+                            "function": "set_lore",
+                            "lore": "§rC4爆弾を持った状態で対象を殴る・対象がこのアイテムを拾う事で設置する"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

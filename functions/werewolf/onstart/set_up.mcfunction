@@ -25,6 +25,7 @@ scoreboard objectives add NumOfPlayers dummy
 scoreboard objectives add NumOfWolf dummy
 scoreboard objectives add NumOfVillagers dummy
 scoreboard objectives add NumOfFox dummy
+scoreboard objectives add NumOfBomber dummy
 scoreboard objectives add NumOfLover dummy
 
 scoreboard objectives add StartRoll dummy
@@ -40,3 +41,4 @@ scoreboard objectives add Wquartz dummy
 
 scoreboard objectives add lover dummy
 scoreboard objectives add hunter dummy
+scoreboard objectives add C4bomb dummy

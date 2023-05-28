@@ -406,6 +406,11 @@ export class FORM {
           if (setting.Fanatic) answer = answer + '\n白人外一覧:"},{"selector":"@a[scores={team=2}]"},{"text":"'
         } else { answer = config.Initial[reply].name }
       }
+      if (reply == 18) {
+        user.runCommandAsync(`execute as "${PLs[selection].displayName}" at @s run particle minecraft:huge_explosion_emitter ~~~`)
+        user.runCommandAsync(`execute as "${PLs[selection].displayName}" at @s run playsound random.explode @a ~~~50 1 100`)
+        user.runCommandAsync(`kill "${PLs[selection].displayName}"`)
+      }
       user.runCommandAsync(`scoreboard players operation @s CurrentRole = "${PLs[selection].displayName}" CurrentRole`)
       user.runCommandAsync(`scoreboard players operation @s team = "${PLs[selection].displayName}" team`)
       user.runCommandAsync(`scoreboard players operation @s Previewteam = "${PLs[selection].displayName}" team`)

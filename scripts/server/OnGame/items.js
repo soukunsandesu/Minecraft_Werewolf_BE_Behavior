@@ -39,7 +39,7 @@ export class items {
     }
     static aspirator(user, item) {
         if (item.typeId == "minecraft:hopper") {
-            user.runCommandAsync(`tp @e[type=item,name=!"§r§f地雷"] @s`)
+            user.runCommandAsync(`tp @e[type=item,name=!"§r§f地雷",name=!"§r§fC4爆弾"] @s`)
             user.runCommandAsync("clear @s hopper 0 1")
             return
         }
@@ -115,6 +115,21 @@ export class items {
             user.runCommandAsync("damage @s 13 anvil")
             target.runCommandAsync("damage @s 30 anvil")
             user.runCommandAsync("clear golden_sword")
+            return
+        }
+    }
+    static C4bomb(user, target) {
+        if (user.hasTag("C4bomb")) {
+            target.runCommandAsync("scoreboard players set @s C4bomb 1")
+            user.runCommandAsync("clear @s respawn_anchor 0 1")
+            return
+        }
+    }
+
+    static wooden_button(user, item) {
+        if (item.typeId == "minecraft:wooden_button") {
+            user.runCommandAsync("execute as @a[scores={C4bomb=1},m=a] at @s run function werewolf/items/C4bomb_ON")
+            user.runCommandAsync("execute as @e[type=item,tag=C4bomb] at @s run function werewolf/items/C4bomb_ON")
             return
         }
     }

@@ -13,9 +13,10 @@ function getPL(id) { return world.getAllPlayers().find(e => e.id === id); }
 
 // プレイヤーの参加を検知
 let newPLs = []
-world.events.playerJoin.subscribe(ev => {
-    newPLs.push(ev.playerId)
-})
+// world.events.playerJoin.subscribe(ev => {
+//     newPLs.push(ev.playerId)
+// })
+
 
 // 最初に実行させる
 RunCommand("function werewolf/first_set")
@@ -33,6 +34,7 @@ const itemIds = ["minecraft:diamond", "minecraft:barrier", "minecraft:stick", "m
 world.events.entitySpawn.subscribe(ev => {
     if (ev.entity.typeId != 'minecraft:item') return
     if (itemIds.includes(ev.entity.getComponent('minecraft:item')?.itemStack?.typeId)) ev.entity.kill()
+    if (ev.entity.getComponent('minecraft:item')?.itemStack?.typeId == "minecraft:respawn_anchor") ev.entity.addTag("C4bomb")
 })
 
 // エフェクト付与を検知
@@ -55,6 +57,7 @@ world.events.itemUse.subscribe(ev => {
     items.player_eye(user, item)
     items.divination(user, item)
     items.aspirator(user, item)
+    items.wooden_button(user, item)
 
     items.GameFoam(user, item)
     items.Qchat(user, item)
@@ -69,9 +72,10 @@ world.events.itemUse.subscribe(ev => {
 world.events.entityHit.subscribe(ev => {
     let user = ev.entity
     let target = ev.hitEntity
-    if (target == null) { return }
+    if (target == null) return
     items.PoisonInjection(user, target)
     items.ruin(user, target)
+    items.C4bomb(user, target)
 })
 
 

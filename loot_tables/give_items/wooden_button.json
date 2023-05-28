@@ -1,0 +1,23 @@
+{
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:wooden_button",
+                    "functions": [
+                        {
+                            "function": "set_name",
+                            "name": "§r§f起爆スイッチ"
+                        },
+                        {
+                            "function": "set_lore",
+                            "lore": "§r設置したC4爆弾を起爆する\nドロップ状態の爆弾も起爆する"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

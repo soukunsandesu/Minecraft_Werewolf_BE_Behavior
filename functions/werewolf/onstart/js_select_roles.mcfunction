@@ -28,6 +28,7 @@ execute as @e[scores={CurrentRole=14}] run scoreboard players add 狼付き Star
 execute as @e[scores={CurrentRole=15}] run scoreboard players add 女王 StartRoll 1
 execute as @e[scores={CurrentRole=16}] run scoreboard players add プリンセス StartRoll 1
 execute as @e[scores={CurrentRole=17}] run scoreboard players add 狩人 StartRoll 1
+execute as @e[scores={CurrentRole=18}] run scoreboard players add ボマー StartRoll 1
 
 execute as @e[scores={lover=1..}] run scoreboard players add 恋人 StartRoll 1
 scoreboard players operation 恋人 StartRoll /= score2 time
@@ -61,6 +62,10 @@ execute as @a[scores={team=3,lover=0}] run scoreboard players add MWSystem NumOf
 scoreboard players set @a[scores={CurrentRole=8}] team 4
 execute as @a[scores={team=4}] run scoreboard players add MWSystem NumOfFox 1
 
+# ボマー陣営=5
+scoreboard players set @a[scores={CurrentRole=18}] team 5
+execute as @a[scores={team=5}] run scoreboard players add MWSystem NumOfBomber 1
+
 # 恋人
 execute as @a[scores={lover=1..}] run scoreboard players add MWSystem NumOfLover 1
 
@@ -90,11 +95,14 @@ tellraw @a[scores={CurrentRole=16}] {"rawtext":[{"text":"あなたの役職は§
 execute if entity @a[scores={CurrentRole=16}] as @p run tellraw @a[scores={CurrentRole=15}] {"rawtext":[{"text":"§dプリンセス§rは"},{"selector":"@a[scores={CurrentRole=16}]"},{"text":"です"}]}
 tellraw @a[scores={CurrentRole=17}] {"rawtext":[{"text":"あなたの役職は§a狩人§rです"}]}
 execute if score MWSystem NumOfWolf matches 2.. run tellraw @a[scores={team=1}] {"rawtext":[{"text":"人狼一覧: "}, {"selector":"@a[scores={team=1}]"}]}
+tellraw @a[scores={CurrentRole=18}] {"rawtext":[{"text":"あなたの役職は§7ボマー§rです"}]}
+execute if score MWSystem NumOfBomber matches 2.. run tellraw @a[scores={team=5}] {"rawtext":[{"text":"ボマー一覧: "}, {"selector":"@a[scores={team=5}]"}]}
+execute as @a[scores={CurrentRole=18}] run function werewolf/items/give_bomb
+
 
 tellraw @a[scores={lover=1}] {"rawtext":[{"text":"あなたは§d恋人§rです\n"},{"selector":"@a[scores={lover=1}]"},{"text":"ペア"}]}
 tellraw @a[scores={lover=2}] {"rawtext":[{"text":"あなたは§d恋人§rです\n"},{"selector":"@a[scores={lover=2}]"},{"text":"ペア"}]}
 tellraw @a[scores={lover=3}] {"rawtext":[{"text":"あなたは§d恋人§rです\n"},{"selector":"@a[scores={lover=3}]"},{"text":"ペア"}]}
 tellraw @a[scores={lover=4}] {"rawtext":[{"text":"あなたは§d恋人§rです\n"},{"selector":"@a[scores={lover=4}]"},{"text":"ペア"}]}
 tellraw @a[scores={lover=5}] {"rawtext":[{"text":"あなたは§d恋人§rです\n"},{"selector":"@a[scores={lover=5}]"},{"text":"ペア"}]}
-
 

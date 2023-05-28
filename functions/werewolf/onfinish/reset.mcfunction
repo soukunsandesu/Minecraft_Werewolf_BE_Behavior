@@ -4,6 +4,7 @@ scoreboard objectives remove PreviewRole
 scoreboard objectives remove NumOfWolf
 scoreboard objectives remove NumOfVillagers
 scoreboard objectives remove NumOfFox
+scoreboard objectives remove NumOfBomber
 scoreboard objectives remove NumOfLover
 scoreboard objectives remove elevator
 scoreboard objectives remove poison
@@ -17,6 +18,10 @@ scoreboard objectives remove lover
 scoreboard objectives remove WolfC
 scoreboard objectives remove Wquartz
 scoreboard objectives remove hunter
+scoreboard objectives remove C4bomb
+
+
+
 
 scoreboard objectives add INplayer dummy
 scoreboard players add @a INplayer 0
