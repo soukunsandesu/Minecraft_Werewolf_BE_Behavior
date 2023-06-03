@@ -53,9 +53,9 @@ export class FORM {
       user.runCommandAsync("effect @a resistance 10 10 true")
     }
     user.runCommandAsync("function werewolf/start_Latter")
-    user.runCommandAsync(`tellraw @a[scores={CurrentRole=6}] {"rawtext":[{"text":"§7怪盗は${setting.thief}秒以降、役職を盗めなくなります注意してください"}]}`)
-    user.runCommandAsync('tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"人狼一覧:"},{"selector":"@a[scores={team=1}]"}]}')
-    if (setting.Fanatic) user.runCommandAsync('tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"白人外一覧:"},{"selector":"@a[scores={team=2}]"}]}')
+    user.runCommandAsync(`tellraw @a[scores={CurrentRole=6}] {"rawtext":[{"text":"§7怪盗は${setting.thief}秒以降、役職を盗めなくなります注意してください"}]}`)//怪盗への注意
+    user.runCommandAsync('tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"人狼一覧:"},{"selector":"@a[scores={team=1}]"}]}')//人狼一覧
+    if (setting.Fanatic) user.runCommandAsync('tellraw @a[scores={CurrentRole=9}] {"rawtext":[{"text":"白人外一覧:"},{"selector":"@a[scores={team=2}]"}]}')//白人外一覧
     for (let PL of PLs) { if (PL.hasTag("player")) member.push(PL) }
   }
 
@@ -447,7 +447,7 @@ export class FORM {
       if (score.participant.displayName === PL.name) { roll = score.score }
     }
 
-    // rollが見かけ上は怪盗だが、本当は違った場合用
+    // rollが見かけ上は狩人だが、本当は違った場合用
     // 例：怪盗に盗まれる
     user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"${PLs[selection].displayName}を守りました"}]}`)
     if (roll == 17) user.runCommandAsync(`scoreboard players set "${PLs[selection].displayName}" hunter 1`)
