@@ -1,6 +1,6 @@
 import { world } from "@minecraft/server";
 import * as UI from '@minecraft/server-ui';
-import { config } from '../data.js';
+import { config } from './data.js';
 
 let datas = config.Rolls
 let setting = config.setting

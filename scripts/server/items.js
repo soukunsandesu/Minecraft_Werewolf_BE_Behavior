@@ -1,6 +1,5 @@
 import { world } from "@minecraft/server";
-import * as UI from '@minecraft/server-ui';
-import { FORM } from "../form/text";
+import { FORM } from "./form";
 function Say(ms) { world.say(String(ms)) }
 
 export class items {

@@ -1,7 +1,5 @@
 import { system, world } from "@minecraft/server";
-import { items } from "./OnGame/items";
-import * as UI from '@minecraft/server-ui';
-import { FORM } from "./form/text";
+import { items } from "./items";
 //import { werewolf } from "./typescript"
 
 function RunCommand(cmd) { world.getDimension("overworld").runCommandAsync(cmd) }
@@ -22,23 +20,23 @@ let newPLs = []
 RunCommand("function werewolf/first_set")
 
 // 死んだことを検知
-world.events.entityDie.subscribe(ev => {
-    // playerか否か
-    if (ev.deadEntity.typeId != "minecraft:player") return
-    let PL = getPL(ev.deadEntity.id)
-})
+// world.events.entityDie.subscribe(ev => {
+//     // playerか否か
+//     if (ev.deadEntity.typeId != "minecraft:player") return
+//     let PL = getPL(ev.deadEntity.id)
+// })
 
 // killするアイテム
 const itemIds = ["minecraft:diamond", "minecraft:barrier", "minecraft:stick", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots"]
 // entityのスポーンを検知 アイテムのドロップもこれに含む
-world.events.entitySpawn.subscribe(ev => {
+world.afterEvents.entitySpawn.subscribe(ev => {
     if (ev.entity.typeId != 'minecraft:item') return
     if (itemIds.includes(ev.entity.getComponent('minecraft:item')?.itemStack?.typeId)) ev.entity.kill()
     if (ev.entity.getComponent('minecraft:item')?.itemStack?.typeId == "minecraft:respawn_anchor") ev.entity.addTag("C4bomb")
 })
 
 // エフェクト付与を検知
-world.events.effectAdd.subscribe(ev => {
+world.afterEvents.effectAdd.subscribe(ev => {
     let entity = ev.entity
     let effect = ev.effect
     // Log(entity.typeId+"\n"+effect.displayName + "\nlv:" + effect.amplifier + "\ntick:" + effect.duration)
@@ -48,8 +46,8 @@ world.events.effectAdd.subscribe(ev => {
 })
 
 // アイテム使用を検知
-world.events.itemUse.subscribe(ev => {
-    const item = ev.item
+world.afterEvents.itemUse.subscribe(ev => {
+    const item = ev.itemStack
     const user = ev.source
 
     items.jukebox(user, item)
@@ -69,7 +67,7 @@ world.events.itemUse.subscribe(ev => {
 
 
 // 攻撃が当たった事を検知
-world.events.entityHit.subscribe(ev => {
+world.afterEvents.entityHit.subscribe(ev => {
     let user = ev.entity
     let target = ev.hitEntity
     if (target == null) return
@@ -81,7 +79,7 @@ world.events.entityHit.subscribe(ev => {
 
 
 // チャットを検知
-world.events.beforeChat.subscribe(ev => {
+world.beforeEvents.chatSend.subscribe(ev => {
     let user = ev.sender
     let ms = ev.message
     if (!user.nameTag) { user.nameTag = Nametag(user.name) }
