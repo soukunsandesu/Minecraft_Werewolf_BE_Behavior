@@ -9,28 +9,14 @@ function Nametag(name) { return name.replace(/(^§.\[(.*?)\]|§.$)/g, ""); }
 // idを入力することでプレイヤーを取得する
 function getPL(id) { return world.getAllPlayers().find(e => e.id === id); }
 
-// プレイヤーの参加を検知
-let newPLs = []
-// world.events.playerJoin.subscribe(ev => {
-//     newPLs.push(ev.playerId)
-// })
-
-
 // 最初に実行させる
 RunCommand("function werewolf/first_set")
-
-// 死んだことを検知
-// world.events.entityDie.subscribe(ev => {
-//     // playerか否か
-//     if (ev.deadEntity.typeId != "minecraft:player") return
-//     let PL = getPL(ev.deadEntity.id)
-// })
 
 // killするアイテム
 const itemIds = ["minecraft:diamond", "minecraft:barrier", "minecraft:stick", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots"]
 // entityのスポーンを検知 アイテムのドロップもこれに含む
 world.afterEvents.entitySpawn.subscribe(ev => {
-    if (ev.entity.typeId != 'minecraft:item') return
+    if (ev.entity?.typeId != 'minecraft:item') return
     if (itemIds.includes(ev.entity.getComponent('minecraft:item')?.itemStack?.typeId)) ev.entity.kill()
     if (ev.entity.getComponent('minecraft:item')?.itemStack?.typeId == "minecraft:respawn_anchor") ev.entity.addTag("C4bomb")
 })
@@ -107,8 +93,8 @@ system.runInterval(ev => {
 }, 1)
 system.runInterval(ev => {
     RunCommand("function werewolf/20tick")
-    if (newPLs.length > 0) {
-    }
+    // if (newPLs.length > 0) {
+    // }
 }, 20)
 
 function nameTag(user, name) {

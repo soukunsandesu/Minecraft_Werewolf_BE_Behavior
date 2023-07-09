@@ -4,7 +4,7 @@ import { config } from './data.js';
 
 let datas = config.Rolls
 let setting = config.setting
-let member
+let member=[]
 
 export class FORM {
   static async gameinfo(user) {

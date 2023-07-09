@@ -16,6 +16,7 @@ scoreboard players set @s[scores={StartRoll=6}] CurrentRole 13
 
 scoreboard players operation @s PreviewRole = @s CurrentRole
 scoreboard players set @s StartRoll 20
+function werewolf/onstart/roles_count
 tag @s add No_tell
 tellraw @s {"rawtext":[{"text":"あなたの役職は§7闇の化身§rです"}]}
 

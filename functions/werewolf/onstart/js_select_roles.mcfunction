@@ -11,42 +11,22 @@ execute as @a[tag=player] run scoreboard players operation @s StartRoll = @s Cur
 
 # 観戦の追加 1tickで観戦にも時間を表示するため
 scoreboard players add @a CurrentRole 0
-execute as @e[scores={CurrentRole=1}] run scoreboard players add 人狼 StartRoll 1
-execute as @e[scores={CurrentRole=2}] run scoreboard players add 狂人 StartRoll 1
-execute as @e[scores={CurrentRole=3}] run scoreboard players add 預言者 StartRoll 1
-execute as @e[scores={CurrentRole=4}] run scoreboard players add 霊媒師 StartRoll 1
-execute as @e[scores={CurrentRole=5}] run scoreboard players add 村人 StartRoll 1
-execute as @e[scores={CurrentRole=6}] run scoreboard players add 怪盗 StartRoll 1
-execute as @e[scores={CurrentRole=7}] run scoreboard players add 猫又 StartRoll 1
-execute as @e[scores={CurrentRole=8}] run scoreboard players add 狐 StartRoll 1
-execute as @e[scores={CurrentRole=9}] run scoreboard players add 狂信者 StartRoll 1
-execute as @e[scores={CurrentRole=10}] run scoreboard players add 大狼 StartRoll 1
-execute as @e[scores={CurrentRole=11}] run scoreboard players add 賢狼 StartRoll 1
-execute as @e[scores={CurrentRole=12}] run scoreboard players add パン屋 StartRoll 1
-execute as @e[scores={CurrentRole=13}] run scoreboard players add 囁く狂人 StartRoll 1
-execute as @e[scores={CurrentRole=14}] run scoreboard players add 狼付き StartRoll 1
-execute as @e[scores={CurrentRole=15}] run scoreboard players add 女王 StartRoll 1
-execute as @e[scores={CurrentRole=16}] run scoreboard players add プリンセス StartRoll 1
-execute as @e[scores={CurrentRole=17}] run scoreboard players add 狩人 StartRoll 1
-execute as @e[scores={CurrentRole=18}] run scoreboard players add ボマー StartRoll 1
-execute as @e[scores={CurrentRole=19}] run scoreboard players add 光の使徒 StartRoll 1
-execute as @e[scores={CurrentRole=20}] run scoreboard players add 闇の化身 StartRoll 1
-
+execute as @e[scores={CurrentRole=0..}] run function werewolf/onstart/roles_count
 execute as @e[scores={lover=1..}] run scoreboard players add 恋人 StartRoll 1
 scoreboard players operation 恋人 StartRoll /= score2 time
-
 function werewolf/onstart/roles_list
 
 # 光の使徒による変化
-execute as @a[scores={CurrentRole=19}] run function werewolf/ongame/hikarinosito
+execute as @e[scores={CurrentRole=19}] run function werewolf/ongame/hikarinosito
 # 闇の化身による変化
-execute as @a[scores={CurrentRole=20}] run function werewolf/ongame/yaminokesin
+execute as @e[scores={CurrentRole=20}] run function werewolf/ongame/yaminokesin
 
 ##判定値追加
 scoreboard players set MWSystem NumOfWolf 0
 scoreboard players set MWSystem NumOfVillagers 0
 scoreboard players set MWSystem NumOfFox 0
 scoreboard players set MWSystem NumOfLover 0
+scoreboard players set MWSystem NumOfBomber 0
 
 # 人狼陣営=1
 scoreboard players set @a[scores={CurrentRole=1}] team 1
