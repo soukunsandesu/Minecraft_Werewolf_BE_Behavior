@@ -1,0 +1,1 @@
+execute as @p at @e[type=bee] run camera @s set minecraft:free pos ^^0.2^0.4 rot ~~

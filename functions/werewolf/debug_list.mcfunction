@@ -1,3 +1,4 @@
+tellraw @a {"rawtext":[{"text":"§7"},{"selector":"@s"},{"text":"がdebug_listを使用しました"}]}
 tellraw @s {"rawtext":[{"text":"§3##############################"}]}
 execute if score 人狼 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§4人狼§r:"},{"selector":"@a[scores={CurrentRole=1}]"}]}
 execute if score 狂人 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§5狂人§r:"},{"selector":"@a[scores={CurrentRole=2}]"}]}

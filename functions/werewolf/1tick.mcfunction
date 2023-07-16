@@ -91,7 +91,7 @@ effect @a[tag=C4bomb] weakness 1 10 true
 
 execute as @a[scores={team=3..4},hasitem={item=beacon},m=a] at @s run function werewolf/items/mine
 execute as @a[scores={team=1..4},hasitem={item=respawn_anchor},m=a] at @s run function werewolf/items/C4bomb
-
+execute as @a[hasitem={item=black_dye},m=a] run function werewolf/items/black_dye
 
 execute as @a[hasitem={item=quartz_block},m=a] run function werewolf/items/quartz_give
 

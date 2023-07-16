@@ -4,12 +4,12 @@
         "description": "マイクラ人狼\n使用するにはベータAPIをonにしてください",
         "name": "minecraft-Werewolf",
         "uuid": "a469ff39-12be-419b-ac1a-eb77d0df808c",
-        "version": [1,0,0],
+        "version": [1,0,1],
         "min_engine_version": [1,19,60]
     },
     "modules": [
         {
-        "version": [1,0,0],
+        "version": [1,0,1],
         "type": "data",
         "uuid": "95922ac2-a2b7-4800-9aac-e2ea63d8d6c9",
         "description": "data"
@@ -19,7 +19,7 @@
             "type": "script",
             "language": "javascript",
             "uuid": "8f3849c4-c22e-459a-802c-ff54ae13698c",
-            "version": [1,0,0],
+            "version": [1,0,1],
             "entry": "scripts/server/main.js"
         }
     ],

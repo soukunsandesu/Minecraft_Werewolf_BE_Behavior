@@ -16,7 +16,7 @@ RunCommand("function werewolf/first_set")
 const itemIds = ["minecraft:diamond", "minecraft:barrier", "minecraft:stick", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots"]
 // entityのスポーンを検知 アイテムのドロップもこれに含む
 world.afterEvents.entitySpawn.subscribe(ev => {
-    if (ev.entity?.typeId != 'minecraft:item') return
+    if (ev?.entity?.typeId != 'minecraft:item') return
     if (itemIds.includes(ev.entity.getComponent('minecraft:item')?.itemStack?.typeId)) ev.entity.kill()
     if (ev.entity.getComponent('minecraft:item')?.itemStack?.typeId == "minecraft:respawn_anchor") ev.entity.addTag("C4bomb")
 })
