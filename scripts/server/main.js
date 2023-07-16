@@ -49,12 +49,9 @@ world.afterEvents.itemUse.subscribe(ev => {
 })
 
 
-
-
-
 // 攻撃が当たった事を検知
-world.afterEvents.entityHit.subscribe(ev => {
-    let user = ev.entity
+world.afterEvents.entityHitEntity.subscribe(ev => {
+    let user = ev.damagingEntity
     let target = ev.hitEntity
     if (target == null) return
     items.PoisonInjection(user, target)
