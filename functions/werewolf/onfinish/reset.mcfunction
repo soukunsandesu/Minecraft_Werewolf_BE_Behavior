@@ -19,6 +19,7 @@ scoreboard objectives remove WolfC
 scoreboard objectives remove Wquartz
 scoreboard objectives remove hunter
 scoreboard objectives remove C4bomb
+scoreboard objectives remove portal
 
 
 

@@ -33,8 +33,8 @@ world.afterEvents.effectAdd.subscribe(ev => {
 
 // アイテム使用を検知
 world.afterEvents.itemUse.subscribe(ev => {
-    const item = ev.itemStack
-    const user = ev.source
+    const item = ev.itemStack,
+        user = ev.source
 
     items.jukebox(user, item)
     items.blackout(user, item)
@@ -42,21 +42,23 @@ world.afterEvents.itemUse.subscribe(ev => {
     items.divination(user, item)
     items.aspirator(user, item)
     items.wooden_button(user, item)
-
+    items.feather(user, item)
     items.GameFoam(user, item)
     items.Qchat(user, item)
+    items.portal_set(user, item)
     // Say(item.typeId)
 })
 
 
 // 攻撃が当たった事を検知
 world.afterEvents.entityHitEntity.subscribe(ev => {
-    let user = ev.damagingEntity
-    let target = ev.hitEntity
+    const user = ev.damagingEntity,
+        target = ev.hitEntity
     if (target == null) return
     items.PoisonInjection(user, target)
     items.ruin(user, target)
     items.C4bomb(user, target)
+    items.portal_use(user, target)
 })
 
 

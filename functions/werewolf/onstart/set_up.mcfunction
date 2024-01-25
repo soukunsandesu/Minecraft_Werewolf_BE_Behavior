@@ -42,3 +42,4 @@ scoreboard objectives add Wquartz dummy
 scoreboard objectives add lover dummy
 scoreboard objectives add hunter dummy
 scoreboard objectives add C4bomb dummy
+scoreboard objectives add portal dummy

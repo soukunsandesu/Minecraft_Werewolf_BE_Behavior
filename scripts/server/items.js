@@ -1,5 +1,6 @@
 import { world } from "@minecraft/server";
 import { FORM } from "./form";
+import { F } from "./functions";
 function Say(ms) { world.say(String(ms)) }
 
 export class items {
@@ -32,7 +33,7 @@ export class items {
             user.runCommandAsync("title @a times 5 20 10")
             user.runCommandAsync("title @a title 停 電 発 生")
             user.runCommandAsync("title @a subtitle 10秒後に復旧します")
-            user.runCommandAsync("playsound mob.wither.spawn @a ~ ~ ~ 100 1 100");
+            user.runCommandAsync("playsound mob.wither.spawn @a ~ ~ ~ 100 1 100")
             return
         }
     }
@@ -101,6 +102,12 @@ export class items {
         }
     }
 
+    static dark_oak_door(user, item) {
+        if (item.typeId == "minecraft:dark_oak_door") {
+            FORM.dokodemo_door(user)
+            return
+        }
+    }
     static PoisonInjection(user, target) {
         if (user.hasTag("PoisonInjection")) {
             user.runCommandAsync("clear @s wither_rose 0 1")
@@ -129,6 +136,34 @@ export class items {
         if (item.typeId == "minecraft:wooden_button") {
             user.runCommandAsync("execute as @a[scores={C4bomb=1},m=a] at @s run function werewolf/items/C4bomb_ON")
             user.runCommandAsync("execute as @e[type=item,tag=C4bomb] at @s run function werewolf/items/C4bomb_ON")
+            return
+        }
+    }
+    static portal_set(user, item) {
+        if (item.typeId == "minecraft:purple_stained_glass_pane") {
+            user.runCommandAsync("scoreboard players set @s portal 150")
+            user.runCommandAsync("kill @e[type=snow_golem,name=portal]")
+            user.runCommandAsync("summon snow_golem portal")
+            user.runCommandAsync("clear @s purple_stained_glass_pane 0 1")
+            return
+        }
+    }
+    static portal_use(user, target) {
+        if (target.typeId == "minecraft:snow_golem" && target.nameTag == "portal") {
+            user.runCommandAsync("effect @s blindness 1 0 true")
+            user.runCommandAsync("tp @s @e[type=snow_golem,name=portal,c=-1]")
+            return
+        }
+    }
+    static feather(user, item) {
+        if (item.typeId == "minecraft:feather") {
+            if (user.hasTag("sneaking")) {
+                F.addKnockback(user, 40)
+                user.runCommandAsync("effect @s slow_falling 1 0 true")
+            } else {
+                F.addKnockback(user, 20)
+            }
+            user.runCommandAsync("clear @s feather 0 1")
             return
         }
     }

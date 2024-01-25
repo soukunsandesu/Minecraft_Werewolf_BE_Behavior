@@ -1,0 +1,23 @@
+{
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:feather",
+                    "functions": [
+                        {
+                            "function": "set_name",
+                            "name": "§r§fフェザージャンプ"
+                        },
+                        {
+                            "function": "set_lore",
+                            "lore": "§r使用することで前方向へブリンクする\nしゃがみながら使用することでベクトルが2倍になり、\n落下速度低下が1秒付与される"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -44,9 +44,10 @@ execute as @a[scores={PreviewRole=16}] if score MWSystem time matches ..-1 run t
 execute as @a[scores={PreviewRole=17}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §a狩人§r"}]}
 execute as @a[scores={PreviewRole=18}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §7ボマー§r"}]}
 
-
 execute as @p[scores={INplayer=-100..100}] run function werewolf/onstart/INplayer
-
+# スノーゴーレム固定
+execute as  @e[type=snow_golem,name=portal] at @s run tp @s ~~~
+execute as @a[scores={portal=0..}] at @s run function werewolf/items/portal
 
 execute as @a[scores={elevator=..0}] at @s if block ~~-2~ lodestone if block ~~4~ lodestone run tag @s add Eup
 execute as @a[tag=sneaking,scores={elevator=..0}] at @s if block ~~-1~ lodestone if block ~~-7~ lodestone run tag @s add Edown
