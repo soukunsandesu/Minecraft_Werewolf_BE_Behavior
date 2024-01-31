@@ -13,13 +13,13 @@ export class items {
         }
     }
     static InvisibilityPotion(effect, entity) {
-        if (effect.displayName.match(/不可視/) && effect.duration == 3600 && effect.amplifier == 0) {
+        if (effect.displayName.match(/透明化/) && effect.amplifier == 0) {
             entity.runCommandAsync("effect @s invisibility 60 1");
             return
         }
     }
     static SpeedPotion(effect, entity) {
-        if (effect.displayName.match(/スピード/) && effect.duration == 3600 && effect.amplifier == 0) {
+        if (effect.displayName.match(/移動速度上昇/) && effect.amplifier == 0) {
             entity.runCommandAsync("effect @s speed 60 8");
             return
         }
@@ -72,6 +72,9 @@ export class items {
                 }
                 if (score == 17) {
                     FORM.hunter(user)
+                }
+                if (score == 21) {
+                    FORM.counselor(user)
                 }
                 return
             }

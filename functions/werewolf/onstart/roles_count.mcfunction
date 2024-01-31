@@ -18,3 +18,4 @@ execute as @s[scores={CurrentRole=17}] run scoreboard players add 狩人 StartRo
 execute as @s[scores={CurrentRole=18}] run scoreboard players add ボマー StartRoll 1
 execute as @s[scores={CurrentRole=19}] run scoreboard players add 光の使徒 StartRoll 1
 execute as @s[scores={CurrentRole=20}] run scoreboard players add 闇の化身 StartRoll 1
+execute as @s[scores={CurrentRole=21}] run scoreboard players add カウンセラー StartRoll 1

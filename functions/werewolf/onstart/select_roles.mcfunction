@@ -39,6 +39,17 @@ execute as @e[scores={CurrentRole=7}] run scoreboard players add 猫又 StartRol
 execute as @e[scores={CurrentRole=8}] run scoreboard players add 狐 StartRoll 1
 execute as @e[scores={CurrentRole=9}] run scoreboard players add 狂信者 StartRoll 1
 execute as @e[scores={CurrentRole=10}] run scoreboard players add 大狼 StartRoll 1
+execute as @e[scores={CurrentRole=11}] run scoreboard players add 賢狼 StartRoll 1
+execute as @e[scores={CurrentRole=12}] run scoreboard players add パン屋 StartRoll 1
+execute as @e[scores={CurrentRole=13}] run scoreboard players add 囁く狂人 StartRoll 1
+execute as @e[scores={CurrentRole=14}] run scoreboard players add 狼付き StartRoll 1
+execute as @e[scores={CurrentRole=15}] run scoreboard players add 女王 StartRoll 1
+execute as @e[scores={CurrentRole=16}] run scoreboard players add プリンセス StartRoll 1
+execute as @e[scores={CurrentRole=17}] run scoreboard players add 狩人 StartRoll 1
+execute as @e[scores={CurrentRole=18}] run scoreboard players add ボマー StartRoll 1
+execute as @e[scores={CurrentRole=19}] run scoreboard players add 光の使徒 StartRoll 1
+execute as @e[scores={CurrentRole=20}] run scoreboard players add 闇の化身 StartRoll 1
+execute as @e[scores={CurrentRole=21}] run scoreboard players add カウンセラー StartRoll 1
 
 ##判定値追加
 scoreboard players set MWSystem NumOfWolf 0

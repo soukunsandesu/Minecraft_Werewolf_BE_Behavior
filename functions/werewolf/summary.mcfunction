@@ -19,6 +19,7 @@ execute if score 狩人 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text"
 execute if score ボマー StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§7ボマー§r:"},{"selector":"@a[scores={CurrentRole=18}]"}]}
 execute if score 光の使徒 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§e光の使徒§r:"},{"selector":"@a[scores={StartRoll=19}]"}]}
 execute if score 闇の化身 StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§7闇の化身§r:"},{"selector":"@a[scores={StartRoll=20}]"}]}
+execute if score カウンセラー StartRoll matches 1.. run tellraw @s {"rawtext":[{"text":"§bカウンセラー§r:"},{"selector":"@a[scores={StartRoll=21}]"}]}
 
 execute if entity @a[scores={lover=1}] run tellraw @s {"rawtext":[{"text":"§d恋人§r"},{"selector":"@a[scores={lover=1}]"},{"text":"ペア"}]}
 execute if entity @a[scores={lover=2}] run tellraw @s {"rawtext":[{"text":"§d恋人§r"},{"selector":"@a[scores={lover=2}]"},{"text":"ペア"}]}

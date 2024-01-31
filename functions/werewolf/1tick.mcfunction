@@ -5,48 +5,10 @@ scoreboard players set @a Ongame 1
 
 scoreboard players add @a elevator 0
 
-execute as @a[scores={CurrentRole=0}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"観戦 / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=1}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4人狼§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=2}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §5狂人§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=3}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §b預言者§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=4}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §e霊媒師§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=5}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §a村人§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=6}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §b怪盗§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=7}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §g猫又§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=8}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §e狐§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=9}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §7狂信者§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=10}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4大狼§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=11}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4賢狼§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=12}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §6パン屋§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=13}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §7囁く狂人§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=14}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §a村人§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=15}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §d女王§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=16}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §dプリンセス§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=17}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §a狩人§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
-execute as @a[scores={PreviewRole=18}] if score MWSystem time matches 0.. run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §7ボマー§r / "},{"text":"クォーツ全配布まで残り"},{"score":{"name":"MWSystem","objective":"time"}},{"text":"秒"}]}
+execute as @a[tag=!actionbar,scores={CurrentRole=0..}] run function werewolf/ongame/actionbar
 
-execute as @a[scores={PreviewRole=1}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4人狼§r"}]}
-execute as @a[scores={PreviewRole=2}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §5狂人§r"}]}
-execute as @a[scores={PreviewRole=3}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §b預言者§r"}]}
-execute as @a[scores={PreviewRole=4}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §e霊媒師§r"}]}
-execute as @a[scores={PreviewRole=5}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §a村人§r"}]}
-execute as @a[scores={PreviewRole=6}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §b怪盗§r"}]}
-execute as @a[scores={PreviewRole=7}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §g猫又§r"}]}
-execute as @a[scores={PreviewRole=8}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §e狐§r"}]}
-execute as @a[scores={PreviewRole=9}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §7狂信者§r"}]}
-execute as @a[scores={PreviewRole=10}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4大狼§r"}]}
-execute as @a[scores={PreviewRole=11}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §4賢狼§r"}]}
-execute as @a[scores={PreviewRole=12}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §6パン屋§r"}]}
-execute as @a[scores={PreviewRole=13}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §7囁く狂人§r"}]}
-execute as @a[scores={PreviewRole=14}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §a村人§r"}]}
-execute as @a[scores={PreviewRole=15}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §d女王§r"}]}
-execute as @a[scores={PreviewRole=16}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §dプリンセス§r"}]}
-execute as @a[scores={PreviewRole=17}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §a狩人§r"}]}
-execute as @a[scores={PreviewRole=18}] if score MWSystem time matches ..-1 run titleraw @s actionbar {"rawtext":[{"text":"あなたの役職: §7ボマー§r"}]}
-
-execute as @p[scores={INplayer=-100..100}] run function werewolf/onstart/INplayer
-# スノーゴーレム固定
-execute as  @e[type=snow_golem,name=portal] at @s run tp @s ~~~
+execute as @p[tag=!actionbar,scores={INplayer=-100..100}] run function werewolf/onstart/INplayer
+execute as @e[type=snow_golem] at @s run function werewolf/items/snow_golem
 execute as @a[scores={portal=0..}] at @s run function werewolf/items/portal
 
 execute as @a[scores={elevator=..0}] at @s if block ~~-2~ lodestone if block ~~4~ lodestone run tag @s add Eup

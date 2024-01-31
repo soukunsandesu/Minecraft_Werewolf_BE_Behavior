@@ -1,5 +1,6 @@
 import { system, world } from "@minecraft/server";
 import { items } from "./items";
+import { F } from "./functions";
 //import { werewolf } from "./typescript"
 
 function RunCommand(cmd) { world.getDimension("overworld").runCommandAsync(cmd) }
@@ -29,6 +30,32 @@ world.afterEvents.effectAdd.subscribe(ev => {
     items.DamagePotion(effect, entity)
     items.InvisibilityPotion(effect, entity)
     items.SpeedPotion(effect, entity)
+})
+
+// 猫又1/2
+world.afterEvents.entityDie.subscribe(ev => {
+    if (ev.deadEntity.typeId === 'minecraft:player') {
+        let team = world.scoreboard.getObjective("CurrentRole"),
+            PL = world.getAllPlayers().find(e => e.nameTag === ev.deadEntity.nameTag),
+            userroll
+        if (team == undefined) { return } else {
+            for (let score of team.getScores()) {
+                if (score.participant.displayName === PL.nameTag) { userroll = score }
+            }
+            if (userroll == undefined) return
+            if (userroll.score == 7) {
+                if (ev.damageSource.damagingEntity) {
+                    if (Math.floor(Math.random() * 2) == 0) {
+                        ev.damageSource.damagingEntity.runCommandAsync(`function werewolf/ongame/nekomata`)
+                    } else {
+                        ev.deadEntity.runCommandAsync(`execute if entity @s[scores={CurrentRole=7}] run execute as @r[scores={a_live=1}] at @s run function werewolf/ongame/nekomata`)
+                    }
+                } else {
+                    ev.deadEntity.runCommandAsync(`execute if entity @s[scores={CurrentRole=7}] run execute as @r[scores={a_live=1}] at @s run function werewolf/ongame/nekomata`)
+                }
+            }
+        }
+    }
 })
 
 // アイテム使用を検知

@@ -19,5 +19,6 @@ execute if score 狩人 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text"
 execute if score ボマー StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§7ボマー§r"},{"score":{"name":"ボマー","objective":"StartRoll"}}]}
 execute if score 光の使徒 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§e光の使徒§r"},{"score":{"name":"光の使徒","objective":"StartRoll"}}]}
 execute if score 闇の化身 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§7闇の化身§r"},{"score":{"name":"闇の化身","objective":"StartRoll"}}]}
+execute if score カウンセラー StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§bカウンセラー§r"},{"score":{"name":"カウンセラー","objective":"StartRoll"}}]}
 
 execute if score 恋人 StartRoll matches 1.. run tellraw @a {"rawtext":[{"text":"§d恋人§r"},{"score":{"name":"恋人","objective":"StartRoll"}},{"text":"組"}]}

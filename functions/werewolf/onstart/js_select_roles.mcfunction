@@ -45,6 +45,7 @@ scoreboard players set @a[scores={CurrentRole=13}] WolfC 1
 scoreboard players set @a[scores={CurrentRole=3..7}] team 3
 scoreboard players set @a[scores={CurrentRole=12}] team 3
 scoreboard players set @a[scores={CurrentRole=14..17}] team 3
+scoreboard players set @a[scores={CurrentRole=21}] team 3
 execute as @a[scores={team=3,lover=0}] run scoreboard players add MWSystem NumOfVillagers 1
 
 # 狐陣営=4
@@ -83,6 +84,7 @@ tellraw @a[tag=!No_tell,scores={CurrentRole=16}] {"rawtext":[{"text":"あなた�
 execute if entity @a[scores={CurrentRole=16}] as @p run tellraw @a[scores={CurrentRole=15}] {"rawtext":[{"text":"§dプリンセス§rは"},{"selector":"@a[scores={CurrentRole=16}]"},{"text":"です"}]}
 tellraw @a[tag=!No_tell,scores={CurrentRole=17}] {"rawtext":[{"text":"あなたの役職は§a狩人§rです"}]}
 tellraw @a[tag=!No_tell,scores={CurrentRole=18}] {"rawtext":[{"text":"あなたの役職は§7ボマー§rです"}]}
+tellraw @a[tag=!No_tell,scores={CurrentRole=21}] {"rawtext":[{"text":"あなたの役職は§bカウンセラー§rです"}]}
 execute as @a[scores={CurrentRole=18}] run function werewolf/items/give_bomb
 tag @a remove No_tell
 
