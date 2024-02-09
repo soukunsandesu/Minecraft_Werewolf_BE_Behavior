@@ -1,25 +1,41 @@
 {
     "format_version": 2,
     "header": {
-        "description": "マイクラ人狼\n使用するにはベータAPIをonにしてください",
-        "name": "minecraft-Werewolf",
-        "uuid": "a469ff39-12be-419b-ac1a-eb77d0df808c",
-        "version": [1,0,1],
-        "min_engine_version": [1,19,60]
+        "description": "人狼2",
+        "name": "jinrou2",
+        "uuid": "5f58803b-de55-4f73-a9cd-3b30d3747b18",
+        "version": [
+            1,
+            0,
+            0
+        ],
+        "min_engine_version": [
+            1,
+            20,
+            51
+        ]
     },
     "modules": [
         {
-        "version": [1,0,1],
-        "type": "data",
-        "uuid": "95922ac2-a2b7-4800-9aac-e2ea63d8d6c9",
-        "description": "data"
+            "version": [
+                1,
+                0,
+                0
+            ],
+            "type": "data",
+            "uuid": "b0d5c8aa-2ed2-4cdb-9fa5-a49b89554bed",
+            "description": "data"
         },
         {
             "description": "js",
             "type": "script",
             "language": "javascript",
-            "uuid": "8f3849c4-c22e-459a-802c-ff54ae13698c",
-            "version": [1,0,1],
+            "uuid": "eb1bbfa3-c00c-4aa2-b86c-35eb54cd8e44",
+            "version": [
+                1,
+                0,
+                0
+            ],
             "entry": "scripts/server/main.js"
         }
     ],

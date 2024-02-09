@@ -32,28 +32,35 @@ world.afterEvents.effectAdd.subscribe(ev => {
     items.SpeedPotion(effect, entity)
 })
 
-// 猫又1/2
+//死亡処理
 world.afterEvents.entityDie.subscribe(ev => {
     if (ev.deadEntity.typeId === 'minecraft:player') {
         let team = world.scoreboard.getObjective("CurrentRole"),
             PL = world.getAllPlayers().find(e => e.nameTag === ev.deadEntity.nameTag),
             userroll
-        if (team == undefined) { return } else {
-            for (let score of team.getScores()) {
-                if (score.participant.displayName === PL.nameTag) { userroll = score }
-            }
-            if (userroll == undefined) return
-            if (userroll.score == 7) {
-                if (ev.damageSource.damagingEntity) {
-                    if (Math.floor(Math.random() * 2) == 0) {
+        PL.runCommandAsync('tag @s[scores={hunter=1..}] add Avo_dead')
+        PL.runCommandAsync('scoreboard players remove @s[scores={hunter=1..}] hunter')
+        if (PL.hasTag('Avo_dead')) {
+            // 死を回避した場合
+            PL.runCommandAsync('function werewolf/ongame/dead_avo')
+            PL.removeTag('Avo_dead')
+        } else {
+            // 猫又の処理
+            if (team == undefined) { return } else {
+                for (let score of team.getScores()) {
+                    if (score.participant.displayName === PL.nameTag) { userroll = score }
+                }
+                if (userroll == undefined) return
+                if (userroll.score == 7) {
+                    if (ev.damageSource.damagingEntity && Math.floor(Math.random() * 2) == 0) {
                         ev.damageSource.damagingEntity.runCommandAsync(`function werewolf/ongame/nekomata`)
                     } else {
-                        ev.deadEntity.runCommandAsync(`execute if entity @s[scores={CurrentRole=7}] run execute as @r[scores={a_live=1}] at @s run function werewolf/ongame/nekomata`)
+                        ev.deadEntity.runCommandAsync(`execute as @r[scores={a_live=1}] at @s run function werewolf/ongame/nekomata`)
                     }
-                } else {
-                    ev.deadEntity.runCommandAsync(`execute if entity @s[scores={CurrentRole=7}] run execute as @r[scores={a_live=1}] at @s run function werewolf/ongame/nekomata`)
                 }
             }
+            // 死亡した場合
+            PL.runCommandAsync('function werewolf/ongame/dead_run')
         }
     }
 })
