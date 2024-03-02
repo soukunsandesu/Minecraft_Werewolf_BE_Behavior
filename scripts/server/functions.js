@@ -1,6 +1,6 @@
-import { world, ItemStack,  Entity } from "@minecraft/server";
+import { world, ItemStack, Entity } from "@minecraft/server";
 // ItemTypes, Enchantmentを除外
-// import { data } from "./data";
+import { config } from "./data";
 export class F {
     /**コマンドをワールド基準で実行
      * @param {String} cmd 実行するコマンド
@@ -19,43 +19,44 @@ export class F {
      * @returns 選択されたリストの要素
      */
     static ListR(L) { return L[Math.floor(Math.random() * L.length)] }
-    // static giveItem(user, id, count, name, lore, CanPlaceOn, CanDestroy) {
-    //     // lore=["§rtest item§r", "+10 coolness", "§p+4 shiny§r"]
-    //     if (id.match(/^\//)) {
-    //         user.runCommandAsync(id)
-    //     } else {
-    //         if (id.match(/^§/)) {
-    //             let item = data.items.filter((e) => e.name == id)[0]
-    //             if (item == undefined) return this.Say('giveItemのエラー:アイテム名の不一致')
-    //             id = item.id
-    //             name = item.name
-    //             lore = item.lore
-    //         }
-    //         if (!id.match(/minecraft:/)) { id = 'minecraft:' + id }
-    //         if (count == undefined) count = 1
-    //         let giveItem = new ItemStack(ItemTypes.get(id), Number(count))
-    //         if (name) giveItem.nameTag = name
-    //         if (lore) {
-    //             if (!Array.isArray(lore)) {
-    //                 if (lore.match(/\n/)) { lore.split('\n') } else { lore = [lore] }
-    //             }
-    //             giveItem.setLore(lore)
-    //         }
-    //         if (CanPlaceOn && CanPlaceOn != '') {
-    //             if (!Array.isArray(CanPlaceOn)) {
-    //                 if (CanPlaceOn.match(/\./)) { CanPlaceOn.split('.') } else { CanPlaceOn = [CanPlaceOn] }
-    //             }
-    //             giveItem.setCanPlaceOn(CanPlaceOn)
-    //         }
-    //         if (CanDestroy && CanDestroy != '') {
-    //             if (!Array.isArray(CanDestroy)) {
-    //                 if (CanDestroy.match(/\./)) { CanDestroy.split('.') } else { CanDestroy = [CanDestroy] }
-    //             }
-    //             giveItem.setCanDestroy(CanDestroy)
-    //         }
-    //         user.getComponent('minecraft:inventory').container.addItem(giveItem)
-    //     }
-    // }
+    
+    static giveItem(user, id, count, name, lore, CanPlaceOn, CanDestroy) {
+        // lore=["§rtest item§r", "+10 coolness", "§p+4 shiny§r"]
+        if (id.match(/^\//)) {
+            user.runCommandAsync(id)
+        } else {
+            if (id.match(/^§/)) {
+                let item = config.Items.filter((e) => e.name == id)[0]
+                if (item == undefined) return this.Say('giveItemのエラー:アイテム名の不一致')
+                id = item.id
+                name = item.name
+                lore = item.lore
+            }
+            if (!id.match(/minecraft:/)) { id = 'minecraft:' + id }
+            if (count == undefined) count = 1
+            let giveItem = new ItemStack(ItemTypes.get(id), Number(count))
+            if (name) giveItem.nameTag = name
+            if (lore) {
+                if (!Array.isArray(lore)) {
+                    if (lore.match(/\n/)) { lore.split('\n') } else { lore = [lore] }
+                }
+                giveItem.setLore(lore)
+            }
+            if (CanPlaceOn && CanPlaceOn != '') {
+                if (!Array.isArray(CanPlaceOn)) {
+                    if (CanPlaceOn.match(/\./)) { CanPlaceOn.split('.') } else { CanPlaceOn = [CanPlaceOn] }
+                }
+                giveItem.setCanPlaceOn(CanPlaceOn)
+            }
+            if (CanDestroy && CanDestroy != '') {
+                if (!Array.isArray(CanDestroy)) {
+                    if (CanDestroy.match(/\./)) { CanDestroy.split('.') } else { CanDestroy = [CanDestroy] }
+                }
+                giveItem.setCanDestroy(CanDestroy)
+            }
+            user.getComponent('minecraft:inventory').container.addItem(giveItem)
+        }
+    }
     /**
      * ノックバックをユーザーの視点方向へ付与
      * @param {Entity} user 与えるエンティティ

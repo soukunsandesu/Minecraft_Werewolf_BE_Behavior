@@ -32,7 +32,10 @@ world.afterEvents.effectAdd.subscribe(ev => {
     items.SpeedPotion(effect, entity)
 })
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 27f0b7952cf0c2533dad3ecfa69edfa6145d74c4
 //死亡処理
 world.afterEvents.entityDie.subscribe(ev => {
     if (ev.deadEntity.typeId === 'minecraft:player') {
@@ -53,13 +56,19 @@ world.afterEvents.entityDie.subscribe(ev => {
                 }
                 if (userroll == undefined) return
                 if (userroll.score == 7) {
+<<<<<<< HEAD
                     if (ev.damageSource?.damagingEntity?.typeId == 'minecraft:player' && Math.floor(Math.random() * 2) == 0) {
+=======
+                    if (ev.damageSource.damagingEntity && Math.floor(Math.random() * 2) == 0) {
+>>>>>>> 27f0b7952cf0c2533dad3ecfa69edfa6145d74c4
                         ev.damageSource.damagingEntity.runCommandAsync(`function werewolf/ongame/nekomata`)
                     } else {
                         ev.deadEntity.runCommandAsync(`execute as @r[scores={a_live=1}] at @s run function werewolf/ongame/nekomata`)
                     }
                 }
             }
+            // 死亡した場合
+            PL.runCommandAsync('function werewolf/ongame/dead_run')
         }
         // 死亡した場合
         PL.runCommandAsync('function werewolf/ongame/dead_run')
