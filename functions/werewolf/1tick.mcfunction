@@ -25,11 +25,11 @@ scoreboard players remove @a[scores={elevator=1..}] elevator 1
 
 # 死亡判定
 execute as @e[type=player,m=a] at @s run spawnpoint @s ~~~
-tag @a[m=a] add dead
-tag @e[type=player] remove dead
-tag @a[tag=dead] add dead_t
-execute as @e[type=player,tag=dead_t,scores={a_live=1..}] run function werewolf/ongame/dead
-tag @e[type=player] remove dead_t
+# tag @a[m=a] add dead
+# tag @e[type=player] remove dead
+# tag @a[tag=dead] add dead_t
+# execute as @e[type=player,tag=dead_t,scores={a_live=1..}] run function werewolf/ongame/dead
+# tag @e[type=player] remove dead_t
 kill @e[tag=kill,type=player]
 
 # スペクテイターチャット用

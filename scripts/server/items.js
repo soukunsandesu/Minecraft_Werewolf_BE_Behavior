@@ -166,7 +166,29 @@ export class items {
             } else {
                 F.addKnockback(user, 20)
             }
+            user.runCommandAsync("playsound mob.enderdragon.flap @s ~~~ 30 2.3")
             user.runCommandAsync("clear @s feather 0 1")
+            return
+        }
+    }
+    static shout(user, item) {
+        if (item.typeId == "minecraft:echo_shard") {
+            for (let i = 1; i < 7; i++) {
+                user.runCommandAsync(`execute positioned ^^^${i * 2} run tag @a[m=a,r=${i},name=!${user.nameTag}] add shout`)
+            }
+
+            let Rotat = user.getRotation(), power = 50, theta = Rotat.y * 0.01745, yr = Rotat.x / -220 * power + 1, x = power * Math.sin(theta) * -1, z = power * Math.cos(theta),
+                PLs = world.getAllPlayers()
+            user.runCommandAsync('effect @a[tag=shout] blindness 2 0 true')
+            user.runCommandAsync('effect @a[tag=shout] slowness 1 3 true')
+            for (let PL of PLs) {
+                if (PL.hasTag('shout')) {
+                    PL.applyKnockback(x, z, power, yr)
+                    PL.removeTag('shout')
+                }
+            }
+            user.runCommandAsync("playsound mob.wither.shoot @a[r=30] ~~~ 100 1.2")
+            user.runCommandAsync("clear @s echo_shard 0 1")
             return
         }
     }

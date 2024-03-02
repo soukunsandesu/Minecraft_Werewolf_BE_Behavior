@@ -17,3 +17,4 @@ execute as @s[scores={CurrentRole=15}] run tellraw @a[scores={CurrentRole=11,a_l
 execute as @s[scores={CurrentRole=16}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7プリンセスが死亡しました"}]}
 execute as @s[scores={CurrentRole=17}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7狩人が死亡しました"}]}
 execute as @s[scores={CurrentRole=18}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7ボマーが死亡しました"}]}
+execute as @s[scores={CurrentRole=21}] run tellraw @a[scores={CurrentRole=11,a_live=1}] {"rawtext":[{"text":"§7カウンセラーが死亡しました"}]}
