@@ -7,7 +7,7 @@ replaceitem entity @a[tag=skull,tag=!skull_T] slot.armor.feet 0 leather_boots 1 
 clear @a[tag=!skull,scores={skull=0}] leather_chestplate
 clear @a[tag=!skull,scores={skull=0}] leather_leggings
 clear @a[tag=!skull,scores={skull=0}] leather_boots
-effect @a[tag=skull] invisibility 1 0 true
+effect @a[tag=skull] invisibility 1 1 true
 tag @a[tag=skull] add skull_T
 tag @a[tag=!skull] remove skull_T
 tag @a remove skull

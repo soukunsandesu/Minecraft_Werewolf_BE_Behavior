@@ -1,12 +1,12 @@
 {
     "format_version": 2,
     "header": {
-        "description": "人狼2",
-        "name": "jinrou2",
-        "uuid": "5f58803b-de55-4f73-a9cd-3b30d3747b18",
+        "description": "スクリプトAPIをONにしてご利用ください",
+        "name": "MC人狼",
+        "uuid": "79aadd58-edf3-4577-b829-2efd47bb1fb0",
         "version": [
             1,
-            0,
+            1,
             0
         ],
         "min_engine_version": [
@@ -23,14 +23,14 @@
                 0
             ],
             "type": "data",
-            "uuid": "b0d5c8aa-2ed2-4cdb-9fa5-a49b89554bed",
+            "uuid": "b43fdfa9-ee25-4708-b721-8ca44e9578f6",
             "description": "data"
         },
         {
             "description": "js",
             "type": "script",
             "language": "javascript",
-            "uuid": "eb1bbfa3-c00c-4aa2-b86c-35eb54cd8e44",
+            "uuid": "529be9e7-ebd9-43db-b2b8-130c9d7fac89",
             "version": [
                 1,
                 0,

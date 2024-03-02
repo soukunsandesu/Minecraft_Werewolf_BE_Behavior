@@ -27,15 +27,10 @@ world.afterEvents.effectAdd.subscribe(ev => {
     let entity = ev.entity
     let effect = ev.effect
     // Log(entity.typeId+"\n"+effect.displayName + "\nlv:" + effect.amplifier + "\ntick:" + effect.duration)
-    items.DamagePotion(effect, entity)
-    items.InvisibilityPotion(effect, entity)
-    items.SpeedPotion(effect, entity)
+    let itemObject = items.effects.filter(e => e.id === effect.displayName && e.amplifier === effect.amplifier)[0]
+    if (itemObject) itemObject.use(effect, entity)
 })
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 27f0b7952cf0c2533dad3ecfa69edfa6145d74c4
 //死亡処理
 world.afterEvents.entityDie.subscribe(ev => {
     if (ev.deadEntity.typeId === 'minecraft:player') {
@@ -75,18 +70,8 @@ world.afterEvents.entityDie.subscribe(ev => {
 world.afterEvents.itemUse.subscribe(ev => {
     const item = ev.itemStack,
         user = ev.source
-
-    items.jukebox(user, item)
-    items.blackout(user, item)
-    items.player_eye(user, item)
-    items.divination(user, item)
-    items.aspirator(user, item)
-    items.wooden_button(user, item)
-    items.feather(user, item)
-    items.GameFoam(user, item)
-    items.Qchat(user, item)
-    items.portal_set(user, item)
-    items.shout(user, item)
+    let itemObject = items.items.filter(e => `minecraft:${e.id}` === item.typeId)[0]
+    if (itemObject) itemObject.use(user, item)
     // Say(item.typeId)
 })
 
@@ -94,12 +79,11 @@ world.afterEvents.itemUse.subscribe(ev => {
 // 攻撃が当たった事を検知
 world.afterEvents.entityHitEntity.subscribe(ev => {
     const user = ev.damagingEntity,
-        target = ev.hitEntity
+        target = ev.hitEntity,
+        item = user.getComponent('minecraft:inventory').container.getItem(user.selectedSlot)
     if (target == null) return
-    items.PoisonInjection(user, target)
-    items.ruin(user, target)
-    items.C4bomb(user, target)
-    items.portal_use(user, target)
+    let itemObject = items.attack.filter(e => `minecraft:${e.id}` === item?.typeId || (`minecraft:${e.attack}` === target.typeId && e.nametag === target.nameTag))[0]
+    if (itemObject) itemObject.use(user, item, target)
 })
 
 

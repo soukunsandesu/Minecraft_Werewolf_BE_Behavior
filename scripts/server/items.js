@@ -6,32 +6,32 @@ function Say(ms) { world.say(String(ms)) }
 export const items = {
     effects: [
         {
-            id: '力',
+            id: '攻撃力上昇', amplifier: 0,
             name: 0, type: 'effect',
             use: function (effect, entity) {
-                if ((effect.displayName.match(/力/) && effect.amplifier == 0) || (effect.displayName.match(/ウィザー/) && effect.amplifier == 1)) {
-                    entity.runCommandAsync("effect @s clear");
-                    entity.runCommandAsync("damage @s 20 anvil entity @s");
-                    return
-                }
+                // if ((effect.displayName.match(/力/) && effect.amplifier == 0) || (effect.displayName.match(/ウィザー/) && effect.amplifier == 1)) {
+                entity.runCommandAsync("effect @s clear");
+                entity.runCommandAsync("damage @s 20 anvil entity @s");
+                return
+                // }
             }
         }, {
-            id: '透明化',
+            id: '透明化', amplifier: 0,
             name: 0, type: 'effect',
             use: function (effect, entity) {
-                if (effect.displayName.match(/透明化/) && effect.amplifier == 0) {
-                    entity.runCommandAsync("effect @s invisibility 60 1");
-                    return
-                }
+                // if (effect.displayName.match(/透明化/) && effect.amplifier == 0) {
+                entity.runCommandAsync("effect @s invisibility 60 5");
+                return
+                // }
             }
         }, {
-            id: '移動速度上昇',
+            id: '移動速度上昇', amplifier: 0,
             name: 0, type: 'effect',
             use: function (effect, entity) {
-                if (effect.displayName.match(/移動速度上昇/) && effect.amplifier == 0) {
-                    entity.runCommandAsync("effect @s speed 60 8");
-                    return
-                }
+                // if (effect.displayName.match(/移動速度上昇/) && effect.amplifier == 0) {
+                entity.runCommandAsync("effect @s speed 60 8");
+                return
+                // }
             }
         }
     ],
@@ -121,7 +121,7 @@ export const items = {
                 return
             }
         }, {
-            id: 'feather', name: 0, type: 'attack',
+            id: 'feather', name: 0, type: 'use',
             use: function (user, item) {
                 if (item.typeId == "minecraft:feather") {
                     if (user.hasTag("sneaking")) {
@@ -135,229 +135,198 @@ export const items = {
                 }
             }
         }, {
-            id: 'blaze_rod', name: 0, type: 'attack',
+            id: 'wooden_button', name: 0, type: 'use',
             use: function (user, item) {
-                let PL = world.getAllPlayers().find(e => e.id === user.id);
-                if (item.typeId == "minecraft:blaze_rod") {
+                user.runCommandAsync("execute as @a[scores={C4bomb=1},m=a] at @s run function werewolf/items/C4bomb_ON")
+                user.runCommandAsync("execute as @e[type=item,tag=C4bomb] at @s run function werewolf/items/C4bomb_ON")
+                return
+            }
+        }, {
+            id: 'stick', name: 0, type: 'use',
+            use: function (user, item) {
+                let PL = world.getAllPlayers().find(e => e.id === user.id)
+                if (item.nameTag == undefined) {
                     if (PL.isOp()) {
                         FORM.gameinfo(user)
                     } else {
                         if (PL.hasTag("player")) { PL.removeTag("player") } else { PL.addTag("player") }
                     }
+                } else if (item.nameTag == '§r§fチャット') {
+                    FORM.QC(user)
+                } else if (item.nameTag == '§r§fヘルプ棒') {
+                    FORM.Help(user)
+                } else if (item.nameTag == '§r§f人狼チャット') {
+                    FORM.WQ(user)
                 }
                 return
-            }
-<<<<<<< HEAD
-        }
-    }
-    static player_eye(user, item) {
-        if (item.typeId == "minecraft:ender_eye") {
-            user.runCommandAsync("clear @s ender_eye 0 1")
-            user.runCommandAsync("effect @s blindness 1 0 true")
-            user.runCommandAsync("tp @s[tag=!sneaking] ~~~ facing @a[c=-1,rm=1,m=a,scores={CurrentRole=1..}]")
-            user.runCommandAsync("tp @s[tag=sneaking] ~~~ facing @a[c=1,rm=1,m=a,scores={CurrentRole=1..}]")
-            return
-        }
-    }
-
-    static jukebox(user, item) {
-        if (item.typeId == "minecraft:jukebox") {
-            user.runCommandAsync("clear @s jukebox 0 1")
-            user.runCommandAsync('give @s diamond 1 0 {"item_lock":{"mode":"lock_in_inventory"}}')
-            return
-        }
-    }
-
-    static dark_oak_door(user, item) {
-        if (item.typeId == "minecraft:dark_oak_door") {
-            FORM.dokodemo_door(user)
-            return
-        }
-    }
-
-    static dark_oak_door(user, item) {
-        if (item.typeId == "minecraft:dark_oak_door") {
-            FORM.dokodemo_door(user)
-            return
-        }
-    }
-    static PoisonInjection(user, target) {
-        if (user.hasTag("PoisonInjection")) {
-            user.runCommandAsync("clear @s wither_rose 0 1")
-            target.runCommandAsync("scoreboard players random @s poison 900 1800")
-            return
-        }
-    }
-    static ruin(user, target) {
-        if (user.hasTag("ruin")) {
-            user.runCommandAsync("summon lightning_bolt ~~~")
-            user.runCommandAsync("damage @s 13 anvil")
-            target.runCommandAsync("damage @s 30 anvil")
-            user.runCommandAsync("clear golden_sword")
-            return
-        }
-    }
-    static C4bomb(user, target) {
-        if (user.hasTag("C4bomb")) {
-            target.runCommandAsync("scoreboard players set @s C4bomb 1")
-            user.runCommandAsync("clear @s respawn_anchor 0 1")
-            return
-        }
-    }
-
-    static wooden_button(user, item) {
-        if (item.typeId == "minecraft:wooden_button") {
-            user.runCommandAsync("execute as @a[scores={C4bomb=1},m=a] at @s run function werewolf/items/C4bomb_ON")
-            user.runCommandAsync("execute as @e[type=item,tag=C4bomb] at @s run function werewolf/items/C4bomb_ON")
-            return
-        }
-    }
-    static portal_set(user, item) {
-        if (item.typeId == "minecraft:purple_stained_glass_pane") {
-            user.runCommandAsync("scoreboard players set @s portal 150")
-            user.runCommandAsync("kill @e[type=snow_golem,name=portal]")
-            user.runCommandAsync("summon snow_golem portal")
-            user.runCommandAsync("clear @s purple_stained_glass_pane 0 1")
-            return
-        }
-    }
-    static portal_use(user, target) {
-        if (target.typeId == "minecraft:snow_golem" && target.nameTag == "portal") {
-            user.runCommandAsync("effect @s blindness 1 0 true")
-            user.runCommandAsync("tp @s @e[type=snow_golem,name=portal,c=-1]")
-            return
-        }
-    }
-    static feather(user, item) {
-        if (item.typeId == "minecraft:feather") {
-            if (user.hasTag("sneaking")) {
-                F.addKnockback(user, 40)
-                user.runCommandAsync("effect @s slow_falling 1 0 true")
-            } else {
-                F.addKnockback(user, 20)
-            }
-            user.runCommandAsync("playsound mob.enderdragon.flap @s ~~~ 30 2.3")
-            user.runCommandAsync("clear @s feather 0 1")
-            return
-        }
-    }
-    static shout(user, item) {
-        if (item.typeId == "minecraft:echo_shard") {
-            for (let i = 1; i < 7; i++) {
-                user.runCommandAsync(`execute positioned ^^^${i * 2} run tag @a[m=a,r=${i},name=!${user.nameTag}] add shout`)
-            }
-
-            let Rotat = user.getRotation(), power = 50, theta = Rotat.y * 0.01745, yr = Rotat.x / -220 * power + 1, x = power * Math.sin(theta) * -1, z = power * Math.cos(theta),
-                PLs = world.getAllPlayers()
-            user.runCommandAsync('effect @a[tag=shout] blindness 2 0 true')
-            user.runCommandAsync('effect @a[tag=shout] slowness 1 3 true')
-            for (let PL of PLs) {
-                if (PL.hasTag('shout')) {
-                    PL.applyKnockback(x, z, power, yr)
-                    PL.removeTag('shout')
-                }
-            }
-            user.runCommandAsync("playsound mob.wither.shoot @a[r=30] ~~~ 100 1.2")
-            user.runCommandAsync("clear @s echo_shard 0 1")
-            return
-        }
-    }
-
-    static GameFoam(user, item) {
-        let PL = world.getAllPlayers().find(e => e.id === user.id);
-        if (item.typeId == "minecraft:blaze_rod") {
-            if (PL.isOp()) {
-                FORM.gameinfo(user)
-            } else {
-                if (PL.hasTag("player")) { PL.removeTag("player") } else { PL.addTag("player") }
-            }
-        }
-        return
-    }
-
-    static Qchat(user, item) {
-        if (item.typeId == "minecraft:stick") {
-            if (item?.nameTag == undefined) {
-                let PL = world.getAllPlayers().find(e => e.id === user.id);
-                if (PL.isOp()) {
-                    FORM.gameinfo(user)
-                } else {
-                    if (PL.hasTag("player")) { PL.removeTag("player") } else { PL.addTag("player") }
-=======
-        }, {
-            id: 'wooden_button', name: 0, type: 'use',
-            use: function (user, item) {
-                if (item.typeId == "minecraft:wooden_button") {
-                    user.runCommandAsync("execute as @a[scores={C4bomb=1},m=a] at @s run function werewolf/items/C4bomb_ON")
-                    user.runCommandAsync("execute as @e[type=item,tag=C4bomb] at @s run function werewolf/items/C4bomb_ON")
-                    return
-                }
             }
         }, {
             id: 'purple_stained_glass_pane', name: 0, type: 'use',
             use: function (user, item) {
-                if (item.typeId == "minecraft:purple_stained_glass_pane") {
-                    user.runCommandAsync("scoreboard players set @s portal 150")
-                    user.runCommandAsync("kill @e[type=snow_golem,name=portal]")
-                    user.runCommandAsync("summon snow_golem portal")
-                    user.runCommandAsync("clear @s purple_stained_glass_pane 0 1")
-                    return
-                }
+                user.runCommandAsync("scoreboard players set @s portal 150")
+                user.runCommandAsync("kill @e[type=snow_golem,name=portal]")
+                user.runCommandAsync("summon snow_golem portal")
+                user.runCommandAsync("clear @s purple_stained_glass_pane 0 1")
+                return
             }
         }, {
-            id: 'stick', name: 0, type: 'use',
+            id: 'echo_shard', name: 0, type: 'use',
             use: function (user, item) {
-                if (item.typeId == "minecraft:stick") {
-                    if (item?.nameTag == undefined) {
-                        let PL = world.getAllPlayers().find(e => e.id === user.id);
-                        if (PL.isOp()) {
-                            FORM.gameinfo(user)
-                        } else {
-                            if (PL.hasTag("player")) { PL.removeTag("player") } else { PL.addTag("player") }
-                        }
-                    } else {
-                        if (item?.nameTag == "§r§fチャット") FORM.QC(user)
-                        if (item?.nameTag == "§r§f人狼チャット") FORM.WQ(user)
-                        if (item?.nameTag == "§r§fヘルプ棒") FORM.Help(user)
-                    }
->>>>>>> 27f0b7952cf0c2533dad3ecfa69edfa6145d74c4
+                for (let i = 1; i < 7; i++) {
+                    user.runCommandAsync(`execute positioned ^^^${i * 2} run tag @a[m=a,r=${i},name=!${user.nameTag}] add shout`)
                 }
+
+                let Rotat = user.getRotation(), power = 50, theta = Rotat.y * 0.01745, yr = Rotat.x / -220 * power + 1, x = power * Math.sin(theta) * -1, z = power * Math.cos(theta),
+                    PLs = world.getAllPlayers()
+                user.runCommandAsync('effect @a[tag=shout] blindness 2 0 true')
+                user.runCommandAsync('effect @a[tag=shout] slowness 1 3 true')
+                for (let PL of PLs) {
+                    if (PL.hasTag('shout')) {
+                        PL.applyKnockback(x, z, power, yr)
+                        PL.removeTag('shout')
+                    }
+                }
+                user.runCommandAsync("playsound mob.wither.shoot @a[r=30] ~~~ 100 1.2")
+                user.runCommandAsync("clear @s echo_shard 0 1")
+                return
             }
         }
-    ],
-    attack: [
+    ]
+
+    //     static player_eye(user, item) {
+    //         if (item.typeId == "minecraft:ender_eye") {
+    //             user.runCommandAsync("clear @s ender_eye 0 1")
+    //             user.runCommandAsync("effect @s blindness 1 0 true")
+    //             user.runCommandAsync("tp @s[tag=!sneaking] ~~~ facing @a[c=-1,rm=1,m=a,scores={CurrentRole=1..}]")
+    //             user.runCommandAsync("tp @s[tag=sneaking] ~~~ facing @a[c=1,rm=1,m=a,scores={CurrentRole=1..}]")
+    //             return
+    //         }
+    //     }
+
+    //     static jukebox(user, item) {
+    //         if (item.typeId == "minecraft:jukebox") {
+    //             user.runCommandAsync("clear @s jukebox 0 1")
+    //             user.runCommandAsync('give @s diamond 1 0 {"item_lock":{"mode":"lock_in_inventory"}}')
+    //             return
+    //         }
+    //     }
+
+    //     static dark_oak_door(user, item) {
+    //         if (item.typeId == "minecraft:dark_oak_door") {
+    //             FORM.dokodemo_door(user)
+    //             return
+    //         }
+    //     }
+
+    //     static PoisonInjection(user, target) {
+    //         if (user.hasTag("PoisonInjection")) {
+    //             user.runCommandAsync("clear @s wither_rose 0 1")
+    //             target.runCommandAsync("scoreboard players random @s poison 900 1800")
+    //             return
+    //         }
+    //     }
+    //     static ruin(user, target) {
+    //         if (user.hasTag("ruin")) {
+    //             user.runCommandAsync("summon lightning_bolt ~~~")
+    //             user.runCommandAsync("damage @s 13 anvil")
+    //             target.runCommandAsync("damage @s 30 anvil")
+    //             user.runCommandAsync("clear golden_sword")
+    //             return
+    //         }
+    //     }
+    //     static C4bomb(user, target) {
+    //         if (user.hasTag("C4bomb")) {
+    //             target.runCommandAsync("scoreboard players set @s C4bomb 1")
+    //             user.runCommandAsync("clear @s respawn_anchor 0 1")
+    //             return
+    //         }
+    //     }
+
+    //     static wooden_button(user, item) {
+    //         if (item.typeId == "minecraft:wooden_button") {
+    //             user.runCommandAsync("execute as @a[scores={C4bomb=1},m=a] at @s run function werewolf/items/C4bomb_ON")
+    //             user.runCommandAsync("execute as @e[type=item,tag=C4bomb] at @s run function werewolf/items/C4bomb_ON")
+    //             return
+    //         }
+    //     }
+    //     static portal_set(user, item) {
+    //         if (item.typeId == "minecraft:purple_stained_glass_pane") {
+    //             user.runCommandAsync("scoreboard players set @s portal 150")
+    //             user.runCommandAsync("kill @e[type=snow_golem,name=portal]")
+    //             user.runCommandAsync("summon snow_golem portal")
+    //             user.runCommandAsync("clear @s purple_stained_glass_pane 0 1")
+    //             return
+    //         }
+    //     }
+    //     static portal_use(user, target) {
+    //         if (target.typeId == "minecraft:snow_golem" && target.nameTag == "portal") {
+    //             user.runCommandAsync("effect @s blindness 1 0 true")
+    //             user.runCommandAsync("tp @s @e[type=snow_golem,name=portal,c=-1]")
+    //             return
+    //         }
+    //     }
+    //     static feather(user, item) {
+    //         if (item.typeId == "minecraft:feather") {
+    //             if (user.hasTag("sneaking")) {
+    //                 F.addKnockback(user, 40)
+    //                 user.runCommandAsync("effect @s slow_falling 1 0 true")
+    //             } else {
+    //                 F.addKnockback(user, 20)
+    //             }
+    //             user.runCommandAsync("playsound mob.enderdragon.flap @s ~~~ 30 2.3")
+    //             user.runCommandAsync("clear @s feather 0 1")
+    //             return
+    //         }
+    //     }
+    //     static shout(user, item) {
+    //         if (item.typeId == "minecraft:echo_shard") {
+    //             for (let i = 1; i < 7; i++) {
+    //                 user.runCommandAsync(`execute positioned ^^^${i * 2} run tag @a[m=a,r=${i},name=!${user.nameTag}] add shout`)
+    //             }
+
+    //             let Rotat = user.getRotation(), power = 50, theta = Rotat.y * 0.01745, yr = Rotat.x / -220 * power + 1, x = power * Math.sin(theta) * -1, z = power * Math.cos(theta),
+    //                 PLs = world.getAllPlayers()
+    //             user.runCommandAsync('effect @a[tag=shout] blindness 2 0 true')
+    //             user.runCommandAsync('effect @a[tag=shout] slowness 1 3 true')
+    //             for (let PL of PLs) {
+    //                 if (PL.hasTag('shout')) {
+    //                     PL.applyKnockback(x, z, power, yr)
+    //                     PL.removeTag('shout')
+    //                 }
+    //             }
+    //             user.runCommandAsync("playsound mob.wither.shoot @a[r=30] ~~~ 100 1.2")
+    //             user.runCommandAsync("clear @s echo_shard 0 1")
+    //             return
+    //         }
+    //     }
+
+    //     static GameFoam(user, item) {
+    //         let PL = world.getAllPlayers().find(e => e.id === user.id);
+    //         if (item.typeId == "minecraft:blaze_rod") {
+    //             if (PL.isOp()) {
+    //                 FORM.gameinfo(user)
+    //             } else {
+    //                 if (PL.hasTag("player")) { PL.removeTag("player") } else { PL.addTag("player") }
+    //             }
+    //         }
+    //         return
+    //     }
+
+    //     static Qchat(user, item) {
+    //         if (item.typeId == "minecraft:stick") {
+    //             if (item?.nameTag == undefined) {
+    //                 let PL = world.getAllPlayers().find(e => e.id === user.id);
+    //                 if (PL.isOp()) {
+    //                     FORM.gameinfo(user)
+    //                 } else {
+    //                     if (PL.hasTag("player")) { PL.removeTag("player") } else { PL.addTag("player") }
+    //                 }
+    //             }
+    //         }
+    //     ],
+    , attack: [
         {
-            id: 'wither_rose', name: 0, type: 'attack',
-            use: function (user, item, target) {
-                if (user.hasTag("PoisonInjection")) {
-                    user.runCommandAsync("clear @s wither_rose 0 1")
-                    target.runCommandAsync("scoreboard players random @s poison 900 1800")
-                    return
-                }
-            }
-        }, {
-            id: 'golden_sword', name: 0, type: 'attack',
-            use: function (user, item, target) {
-                if (user.hasTag("ruin")) {
-                    user.runCommandAsync("summon lightning_bolt ~~~")
-                    user.runCommandAsync("damage @s 13 anvil")
-                    target.runCommandAsync("damage @s 30 anvil")
-                    user.runCommandAsync("clear golden_sword")
-                    return
-                }
-            }
-        }, {
-            id: 'respawn_anchor', name: 0, type: 'attack',
-            use: function (user, item, target) {
-                if (user.hasTag("C4bomb")) {
-                    target.runCommandAsync("scoreboard players set @s C4bomb 1")
-                    user.runCommandAsync("clear @s respawn_anchor 0 1")
-                    return
-                }
-            }
-        },
-        {
-            id: 'blindness', name: 0, type: 'attack',
+            id: undefined, attack: 'snow_golem', nametag: 'portal', name: 0, type: 'attack',
             use: function (user, item, target) {
                 if (target.typeId == "minecraft:snow_golem" && target.nameTag == "portal") {
                     user.runCommandAsync("effect @s blindness 1 0 true")
@@ -365,7 +334,38 @@ export const items = {
                     return
                 }
             }
-        }
-
+        },
+        {
+            id: 'wither_rose', attack: undefined, nametag: undefined, name: 0, type: 'attack',
+            use: function (user, item, target) {
+                user.runCommandAsync("clear @s wither_rose 0 1")
+                target.runCommandAsync("scoreboard players random @s poison 900 1800")
+                return
+            }
+        }, {
+            id: 'golden_sword', attack: undefined, nametag: undefined, name: 0, type: 'attack',
+            use: function (user, item, target) {
+                user.runCommandAsync("summon lightning_bolt ~~~")
+                user.runCommandAsync("damage @s 13 anvil")
+                target.runCommandAsync("damage @s 30 anvil")
+                user.runCommandAsync("clear golden_sword")
+                return
+            }
+        }, {
+            id: 'respawn_anchor', attack: undefined, nametag: undefined, name: 0, type: 'attack',
+            use: function (user, item, target) {
+                target.runCommandAsync("scoreboard players set @s C4bomb 1")
+                user.runCommandAsync("clear @s respawn_anchor 0 1")
+                return
+            }
+        },
+        {
+            id: 'redstone', attack: undefined, nametag: undefined, name: 0, type: 'attack',
+            use: function (user, item, target) {
+                target.runCommandAsync("function werewolf/ongame/puppet_powder")
+                user.runCommandAsync("clear @s redstone 0 1")
+                return
+            }
+        },
     ]
 }

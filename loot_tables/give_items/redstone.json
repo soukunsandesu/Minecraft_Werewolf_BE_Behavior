@@ -5,15 +5,15 @@
             "entries": [
                 {
                     "type": "item",
-                    "name": "minecraft:splash_potion",
+                    "name": "minecraft:redstone",
                     "functions": [
                         {
                             "function": "set_name",
-                            "name": "§r§f1必殺ポーション"
+                            "name": "§r§f傀儡の粉"
                         },
                         {
-                            "function": "set_data",
-                            "data": 31
+                            "function": "set_lore",
+                            "lore": "§r§f殴ることで対象を狂人にする\nただし市民陣営以外に効果はない"
                         }
                     ]
                 }
