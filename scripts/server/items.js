@@ -77,19 +77,19 @@ export const items = {
                     if (score == 1 || score == 10 || score == 11) {
                         FORM.werewolf(user)
                     }
-                    if (score == 3) {
+                    else if (score == 3) {
                         FORM.divination(user)
                     }
-                    if (score == 4) {
+                    else if (score == 4) {
                         FORM.psychic(user)
                     }
-                    if (score == 6) {
+                    else if (score == 6) {
                         FORM.thief(user)
                     }
-                    if (score == 17) {
+                    else if (score == 17) {
                         FORM.hunter(user)
                     }
-                    if (score == 21) {
+                    else if (score == 21) {
                         FORM.counselor(user)
                     }
                     return

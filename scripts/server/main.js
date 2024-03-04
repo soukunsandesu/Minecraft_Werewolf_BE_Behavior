@@ -35,34 +35,38 @@ world.afterEvents.effectAdd.subscribe(ev => {
 world.afterEvents.entityDie.subscribe(ev => {
     if (ev.deadEntity.typeId === 'minecraft:player') {
         let team = world.scoreboard.getObjective("CurrentRole"),
-            PL = world.getAllPlayers().find(e => e.nameTag === ev.deadEntity.nameTag),
-            userroll
-        PL.runCommandAsync('tag @s[scores={hunter=1..}] add Avo_dead')
-        PL.runCommandAsync('scoreboard players remove @s[scores={hunter=1..}] hunter')
-        if (PL.hasTag('Avo_dead')) {
+            PLs = world.getAllPlayers(),
+            target = PLs.find(e => e.nameTag === ev.deadEntity.nameTag),
+            targetRroll,
+            attacker = PLs.find(e => e.nameTag === ev.damageSource.nameTag),
+            attackerRroll
+
+        target.runCommandAsync('tag @s[scores={hunter=1..}] add Avo_dead')
+        target.runCommandAsync('scoreboard players remove @s[scores={hunter=1..}] hunter')
+        if (target.hasTag('Avo_dead')) {
             // 死を回避した場合
-            PL.runCommandAsync('function werewolf/ongame/dead_avo')
-            PL.removeTag('Avo_dead')
+            target.runCommandAsync('function werewolf/ongame/dead_avo')
+            target.removeTag('Avo_dead')
         } else {
             // 猫又の処理
             if (team == undefined) { return } else {
                 for (let score of team.getScores()) {
-                    if (score.participant.displayName === PL.nameTag) { userroll = score }
+                    if (score.participant.displayName === target.nameTag) { targetRroll = score }
+                    if (score.participant.displayName === attacker.nameTag) { attackerRroll = score }
                 }
-                if (userroll == undefined) return
-                if (userroll.score == 7) {
-                    if (ev.damageSource?.damagingEntity?.typeId == 'minecraft:player' && Math.floor(Math.random() * 2) == 0) {
+                if (targetRroll?.score == 7) {
+                    if (attacker && Math.floor(Math.random() * 2) == 0) {
                         ev.damageSource.damagingEntity.runCommandAsync(`function werewolf/ongame/nekomata`)
                     } else {
-                        ev.deadEntity.runCommandAsync(`execute as @r[scores={a_live=1}] at @s run function werewolf/ongame/nekomata`)
+                        target.runCommandAsync(`execute as @r[scores={a_live=1}] at @s run function werewolf/ongame/nekomata`)
                     }
+                } else if (attackerRroll?.score == 22) {
+                    target.runCommandAsync('effect @s instant_health 1 3 true')
                 }
             }
             // 死亡した場合
-            PL.runCommandAsync('function werewolf/ongame/dead_run')
+            target.runCommandAsync('function werewolf/ongame/dead_run')
         }
-        // 死亡した場合
-        PL.runCommandAsync('function werewolf/ongame/dead_run')
     }
 })
 

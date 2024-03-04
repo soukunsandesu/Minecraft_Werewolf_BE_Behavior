@@ -1,11 +1,11 @@
 scoreboard objectives add give_item dummy
 scoreboard players set @a[tag=player] give_item 0
 # ランダムに与える
-execute as @a[scores={give_item=0}] run scoreboard players random @s give_item 1 13
+execute as @a[scores={give_item=0}] run scoreboard players random @s give_item 1 14
 # 重複なしで与える
 # function werewolf/onstart/give_items_score
 
-execute as @a[scores={give_item=14..}] run scoreboard players random @s give_item 1 13
+execute as @a[scores={give_item=15..}] run scoreboard players random @s give_item 1 14
 loot give @a[scores={give_item=1}] loot "give_items/double_plant"
 loot give @a[scores={give_item=2}] loot "give_items/ender_eye"
 loot give @a[scores={give_item=2}] loot "give_items/ender_eye"
@@ -23,6 +23,9 @@ loot give @a[scores={give_item=10}] loot "give_items/totem_of_undying"
 loot give @a[scores={give_item=11}] loot "give_items/hopper"
 loot give @a[scores={give_item=12}] loot "give_items/skull"
 loot give @a[scores={give_item=13}] loot "give_items/golden_sword"
+loot give @a[scores={give_item=14}] loot "give_items/echo_shard"
+loot give @a[scores={give_item=14}] loot "give_items/echo_shard"
+loot give @a[scores={give_item=14}] loot "give_items/echo_shard"
 # 人狼専用
 loot give @a[scores={give_item=-1}] loot "give_items/beacon"
 loot give @a[scores={give_item=-1}] loot "give_items/beacon"
