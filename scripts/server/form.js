@@ -1,10 +1,13 @@
 import { world } from "@minecraft/server";
 import * as UI from '@minecraft/server-ui';
 import { config } from './data.js';
+import { F } from './functions.js';
 
 let datas = config.Rolls
 let setting = config.setting
 let member = []
+let gameData = { time: 0, config: {}, players: [{ player: world.getPlayers()[0], currentRole: config.Initial[0], previewRole: config.Initial[0], tags: [] }] }
+gameData = []
 
 export class FORM {
   static async gameinfo(user) {
@@ -30,14 +33,18 @@ export class FORM {
 
 
   static async gamestart(user) {
-    let PLs = world.getAllPlayers()
+    let PLs = world.getAllPlayers(), PLS = []
+    gameData.config = setting
     user.runCommandAsync("function werewolf/start_First")
-
     user.runCommandAsync("scoreboard players set MWSystem time " + setting.time)
     user.runCommandAsync("scoreboard players set クォーツ間隔 time " + setting.quartz)
     user.runCommandAsync("scoreboard players set 怪盗リミット time " + setting.thief)
+    // for (let i = 0; i < PLs.length; i++) {
+    //   PLS.push(PLs[i].hasTag('player'))
+    // }
 
     for (let data of datas) {
+      // F.ListR(PLS)
       user.runCommandAsync("execute as @r[tag=player,scores={CurrentRole=0}] run scoreboard players set @s CurrentRole " + data.score)
     }
     if (setting.lover > 0) {
@@ -171,7 +178,7 @@ export class FORM {
     return await this.setting(user)
   }
 
-  static async setting_time(user) {
+  static async setting_time(user, time) {
     const form = new UI.ActionFormData()
       .title('設定_時間').body(setting.time + "秒")
       .button(`+300`)

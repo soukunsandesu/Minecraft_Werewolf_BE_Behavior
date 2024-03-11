@@ -1,6 +1,7 @@
 import { system, world } from "@minecraft/server";
 import { items } from "./items";
 import { F } from "./functions";
+import { config } from "./data";
 //import { werewolf } from "./typescript"
 
 function RunCommand(cmd) { world.getDimension("overworld").runCommandAsync(cmd) }
@@ -12,6 +13,10 @@ function getPL(id) { return world.getAllPlayers().find(e => e.id === id); }
 
 // 最初に実行させる
 RunCommand("function werewolf/first_set")
+
+let gameData = { time: 0, players: [{ player: world.getPlayers()[0], currentRole: config.Initial[0], previewRole: config.Initial[0], tags: [] }] }
+gameData.players = []
+
 
 // killするアイテム
 const itemIds = ["minecraft:diamond", "minecraft:barrier", "minecraft:stick", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots"]
@@ -134,4 +139,36 @@ function nameTag(user, name) {
         user.runCommandAsync(`tellraw @s {"rawtext":[{"text":"§7名前が入力されていません"}]}`)
     }
 
+}
+
+function gameCheck() {
+    let teamCount = { team1: 0, team2: 0, team3: 0, team4: 0, team5: 0, member: 0, lover: 0 }, winTeam = -1
+    for (let i = 0; i < gameData.players.length; i++) {
+        if (0 < gameData.players[i].tags.life) {
+            teamCount[`team${gameData.players[i].currentRole.team}`]++
+            teamCount.member++
+        }
+        if (gameData.players[i].tags.includes('lover')) {
+            teamCount.lover++
+        }
+    }
+    if (teamCount.team1 == 0 && teamCount.team3 == 0) winTeam = 0
+    if (teamCount.team1 != 0 && teamCount.team3 == 0 && teamCount.team5 == 0) winTeam = 1
+    if (teamCount.team3 != 0 && teamCount.team1 == 0 && teamCount.team5 == 0) winTeam = 3
+    if (teamCount.team4 != 0 && winTeam != -1) winTeam = 4
+    if (teamCount.team5 != 0 && winTeam == 0) winTeam = 5
+    if (teamCount.lover != 0 && winTeam != -1) winTeam = 'lover'
+
+    if (winTeam != -1) {
+        let texts = ['引き分け', '§c人狼の勝利', 'null', '§a村人の勝利', '§e狐の勝利', '§7ボマーの勝利', '§d恋人の勝利'], winners = ''
+        for (let i = 0; i < gameData.players.length; i++) {
+            if (gameData.players[i].currentRole.team == winTeam || gameData.players[i].tags.includes(winTeam)) {
+                if (winners != '') winners += ','
+                winners += gameData.players[i].player.nameTag
+            }
+        }
+        F.RunCommand(`title @a title ${texts[winTeam]}`)
+        F.RunCommand(`tellraw @a {"rawtext":[{"text":"${texts[winTeam]}\n§r${winners}"}]}`)
+        F.RunCommand(`function werewolf/onfinish/clean_up`)
+    }
 }
